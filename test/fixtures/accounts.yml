@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type: 
+  code: MyString
+  description: MyString
+  credit_balance: 1.5
+  debit_balance: 1.5
+
+two:
+  name: MyString
+  type: 
+  code: MyString
+  description: MyString
+  credit_balance: 1.5
+  debit_balance: 1.5
