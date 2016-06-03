@@ -38,10 +38,32 @@ body{
    	color: #ffffff !important;
 }
 
+.panel-red{
+	border-color: #d9534f;
+	background: #d9534f;
+   	color: #ffffff !important;
+}
+
 a{
 	color: inherit;
 }
 
 a:hover{
 	color: inherit;
+}
+
+/*AUMENTA TAMANHO DOS ICONES*/
+.aumentaicon{
+	font-size: 44px;
+}
+
+.page-header{
+	padding-bottom: 9px;
+	margin: 40px 0 20px;
+	border-bottom: 2px solid #eee;
+}
+
+.centralizado {
+    margin: 0 auto;
+    float: none;
 }
