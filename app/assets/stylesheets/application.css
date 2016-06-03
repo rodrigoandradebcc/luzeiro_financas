@@ -28,4 +28,20 @@ body{
 
 .panel-yellow {
     border-color: #f0ad4e;
+    background: #f0ad4e;
+   	color: #ffffff !important;
+}
+
+.panel-green{
+	border-color: #5cb85c;
+	background: #5cb85c;
+   	color: #ffffff !important;
+}
+
+a{
+	color: inherit;
+}
+
+a:hover{
+	color: inherit;
 }

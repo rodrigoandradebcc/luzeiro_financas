@@ -8,7 +8,7 @@
 					<i class="glyphicon glyphicon-indent-right"></i>
 				</div>
 				<div class="col-xs-9 text-right">
-					<div class="huge">Empresas</div>
+					<%= link_to "Empresas", enterprises_path, :class => "huge" %>
 				</div>
 			</div>
 		</div>
@@ -23,7 +23,23 @@
 					<i class="glyphicon glyphicon-indent-right"></i>
 				</div>
 				<div class="col-xs-9 text-right">
-					<div class="huge">Empresas</div>
+					<%= link_to "Contas", accounts_path, :class => "huge"%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+	<div class="panel panel-green">
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-xs-3">
+					<i class="glyphicon glyphicon-indent-right"></i>
+				</div>
+				<div class="col-xs-9 text-right">
+					<%= link_to "Grupos", groups_path, :class => "huge"%>
 				</div>
 			</div>
 		</div>
@@ -43,8 +59,3 @@
 		<li> <%= link_to "Logar", new_user_session_path %> </li>
 	</ul>
 <% end %>
-
-<ul>
-	<li> <%= link_to "Empresas", enterprises_path %> </li>
-	<li> <%= link_to "Contas", accounts_path %> </li>
-</ul>
