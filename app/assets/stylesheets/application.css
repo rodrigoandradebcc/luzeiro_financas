@@ -19,3 +19,13 @@ body{
 	margin-right: 10px;
 	margin-left: 10px;
 }
+
+/*TEXTO GRANDE*/
+
+.huge{
+	font-size: 40px;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
