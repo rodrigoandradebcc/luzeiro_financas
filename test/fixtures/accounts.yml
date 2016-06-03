@@ -1,17 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  type: 
   code: MyString
+  name: MyString
   description: MyString
+  nature_of_the: MyString
+  balance: MyString
   credit_balance: 1.5
   debit_balance: 1.5
 
 two:
-  name: MyString
-  type: 
   code: MyString
+  name: MyString
   description: MyString
+  nature_of_the: MyString
+  balance: MyString
   credit_balance: 1.5
   debit_balance: 1.5

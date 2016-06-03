@@ -18,7 +18,7 @@ class AccountsControllerTest < ActionController::TestCase
 
   test "should create account" do
     assert_difference('Account.count') do
-      post :create, account: { code: @account.code, credit_balance: @account.credit_balance, debit_balance: @account.debit_balance, description: @account.description, name: @account.name, type: @account.type }
+      post :create, account: { balance: @account.balance, code: @account.code, credit_balance: @account.credit_balance, debit_balance: @account.debit_balance, description: @account.description, name: @account.name, nature_of_the: @account.nature_of_the }
     end
 
     assert_redirected_to account_path(assigns(:account))
@@ -35,7 +35,7 @@ class AccountsControllerTest < ActionController::TestCase
   end
 
   test "should update account" do
-    patch :update, id: @account, account: { code: @account.code, credit_balance: @account.credit_balance, debit_balance: @account.debit_balance, description: @account.description, name: @account.name, type: @account.type }
+    patch :update, id: @account, account: { balance: @account.balance, code: @account.code, credit_balance: @account.credit_balance, debit_balance: @account.debit_balance, description: @account.description, name: @account.name, nature_of_the: @account.nature_of_the }
     assert_redirected_to account_path(assigns(:account))
   end
 

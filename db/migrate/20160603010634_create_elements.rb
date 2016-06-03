@@ -1,0 +1,11 @@
+class CreateElements < ActiveRecord::Migration
+  def change
+    create_table :elements do |t|
+      t.string :code
+      t.string :name
+      t.float :balance
+
+      t.timestamps null: false
+    end
+  end
+end

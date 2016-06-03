@@ -1,7 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
-  
+
   # GET /accounts
   # GET /accounts.json
   def index
@@ -70,6 +69,6 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:name, :type, :code, :description, :credit_balance, :debit_balance)
+      params.require(:account).permit(:code, :name, :description, :nature_of_the, :balance, :credit_balance, :debit_balance)
     end
 end
