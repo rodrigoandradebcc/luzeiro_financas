@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :chart_of_accounts
   resources :elements
   resources :subitems
   resources :items
