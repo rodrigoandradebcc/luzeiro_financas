@@ -1,3 +1,5 @@
 class Subelement < ActiveRecord::Base
-  belongs_to :Element
+  belongs_to :element
+
+  has_many :item
 end

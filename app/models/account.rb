@@ -1,2 +1,7 @@
 class Account < ActiveRecord::Base
-end 
+  belongs_to :chart_of_account
+  has_many :group
+
+  has_many :operation
+
+end

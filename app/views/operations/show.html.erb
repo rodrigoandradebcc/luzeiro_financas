@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Value input:</strong>
+  <%= @operation.value_input %>
+</p>
+
+<p>
+  <strong>Value output:</strong>
+  <%= @operation.value_output %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @operation.description %>
+</p>
+
+<p>
+  <strong>Release date:</strong>
+  <%= @operation.release_date %>
+</p>
+
+<%= link_to 'Edit', edit_operation_path(@operation) %> |
+<%= link_to 'Back', operations_path %>

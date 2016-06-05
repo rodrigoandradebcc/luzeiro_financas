@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value_input: 1.5
+  value_output: 1.5
+  description: MyString
+  release_date: MyString
+
+two:
+  value_input: 1.5
+  value_output: 1.5
+  description: MyString
+  release_date: MyString
