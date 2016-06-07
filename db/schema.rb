@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160605141631) do
+ActiveRecord::Schema.define(version: 20160607005150) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "code"
@@ -21,15 +21,21 @@ ActiveRecord::Schema.define(version: 20160605141631) do
     t.string   "balance"
     t.float    "credit_balance"
     t.float    "debit_balance"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "chart_of_account_id"
   end
+
+  add_index "accounts", ["chart_of_account_id"], name: "index_accounts_on_chart_of_account_id"
 
   create_table "chart_of_accounts", force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "enterprise_id"
   end
+
+  add_index "chart_of_accounts", ["enterprise_id"], name: "index_chart_of_accounts_on_enterprise_id"
 
   create_table "elements", force: :cascade do |t|
     t.string   "code"
@@ -45,7 +51,10 @@ ActiveRecord::Schema.define(version: 20160605141631) do
     t.string   "field_of_work"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "user_id"
   end
+
+  add_index "enterprises", ["user_id"], name: "index_enterprises_on_user_id"
 
   create_table "groups", force: :cascade do |t|
     t.string   "code"

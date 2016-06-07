@@ -39,6 +39,12 @@
     <%= f.label :debit_balance %><br>
     <%= f.text_field :debit_balance %>
   </div>
+
+  <div class="field">
+    <%= f.label :chart_of_account_id %><br>
+    <%= collection_check_boxes(:account, :chart_of_account_id, ChartOfAccount.all, :id, :title)%>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

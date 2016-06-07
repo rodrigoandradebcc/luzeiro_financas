@@ -10,6 +10,6 @@ class CreateAccounts < ActiveRecord::Migration
       t.float :debit_balance
 
       t.timestamps null: false
-    end
+    end  
   end
 end

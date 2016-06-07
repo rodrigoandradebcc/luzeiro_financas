@@ -9,4 +9,3 @@ class CreateEnterprises < ActiveRecord::Migration
     end
   end
 end
-d
