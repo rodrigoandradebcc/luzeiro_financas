@@ -42,7 +42,7 @@
 
   <div class="field">
     <%= f.label :chart_of_account_id %><br>
-    <%= collection_check_boxes(:account, :chart_of_account_id, ChartOfAccount.all, :id, :title)%>
+    <%= f.collection_select(:chart_of_account_id, ChartOfAccount.all, :id, :title)%>
   </div>
 
   <div class="actions">
