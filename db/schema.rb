@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607005150) do
+ActiveRecord::Schema.define(version: 20160608032402) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "code"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20160607005150) do
   end
 
   add_index "accounts", ["chart_of_account_id"], name: "index_accounts_on_chart_of_account_id"
+
+  create_table "accounts_operations", force: :cascade do |t|
+    t.integer "account_id"
+    t.integer "operation_id"
+  end
+
+  add_index "accounts_operations", ["account_id"], name: "index_accounts_operations_on_account_id"
+  add_index "accounts_operations", ["operation_id"], name: "index_accounts_operations_on_operation_id"
 
   create_table "chart_of_accounts", force: :cascade do |t|
     t.string   "title"

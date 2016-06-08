@@ -27,6 +27,10 @@
     <%= f.label :release_date %><br>
     <%= f.text_field :release_date %>
   </div>
+  <div class="field">
+    <div>Para onde vai</div>
+    <%= @teste1 = collection_select(:account, :title, Account.all, :id, :name, {:prompt=>false}, {:class=>'my-custom-class'})%>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

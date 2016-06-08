@@ -3,6 +3,6 @@ class Account < ActiveRecord::Base
 
   has_many :group
 
-  has_many :operation
+  has_and_belongs_to_many :operations
 
 end

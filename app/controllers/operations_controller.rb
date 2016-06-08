@@ -5,6 +5,7 @@ class OperationsController < ApplicationController
   # GET /operations.json
   def index
     @operations = Operation.all
+    @accounts = Account.all
   end
 
   # GET /operations/1
@@ -25,7 +26,6 @@ class OperationsController < ApplicationController
   # POST /operations.json
   def create
     @operation = Operation.new(operation_params)
-
     respond_to do |format|
       if @operation.save
         format.html { redirect_to @operation, notice: 'Operation was successfully created.' }
@@ -69,6 +69,6 @@ class OperationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def operation_params
-      params.require(:operation).permit(:value_input, :value_output, :description, :release_date)
+      params.require(:operation).permit(:value_input, :value_output, :description, :release_date, :teste1)
     end
 end
