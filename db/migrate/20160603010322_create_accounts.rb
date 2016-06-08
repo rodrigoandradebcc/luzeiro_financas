@@ -4,12 +4,11 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :code
       t.string :name
       t.string :description
-      t.string :nature_of_the
-      t.string :balance
+      t.string :nature_of_the_balance
       t.float :credit_balance
       t.float :debit_balance
 
       t.timestamps null: false
-    end  
+    end
   end
 end
