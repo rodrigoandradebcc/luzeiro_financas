@@ -11,5 +11,7 @@
   subitems: "Sub-items"
   operations: "Operações"
   subelements: "Sub-elementos"
-  users:"usuarios"
+  users: "usuarios"
   name: "nome"
+  password: "senha"
+  remember_me: "Lembrar"
