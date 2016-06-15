@@ -16,6 +16,7 @@ class EnterprisesController < ApplicationController
   # GET /enterprises/new
   def new
     @enterprise = Enterprise.new
+    @chart_of_account = @enterprise.build_chart_of_account
   end
 
   # GET /enterprises/1/edit
@@ -27,6 +28,7 @@ class EnterprisesController < ApplicationController
   def create
     @enterprise = Enterprise.new(enterprise_params)
 
+    
     respond_to do |format|
       if @enterprise.save
         format.html { redirect_to @enterprise, notice: 'Enterprise was successfully created.' }
@@ -70,6 +72,6 @@ class EnterprisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def enterprise_params
-      params.require(:enterprise).permit(:name, :cnpj, :field_of_work)
+      params.require(:enterprise).permit(:name, :cnpj, :field_of_work, chart_of_account_attributes: [:id, :title, :enterprise_id])
     end
 end

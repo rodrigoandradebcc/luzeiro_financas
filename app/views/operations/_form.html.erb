@@ -29,7 +29,9 @@
   </div>
   <div class="field">
     <div>Para onde vai</div>
-    <%= @teste1 = collection_select(:account, :title, Account.all, :id, :name, {:prompt=>false}, {:class=>'my-custom-class'})%>
+    <%= f.collection_select :account_ids, Account.order("name"), :id, :name, {}, 
+    {:multiple => true} %>
+    
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,19 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3">
+			<p id="notice"><%= notice %></p>
+			<p><strong><h3>Empresa:</h3></strong></p>
+			<p>
+			  <strong>Name:</strong>
+			  <%= @enterprise.name %>
+			</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @enterprise.name %>
-</p>
+			<p>
+			  <strong>Cnpj:</strong>
+			  <%= @enterprise.cnpj %>
+			</p>
 
-<p>
-  <strong>Cnpj:</strong>
-  <%= @enterprise.cnpj %>
-</p>
+			<p>
+			  <strong>Field of work:</strong>
+			  <%= @enterprise.field_of_work %>
+			</p>
+		</div>
+		<div class="col-md-3">
+			<p>
+			  <strong><h3>Plano de contas:</h3></strong>
+			</p>
+			<p>
+			  <strong>Title:</strong>
+			  <%= @enterprise.chart_of_account.title %>
+			</p>
+		</div>
+	</div>
 
-<p>
-  <strong>Field of work:</strong>
-  <%= @enterprise.field_of_work %>
-</p>
-
-<%= link_to 'Edit', edit_enterprise_path(@enterprise) %> |
-<%= link_to 'Back', enterprises_path %>
+	<%= link_to 'Edit', edit_enterprise_path(@enterprise), class: "btn btn-primary" %> 
+	<%= link_to 'Back', enterprises_path, class: "btn btn-warning" %>
+</div>

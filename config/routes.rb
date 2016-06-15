@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :operations
-  resources :chart_of_accounts
   resources :elements
+  resources :chart_of_accounts
   resources :subitems
   resources :items
   resources :subelements
@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   devise_for :users
   get 'welcome/index'
 
-  resources :enterprises
+  resources :enterprises 
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

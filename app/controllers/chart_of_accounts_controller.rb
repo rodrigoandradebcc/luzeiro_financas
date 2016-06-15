@@ -69,6 +69,6 @@ class ChartOfAccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chart_of_account_params
-      params.require(:chart_of_account).permit(:title)
+      params.require(:chart_of_account).permit(:title, :enterprise_id)
     end
 end
