@@ -1,8 +1,7 @@
 class CreateOperations < ActiveRecord::Migration
   def change
     create_table :operations do |t|
-      t.float :value_input
-      t.float :value_output
+      t.float :value
       t.string :description
       t.string :release_date
 

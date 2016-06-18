@@ -78,8 +78,7 @@ ActiveRecord::Schema.define(version: 20160613032113) do
   end
 
   create_table "operations", force: :cascade do |t|
-    t.float    "value_input"
-    t.float    "value_output"
+    t.float    "value"
     t.string   "description"
     t.string   "release_date"
     t.datetime "created_at",   null: false

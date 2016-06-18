@@ -10,28 +10,22 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= f.label :value_input %><br>
-    <%= f.text_field :value_input %>
+    <%= f.label :release_date %><br>
+    <%= f.datetime_field :release_date, "data-provide" => 'datepicker', placeholder: Time.now.strftime("%b/%m/%Y") %>
   </div>
   <div class="field">
-    <%= f.label :value_output %><br>
-    <%= f.text_field :value_output %>
+    <%= f.label :value %><br>
+    <%= f.text_field :value %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :release_date %><br>
-    <%= f.text_field :release_date %>
-  </div>
-  <div class="field">
     <div>Para onde vai</div>
-    <%= f.collection_select :account_ids, Account.order("name"), :id, :name, {}, 
+    <%= f.collection_select :account_ids, Account.order("name"), :id, :name, {},
     {:multiple => true} %>
-    
   </div>
   <div class="actions">
     <%= f.submit %>

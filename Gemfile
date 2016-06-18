@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 gem 'boostrap-sass'
 gem 'devise'
 gem 'font-awesome-sass', '~> 4.6.2'
+gem 'bootstrap-datepicker-rails'
 
 gem 'rails-i18n'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

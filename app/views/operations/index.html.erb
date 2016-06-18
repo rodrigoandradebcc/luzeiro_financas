@@ -5,8 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Value input</th>
-      <th>Value output</th>
+      <th>Value</th>
       <th>Description</th>
       <th>Release date</th>
       <th colspan="3"></th>
@@ -16,8 +15,7 @@
   <tbody>
     <% @operations.each do |operation| %>
       <tr>
-        <td><%= operation.value_input %></td>
-        <td><%= operation.value_output %></td>
+        <td><%= operation.value %></td>
         <td><%= operation.description %></td>
         <td><%= operation.release_date %></td>
         <td><%= link_to 'Show', operation %></td>
