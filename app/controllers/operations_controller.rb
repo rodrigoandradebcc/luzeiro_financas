@@ -70,6 +70,6 @@ class OperationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def operation_params
       # Adicionado {operation_ids: []} pra ter acesso, pela view, a todas as operações
-      params.require(:operation).permit(:value_input, :value_output, :description, :release_date, :teste1, account_ids: [])
+      params.require(:operation).permit(:value, :description, :release_date, :teste1, account_ids: [])
     end
 end
