@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  debit: MyString
+  credit: MyString
+  total: MyString
+
+two:
+  debit: MyString
+  credit: MyString
+  total: MyString

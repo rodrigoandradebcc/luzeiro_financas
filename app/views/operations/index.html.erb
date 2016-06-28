@@ -5,10 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Value input</th>
-      <th>Value output</th>
+      <th>Value</th>
       <th>Description</th>
-      <th>Release date</th>
+      <th>Launch date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +15,9 @@
   <tbody>
     <% @operations.each do |operation| %>
       <tr>
-        <td><%= operation.value_input %></td>
-        <td><%= operation.value_output %></td>
+        <td><%= operation.value %></td>
         <td><%= operation.description %></td>
-        <td><%= operation.release_date %></td>
+        <td><%= operation.launch_date %></td>
         <td><%= link_to 'Show', operation %></td>
         <td><%= link_to 'Edit', edit_operation_path(operation) %></td>
         <td><%= link_to 'Destroy', operation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

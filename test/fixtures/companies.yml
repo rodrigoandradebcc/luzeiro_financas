@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cnpj: MyString
+  field_of_work: MyString
+  address: MyString
+  cep: MyString
+  user_id: 
+
+two:
+  name: MyString
+  cnpj: MyString
+  field_of_work: MyString
+  address: MyString
+  cep: MyString
+  user_id: 

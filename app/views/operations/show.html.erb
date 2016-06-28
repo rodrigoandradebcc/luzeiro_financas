@@ -1,13 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Value input:</strong>
-  <%= @operation.value_input %>
-</p>
-
-<p>
-  <strong>Value output:</strong>
-  <%= @operation.value_output %>
+  <strong>Value:</strong>
+  <%= @operation.value %>
 </p>
 
 <p>
@@ -16,15 +11,8 @@
 </p>
 
 <p>
-  <strong>Release date:</strong>
-  <%= @operation.release_date %>
-</p>
-
-<p>
-  <strong>Contas:</strong>
-  <%@operation.accounts.each do |a| %>
-  <%= a.name %>
-  <% end %>
+  <strong>Launch date:</strong>
+  <%= @operation.launch_date %>
 </p>
 
 <%= link_to 'Edit', edit_operation_path(@operation) %> |

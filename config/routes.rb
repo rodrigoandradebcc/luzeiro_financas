@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
+  resources :seventh_levels
+  resources :sixth_levels
+  resources :fifth_levels
+  resources :fourth_levels
   resources :operations
-  resources :elements
-  resources :chart_of_accounts
-  resources :subitems
-  resources :items
-  resources :subelements
-  resources :subgroups
-  resources :groups
-  resources :accounts
+  resources :third_levels
+  resources :second_levels
+  resources :first_levels
+  resources :companies
   get 'control_users/index'
 
   devise_for :users

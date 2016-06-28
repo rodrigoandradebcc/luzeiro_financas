@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Fourth Levels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Analytic</th>
+      <th>Balance</th>
+      <th>Third level</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fourth_levels.each do |fourth_level| %>
+      <tr>
+        <td><%= fourth_level.code %></td>
+        <td><%= fourth_level.name %></td>
+        <td><%= fourth_level.analytic %></td>
+        <td><%= fourth_level.balance %></td>
+        <td><%= fourth_level.third_level %></td>
+        <td><%= link_to 'Show', fourth_level %></td>
+        <td><%= link_to 'Edit', edit_fourth_level_path(fourth_level) %></td>
+        <td><%= link_to 'Destroy', fourth_level, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fourth level', new_fourth_level_path %>

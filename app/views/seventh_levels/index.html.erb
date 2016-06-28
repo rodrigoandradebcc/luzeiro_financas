@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Seventh Levels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Analytic</th>
+      <th>Balance</th>
+      <th>Sixth level</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @seventh_levels.each do |seventh_level| %>
+      <tr>
+        <td><%= seventh_level.code %></td>
+        <td><%= seventh_level.name %></td>
+        <td><%= seventh_level.analytic %></td>
+        <td><%= seventh_level.balance %></td>
+        <td><%= seventh_level.sixth_level %></td>
+        <td><%= link_to 'Show', seventh_level %></td>
+        <td><%= link_to 'Edit', edit_seventh_level_path(seventh_level) %></td>
+        <td><%= link_to 'Destroy', seventh_level, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Seventh level', new_seventh_level_path %>

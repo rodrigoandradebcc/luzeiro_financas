@@ -12,26 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :value_input %><br>
-    <%= f.text_field :value_input %>
-  </div>
-  <div class="field">
-    <%= f.label :value_output %><br>
-    <%= f.text_field :value_output %>
+    <%= f.label :value %><br>
+    <%= f.text_field :value %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :release_date %><br>
-    <%= f.text_field :release_date %>
-  </div>
-  <div class="field">
-    <div>Para onde vai</div>
-    <%= f.collection_select :account_ids, Account.order("name"), :id, :name, {}, 
-    {:multiple => true} %>
-    
+    <%= f.label :launch_date %><br>
+    <%= f.date_select :launch_date %>
   </div>
   <div class="actions">
     <%= f.submit %>
