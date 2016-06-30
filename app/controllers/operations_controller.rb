@@ -69,6 +69,7 @@ class OperationsController < ApplicationController
 
     # Adicionado {operation_ids: []} pra ter acesso, pela view, a todas as operações
     def operation_params
-      params.require(:operation).permit(:value, :description, :release_date, {fourth_levels_ids: []},{fifth_levels_ids: []},{sixth_levels_ids: []},{seventh_levels_ids: []})   
+      params.require(:operation).permit(:value, :description, :release_date, {fourth_levels_ids: []},{fifth_levels_ids: []},
+      {sixth_levels_ids: []},{seventh_levels_ids: []})   
     end
 end
