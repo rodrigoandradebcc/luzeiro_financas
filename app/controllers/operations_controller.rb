@@ -67,13 +67,8 @@ class OperationsController < ApplicationController
       @operation = Operation.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Adicionado {operation_ids: []} pra ter acesso, pela view, a todas as operações
     def operation_params
-<<<<<<< HEAD
-      params.require(:operation).permit(:value, :description, :launch_date)
-=======
-      # Adicionado {operation_ids: []} pra ter acesso, pela view, a todas as operações
-      params.require(:operation).permit(:value, :description, :release_date, :teste1, account_ids: [])
->>>>>>> 8fcd3ff446731673164eaabacc396d576e15daef
+      params.require(:operation).permit(:value, :description, :release_date, {fourth_levels_ids: []},{fifth_levels_ids: []},{sixth_levels_ids: []},{seventh_levels_ids: []})   
     end
 end
