@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20160628212532) do
 
   create_table "operations", force: :cascade do |t|
     t.float    "value"
+<<<<<<< HEAD
     t.text     "description"
     t.date     "launch_date"
     t.datetime "created_at",  null: false
@@ -123,6 +124,12 @@ ActiveRecord::Schema.define(version: 20160628212532) do
   create_table "operations_seventh_levels", id: false, force: :cascade do |t|
     t.integer "operation_id",     null: false
     t.integer "seventh_level_id", null: false
+=======
+    t.string   "description"
+    t.string   "release_date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+>>>>>>> 8fcd3ff446731673164eaabacc396d576e15daef
   end
 
   create_table "operations_sixth_levels", id: false, force: :cascade do |t|
