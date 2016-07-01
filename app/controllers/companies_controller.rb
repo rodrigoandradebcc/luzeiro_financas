@@ -15,12 +15,12 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
-    @company.build_chart_of_account
+    @chart_of_account = @company.build_chart_of_account
   end
 
   # GET /companies/1/edit
   def edit
-    @company.build_chart_of_account if @company.chart_of_account.nil?
+    @chart_of_account = @company.build_chart_of_account if @company.chart_of_account.nil?
   end
 
   # POST /companies
@@ -73,6 +73,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :cnpj, :field_of_work, :address, :cep, :user_id, chart_of_account_attributes: [:id, :title ])
+      params.require(:company).permit(:name, :cnpj, :field_of_work, :address, :cep, :user_id, chart_of_account_attributes: [:id, :title, :company_id ])
     end
 end
