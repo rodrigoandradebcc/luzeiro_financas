@@ -15,6 +15,7 @@ class OperationsController < ApplicationController
   # GET /operations/new
   def new
     @operation = Operation.new
+    @accounts = FourthLevel.where(analytic: true)
   end
 
   # GET /operations/1/edit
@@ -62,6 +63,10 @@ class OperationsController < ApplicationController
   end
 
   private
+
+   
+
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_operation
       @operation = Operation.find(params[:id])

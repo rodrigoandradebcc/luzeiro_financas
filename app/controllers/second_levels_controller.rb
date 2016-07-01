@@ -15,6 +15,7 @@ class SecondLevelsController < ApplicationController
   # GET /second_levels/new
   def new
     @second_level = SecondLevel.new
+    @balance = @second_level.build_balance
   end
 
   # GET /second_levels/1/edit

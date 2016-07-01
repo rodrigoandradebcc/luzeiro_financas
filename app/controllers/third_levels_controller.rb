@@ -15,6 +15,7 @@ class ThirdLevelsController < ApplicationController
   # GET /third_levels/new
   def new
     @third_level = ThirdLevel.new
+    @balance = @third_level.build_balance
   end
 
   # GET /third_levels/1/edit

@@ -5,6 +5,7 @@ class FirstLevelsController < ApplicationController
   # GET /first_levels.json
   def index
     @first_levels = FirstLevel.all
+
   end
 
   # GET /first_levels/1
@@ -15,6 +16,7 @@ class FirstLevelsController < ApplicationController
   # GET /first_levels/new
   def new
     @first_level = FirstLevel.new
+    @balance = @first_level.build_balance
   end
 
   # GET /first_levels/1/edit

@@ -4,4 +4,6 @@ class FifthLevel < ActiveRecord::Base
 
   has_many :sixth_levels
   has_and_belongs_to_many :operations
+
+  accepts_nested_attributes_for :balance
 end

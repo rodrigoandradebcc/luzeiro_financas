@@ -15,6 +15,8 @@ class SeventhLevelsController < ApplicationController
   # GET /seventh_levels/new
   def new
     @seventh_level = SeventhLevel.new
+    @balance = @seventh_level.build_balance
+
   end
 
   # GET /seventh_levels/1/edit

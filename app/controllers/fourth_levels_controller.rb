@@ -15,6 +15,7 @@ class FourthLevelsController < ApplicationController
   # GET /fourth_levels/new
   def new
     @fourth_level = FourthLevel.new
+    @balance = @fourth_level.build_balance
   end
 
   # GET /fourth_levels/1/edit
