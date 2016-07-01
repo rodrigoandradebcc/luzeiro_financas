@@ -38,7 +38,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "select2-rails"
 
-gem 'xray-rails', group: :development
+# gem 'xray-rails', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

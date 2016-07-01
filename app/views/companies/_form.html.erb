@@ -1,41 +1,60 @@
-<%= form_for(@company) do |f| %>
-  <% if @company.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+    <%= form_for @company do |f| %>
+      <% if @company.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
 
-      <ul>
-      <% @company.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @company.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :cnpj %><br>
+        <%= f.text_field :cnpj %>
+      </div>
+      <div class="field">
+        <%= f.label :field_of_work %><br>
+        <%= f.text_field :field_of_work %>
+      </div>
+      <div class="field">
+        <%= f.label :address %><br>
+        <%= f.text_field :address %>
+      </div>
+      <div class="field">
+        <%= f.label :cep %><br>
+        <%= f.text_field :cep %>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+
+   
+
+    <h2><strong>Plano de contas: </strong></h2>
+    <%= f.fields_for :chart_of_account do |chart_of_account| %>
+    <div class="field">
+      
+     <%= chart_of_account.label :title %><br>
+     <%= chart_of_account.text_field :title %>
+      
+    </div>
+    <% end %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :cnpj %><br>
-    <%= f.text_field :cnpj %>
-  </div>
-  <div class="field">
-    <%= f.label :field_of_work %><br>
-    <%= f.text_field :field_of_work %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :cep %><br>
-    <%= f.text_field :cep %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="actions">
+ 
+
+</div>
+ <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+  <% end %>
