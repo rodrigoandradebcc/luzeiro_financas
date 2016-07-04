@@ -30,21 +30,33 @@ body{
 }
 
 .panel-yellow {
-    border-color: #f0ad4e;
-    background: #f0ad4e;
+    border-color: #f0ad4e !important;
+    background: #f0ad4e !important;
    	color: #ffffff !important;
 }
 
 .panel-green{
 	border-color: #5cb85c;
-	background: #5cb85c;
+	background: #5cb85c !important;
    	color: #ffffff !important;
 }
 
 .panel-red{
 	border-color: #d9534f;
-	background: #d9534f;
+	background: #d9534f !important;
    	color: #ffffff !important;
+}
+
+.mudabordaramarelo{
+	border-color: #f0ad4e !important;
+}
+
+.mudabordarverde{
+	border-color: #5cb85c !important;
+}
+
+.mudabordarvermelho{
+	border-color: #d9534f !important;
 }
 
 a{

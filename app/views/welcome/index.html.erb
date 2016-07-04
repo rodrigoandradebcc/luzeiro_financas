@@ -1,31 +1,5 @@
 <div class="container-fluid">
 
-	<div class="panel panel-default">
-		<div class="panel-heading">Empresas</div>
-		<table class="table">
-		  <thead>
-		    <tr>
-		      <th>Nome</th>
-		      <th>CNPJ</th>
-		      <th>Ramo de trabalho</th>
-		      <th colspan="3"></th>
-		    </tr>
-		  </thead>
-
-		  <tbody>
-		    <% @companies.each do |company| %>
-		      <tr>
-		        <td><%= company.name %></td>
-		        <td><%= company.cnpj %></td>
-		        <td><%= company.field_of_work %></td>
-		        <td><%= link_to 'Show', company, class: "btn btn-primary" %></td>
-		      </tr>
-		    <% end %>
-		  </tbody>
-		</table>
-	</div>
-
-
 	<h1 class="page-header"><strong>Dashboard</strong></h1>
 	<div class="row">
 		<div class="col-lg-3 col-md-6">
@@ -40,28 +14,69 @@
 						</div>
 					</div>
 				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>CNPJ</th>
+							<th>Ramo de trabalho</th>
+							<th colspan="3"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<% @companies.each do |company| %>
+						<tr>
+							<td><%= company.name %></td>
+							<td><%= company.cnpj %></td>
+							<td><%= company.field_of_work %></td>
+							<td><%= link_to 'Show', company, class: "btn btn-primary btn-sm" %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
 			</div>
 		</div>
 
 		<div class="col-lg-3 col-md-6">
-			<div class="panel panel-yellow">
-				<div class="panel-heading">
+			<div class="panel panel-default mudabordaramarelo">
+				<div class="panel-heading panel-yellow">
 					<div class="row">
 						<div class="col-xs-3">
-							<%= icon('archive', class: 'strong aumentaicon')%>
+							<%= icon('suitcase', class: 'strong aumentaicon')%>
 						</div>
 						<div class="col-xs-9 text-right">
-							<%= link_to "Contas", accounts_path, :class => "huge"%>
+							<%= link_to "Contas", accounts_path, :class => "huge" %>
 						</div>
 					</div>
 				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Código</th>
+							<th>Nome</th>
+							<th>Saldo</th>
+							<th></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<% @accounts.each do |account| %>
+						<tr>
+							<td><%= account.code %></td>
+							<td><%= account.name %></td>
+							<td><%= account.balance %></td>
+							<td><%= link_to 'Show', account, class: "btn btn-primary btn-sm" %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
 			</div>
 		</div>
 
-
 		<div class="col-lg-3 col-md-6">
-			<div class="panel panel-green">
-				<div class="panel-heading">
+			<div class="panel panel-default mudabordarverde">
+				<div class="panel-heading panel-green">
 					<div class="row">
 						<div class="col-xs-3">
 							<%= icon('users', class: 'strong aumentaicon')%>
@@ -71,12 +86,33 @@
 						</div>
 					</div>
 				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Código</th>
+							<th>Nome</th>
+							<th>Saldo</th>
+							<th></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<% @synthetic_accounts.each do |synt| %>
+						<tr>
+							<td><%= synt.code %></td>
+							<td><%= synt.name %></td>
+							<td><%= synt.balance %></td>
+							<td><%= link_to 'Show', synt, class: "btn btn-primary btn-sm" %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
 			</div>
 		</div>
 
 		<div class="col-lg-3 col-md-6">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
+			<div class="panel panel-default mudabordarvermelho">
+				<div class="panel-heading panel-red">
 					<div class="row">
 						<div class="col-xs-3">
 							<%= icon('users', class: 'strong aumentaicon')%>
@@ -86,21 +122,27 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Código</th>
+							<th>Nome</th>
+							<th>Saldo</th>
+							<th></th>
+						</tr>
+					</thead>
 
-		<div class="col-lg-3 col-md-6">
-			<div class="panel panel-red">
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-xs-3">
-							<%= icon('money', class: 'strong aumentaicon')%>
-						</div>
-						<div class="col-xs-9 text-right">
-							<%= link_to "Operações", operations_path, :class => "huge"%>
-						</div>
-					</div>
-				</div>
+					<tbody>
+						<% @analytic_accounts.each do |analitic| %>
+						<tr>
+							<td><%= analitic.code %></td>
+							<td><%= analitic.name %></td>
+							<td><%= analitic.balance %></td>
+							<td><%= link_to 'Show', analitic, class: "btn btn-primary btn-sm" %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
 			</div>
 		</div>
 
@@ -112,9 +154,10 @@
 			<div class="btn btn-default btn-lg">Ver Saldo em Caixa</div>
 			<div class="btn btn-default btn-lg">Gerar Relatório</div>
 			<div class="btn btn-default btn-lg">Cadastrar Empresa</div>
-			<div class="btn btn-default btn-lg">Cadastrar Operação</div>
+			<div class="btn btn-default btn-lg"><%= link_to 'Cadastrar Operação', new_operation_path %></div>
 			<div class="btn btn-default btn-lg">Cadastrar Conta</div>
 			<div class="btn btn-default btn-lg">Calculadora</div>
+			<div class="btn btn-default btn-lg"><%= link_to 'Livro Razão', ledger_path %></div>
 		</div>
 	</div>
 

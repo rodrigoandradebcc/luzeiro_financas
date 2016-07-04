@@ -12,7 +12,7 @@ private
  
 
   def update_balance
-  	release_value = self.release_account.balance - self.value
+  	release_value = self.release_account.balance + self.value
   	retrieve_value = self.retrieve_account.balance + self.value
     
     self.release_account.update(balance: release_value)
@@ -21,7 +21,7 @@ private
   end
 
    def undo_operation
-    release_value = self.release_account.balance + self.value
+    release_value = self.release_account.balance - self.value
     retrieve_value = self.retrieve_account.balance - self.value
     
     self.release_account.update(balance: release_value)

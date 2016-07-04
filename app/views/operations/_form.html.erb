@@ -16,11 +16,11 @@
     <%= f.text_field :value %>
   </div>
    <div class="field">
-    <%= f.label :retrieve_account_id %><br>
+    <%= f.label :retrieve_account_id, "Para onde vai" %><br>
     <%= f.collection_select :retrieve_account_id, AnalyticAccount.all, :id, :name , default: AnalyticAccount.take, include_blank: false %>
   </div>
    <div class="field">
-    <%= f.label :release_account_id %><br>
+    <%= f.label :release_account_id, "De onde vem" %><br>
     <%= f.collection_select :release_account_id, AnalyticAccount.all, :id, :name , default: AnalyticAccount.take, include_blank: false %>
   </div>
   <div class="field">

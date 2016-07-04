@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   resources :chart_of_accounts
   resources :companies
   get 'control_users/index'
-
   devise_for :users
   get 'welcome/index'
+  get 'ledger', to: 'operations#ledger', as: :ledger
 
   resources :enterprises 
   

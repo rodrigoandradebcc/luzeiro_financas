@@ -1,0 +1,37 @@
+<div class="container-fluid">
+	<h1 class="page-header"><strong>Livro Razão</strong></h1>
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading text-center"><strong><%= Company.last.name %></strong></div>
+			<table class="table ">
+				<thead>
+					<tr>
+						<th>Data</th>
+						<th>Histórico</th>
+						<th>Débito</th>
+						<th>Crédito</th>
+						<th>Saldo</th>
+						<th colspan="3"></th>
+					</tr>
+				</thead>
+				<% @operations.each do |op| %>	
+				<tbody>
+					
+					<tr>
+						<td><%= op.release_date %></td>
+						<td><%= op.description %></td>
+						<td>
+						<% if  op.release_account.synthetic_account.account.account_type.code != 0 %><%= op.value%>
+						<% end %></td>
+						<td><%= op.value %></td>
+						<td>TTT</td>
+					</tr>
+				</tbody>
+				<% end %>
+
+			</table>
+		</div>
+
+	</div>
+
+</div>

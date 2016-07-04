@@ -1,5 +1,5 @@
 class OperationsController < ApplicationController
-  before_action :set_operation, only: [:show, :edit, :update, :destroy]
+  before_action :set_operation, only: [:show, :edit, :update,  :destroy]
 
   # GET /operations
   # GET /operations.json
@@ -10,6 +10,10 @@ class OperationsController < ApplicationController
   # GET /operations/1
   # GET /operations/1.json
   def show
+  end
+
+  def ledger
+    @operations = Operation.all
   end
 
   # GET /operations/new
@@ -27,7 +31,7 @@ class OperationsController < ApplicationController
     respond_to do |format|
       @operation = Operation.new(operation_params)
       if @operation.save
-        format.html { redirect_to @operation, notice: 'Operation was successfully created.' }
+        format.html { redirect_to ledger_path, notice: 'Operation was successfully created.' }
         format.json { render :show, status: :created, location: @operation }
       else
         format.html { render :new }
