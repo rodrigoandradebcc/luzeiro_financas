@@ -1,0 +1,37 @@
+<%= form_for(@analytic_account) do |f| %>
+  <% if @analytic_account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@analytic_account.errors.count, "error") %> prohibited this analytic_account from being saved:</h2>
+
+      <ul>
+      <% @analytic_account.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div class="field">
+      <%= f.label :synthetic_account_id %><br>
+      <%= f.collection_select :synthetic_account_id, SyntheticAccount.all, :id, :name , default: SyntheticAccount.take, include_blank: false %>
+    </div>
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.number_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :balance %><br>
+    <%= f.text_field :balance %>
+  </div>
+ 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

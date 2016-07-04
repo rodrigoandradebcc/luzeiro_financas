@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Analytic Accounts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Balance</th>
+      <th>Synthetic account</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @analytic_accounts.each do |analytic_account| %>
+      <tr>
+        <td><%= analytic_account.synthetic_account.account.account_type.code %>.<%= analytic_account.synthetic_account.account.code %>.<%= analytic_account.synthetic_account.code %>.<%= analytic_account.code %></td>
+        <td><%= analytic_account.name %></td>
+        <td><%= analytic_account.description %></td>
+        <td><%= analytic_account.balance %></td>
+        <td><%= analytic_account.synthetic_account.name %></td>
+        <td><%= link_to 'Show', analytic_account %></td>
+        <td><%= link_to 'Edit', edit_analytic_account_path(analytic_account) %></td>
+        <td><%= link_to 'Destroy', analytic_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Analytic account', new_analytic_account_path %>

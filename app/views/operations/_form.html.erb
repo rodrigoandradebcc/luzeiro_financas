@@ -1,53 +1,37 @@
-<div class="container">
-  <div class="row">
-    <%= form_for(@operation) do |f| %>
-      <% if @operation.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@operation.errors.count, "error") %> prohibited this operation from being saved:</h2>
-          <ul>
-          <% @operation.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-      
-      <div class="field">
-        <%= f.label :value %><br>
-        <%= f.text_field :value %>
-      </div>
-      <div class="field">
-        <%= f.label :description %><br>
-        <%= f.text_area :description %>
-      </div>
+<%= form_for(@operation) do |f| %>
+  <% if @operation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@operation.errors.count, "error") %> prohibited this operation from being saved:</h2>
 
-      <div class="field">
-        <%= f.label :release_date %><br>
-        <%= f.date_select :release_date %>
-      </div>
-      <div class="row">
-      <div class="col-lg-6">
-      
-      <div class="col-md-6">
-      <div class="field">
-        <div>Para onde vai</div>
-        <%= f.collection_select :fourth_level_ids, @accounts.order("name"), :id, :name, {},
-        {:multiple => true, include_blank: false} %>
-      </div>
-      </div>
-      <div class="col-md-6">
-      <div class="field">
-        <div>De onde veio</div>
-        <%= f.collection_select :fourth_level_ids, @accounts.order("name"), :id, :name, {},
-        {:multiple => true, include_blank: false} %>
-      </div>
-      </div>
-      </div>
-      </div>
-      </br>
-      <div class="actions">
-        <%= f.submit :class => "btn btn-success"%>
-      </div>
-    <% end %>
+      <ul>
+      <% @operation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :value %><br>
+    <%= f.text_field :value %>
   </div>
-</div>
+   <div class="field">
+    <%= f.label :retrieve_account_id %><br>
+    <%= f.collection_select :retrieve_account_id, AnalyticAccount.all, :id, :name , default: AnalyticAccount.take, include_blank: false %>
+  </div>
+   <div class="field">
+    <%= f.label :release_account_id %><br>
+    <%= f.collection_select :release_account_id, AnalyticAccount.all, :id, :name , default: AnalyticAccount.take, include_blank: false %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :release_date %><br>
+    <%= f.date_select :release_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

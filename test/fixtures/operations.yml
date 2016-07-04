@@ -3,9 +3,9 @@
 one:
   value: 1.5
   description: MyText
-  launch_date: 2016-06-28
+  release_date: 2016-07-01
 
 two:
   value: 1.5
   description: MyText
-  launch_date: 2016-06-28
+  release_date: 2016-07-01

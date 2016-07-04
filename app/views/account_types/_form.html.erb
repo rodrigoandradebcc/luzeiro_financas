@@ -1,0 +1,33 @@
+<%= form_for(@account_type) do |f| %>
+  <% if @account_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@account_type.errors.count, "error") %> prohibited this account_type from being saved:</h2>
+
+      <ul>
+      <% @account_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  
+    
+    
+ <label for="chart_of_account_id">
+  Click na caixa de seleção abaixo para selecionar um Plano de Contas<br>
+
+  <%= f.collection_select :chart_of_account_id, ChartOfAccount.all, :id, :title,{}, {id: "e1"} %>
+</label>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

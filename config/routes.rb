@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-  resources :seventh_levels
-  resources :sixth_levels
-  resources :fifth_levels
-  resources :fourth_levels
+  resources :analytic_accounts
+  resources :synthetic_accounts
   resources :operations
-  resources :third_levels
-  resources :second_levels
-  resources :first_levels
+  resources :accounts
+  resources :account_types
+  resources :chart_of_accounts
   resources :companies
   get 'control_users/index'
 

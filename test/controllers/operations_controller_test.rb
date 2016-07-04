@@ -18,7 +18,7 @@ class OperationsControllerTest < ActionController::TestCase
 
   test "should create operation" do
     assert_difference('Operation.count') do
-      post :create, operation: { description: @operation.description, launch_date: @operation.launch_date, value: @operation.value }
+      post :create, operation: { description: @operation.description, release_date: @operation.release_date, value: @operation.value }
     end
 
     assert_redirected_to operation_path(assigns(:operation))
@@ -35,7 +35,7 @@ class OperationsControllerTest < ActionController::TestCase
   end
 
   test "should update operation" do
-    patch :update, id: @operation, operation: { description: @operation.description, launch_date: @operation.launch_date, value: @operation.value }
+    patch :update, id: @operation, operation: { description: @operation.description, release_date: @operation.release_date, value: @operation.value }
     assert_redirected_to operation_path(assigns(:operation))
   end
 

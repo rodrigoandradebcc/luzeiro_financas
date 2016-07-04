@@ -15,7 +15,6 @@ class OperationsController < ApplicationController
   # GET /operations/new
   def new
     @operation = Operation.new
-    @accounts = FourthLevel.where(analytic: true)
   end
 
   # GET /operations/1/edit
@@ -25,9 +24,8 @@ class OperationsController < ApplicationController
   # POST /operations
   # POST /operations.json
   def create
-    @operation = Operation.new(operation_params)
-
     respond_to do |format|
+      @operation = Operation.new(operation_params)
       if @operation.save
         format.html { redirect_to @operation, notice: 'Operation was successfully created.' }
         format.json { render :show, status: :created, location: @operation }
@@ -63,18 +61,13 @@ class OperationsController < ApplicationController
   end
 
   private
-
-   
-
-    
     # Use callbacks to share common setup or constraints between actions.
     def set_operation
       @operation = Operation.find(params[:id])
     end
-
-    # Adicionado {operation_ids: []} pra ter acesso, pela view, a todas as operações
+    
+    # Never trust parameters from the scary internet, only allow the white list through.
     def operation_params
-      params.require(:operation).permit(:value, :description, :release_date, {fourth_levels_ids: []},{fifth_levels_ids: []},
-      {sixth_levels_ids: []},{seventh_levels_ids: []})   
+      params.require(:operation).permit(:value, :description, :release_date, :retrieve_account_id, :release_account_id)
     end
 end

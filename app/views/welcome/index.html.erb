@@ -51,7 +51,7 @@
 							<%= icon('archive', class: 'strong aumentaicon')%>
 						</div>
 						<div class="col-xs-9 text-right">
-							<%= link_to "Contas", first_levels_path, :class => "huge"%>
+							<%= link_to "Contas", accounts_path, :class => "huge"%>
 						</div>
 					</div>
 				</div>
@@ -67,7 +67,22 @@
 							<%= icon('users', class: 'strong aumentaicon')%>
 						</div>
 						<div class="col-xs-9 text-right">
-							<%= link_to "Grupos", second_levels_path, :class => "huge"%>
+							<%= link_to "Contas Sintéticas", synthetic_accounts_path, :class => "huge"%>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-3">
+							<%= icon('users', class: 'strong aumentaicon')%>
+						</div>
+						<div class="col-xs-9 text-right">
+							<%= link_to "Contas Analíticas", analytic_accounts_path, :class => "huge"%>
 						</div>
 					</div>
 				</div>
@@ -82,7 +97,7 @@
 							<%= icon('money', class: 'strong aumentaicon')%>
 						</div>
 						<div class="col-xs-9 text-right">
-							<%= link_to "Operações", second_levels_path, :class => "huge"%>
+							<%= link_to "Operações", operations_path, :class => "huge"%>
 						</div>
 					</div>
 				</div>

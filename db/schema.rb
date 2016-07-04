@@ -11,23 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628212532) do
+ActiveRecord::Schema.define(version: 20160703193316) do
 
-  create_table "accounts_operations", id: false, force: :cascade do |t|
-    t.integer "account_id",   null: false
-    t.integer "operation_id", null: false
+  create_table "account_types", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.integer  "chart_of_account_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
-  add_index "accounts_operations", ["account_id", "operation_id"], name: "index_accounts_operations_on_account_id_and_operation_id"
-  add_index "accounts_operations", ["operation_id", "account_id"], name: "index_accounts_operations_on_operation_id_and_account_id"
+  add_index "account_types", ["chart_of_account_id"], name: "index_account_types_on_chart_of_account_id"
 
-  create_table "balances", force: :cascade do |t|
-    t.string   "debit"
-    t.string   "credit"
-    t.string   "total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "accounts", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.text     "description"
+    t.float    "balance"
+    t.integer  "account_type_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
+
+  add_index "accounts", ["account_type_id"], name: "index_accounts_on_account_type_id"
+
+  create_table "analytic_accounts", force: :cascade do |t|
+    t.integer  "code"
+    t.string   "name"
+    t.text     "description"
+    t.float    "balance"
+    t.integer  "synthetic_account_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "analytic_accounts", ["synthetic_account_id"], name: "index_analytic_accounts_on_synthetic_account_id"
 
   create_table "chart_of_accounts", force: :cascade do |t|
     t.string   "title"
@@ -51,130 +69,30 @@ ActiveRecord::Schema.define(version: 20160628212532) do
 
   add_index "companies", ["user_id"], name: "index_companies_on_user_id"
 
-  create_table "fifth_levels", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
-    t.boolean  "analytic"
-    t.integer  "balance_id"
-    t.integer  "fourth_level_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "fifth_levels", ["balance_id"], name: "index_fifth_levels_on_balance_id"
-  add_index "fifth_levels", ["fourth_level_id"], name: "index_fifth_levels_on_fourth_level_id"
-
-  create_table "fifth_levels_operations", id: false, force: :cascade do |t|
-    t.integer "fifth_level_id", null: false
-    t.integer "operation_id",   null: false
-  end
-
-  create_table "first_level_second_levels", force: :cascade do |t|
-    t.string   "account_type"
-    t.string   "group_type"
-    t.integer  "first_level_id"
-    t.integer  "second_level_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "first_level_second_levels", ["first_level_id"], name: "index_first_level_second_levels_on_first_level_id"
-  add_index "first_level_second_levels", ["second_level_id"], name: "index_first_level_second_levels_on_second_level_id"
-
-  create_table "first_levels", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
-    t.string   "description"
-    t.integer  "chart_of_account_id"
-    t.integer  "balance_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
-  add_index "first_levels", ["balance_id"], name: "index_first_levels_on_balance_id"
-  add_index "first_levels", ["chart_of_account_id"], name: "index_first_levels_on_chart_of_account_id"
-
-  create_table "fourth_levels", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
-    t.boolean  "analytic"
-    t.integer  "balance_id"
-    t.integer  "third_level_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "fourth_levels", ["balance_id"], name: "index_fourth_levels_on_balance_id"
-  add_index "fourth_levels", ["third_level_id"], name: "index_fourth_levels_on_third_level_id"
-
-  create_table "fourth_levels_operations", id: false, force: :cascade do |t|
-    t.integer "fourth_level_id", null: false
-    t.integer "operation_id",    null: false
-  end
-
   create_table "operations", force: :cascade do |t|
     t.float    "value"
     t.text     "description"
     t.date     "release_date"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "release_account_id"
+    t.integer  "retrieve_account_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
-  create_table "operations_seventh_levels", id: false, force: :cascade do |t|
-    t.integer "operation_id",     null: false
-    t.integer "seventh_level_id", null: false
-  end
+  add_index "operations", ["release_account_id"], name: "index_operations_on_release_account_id"
+  add_index "operations", ["retrieve_account_id"], name: "index_operations_on_retrieve_account_id"
 
-  create_table "operations_sixth_levels", id: false, force: :cascade do |t|
-    t.integer "operation_id",   null: false
-    t.integer "sixth_level_id", null: false
-  end
-
-  create_table "second_levels", force: :cascade do |t|
-    t.string   "code"
+  create_table "synthetic_accounts", force: :cascade do |t|
+    t.integer  "code"
     t.string   "name"
-    t.integer  "balance_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "description"
+    t.float    "balance"
+    t.integer  "account_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "second_levels", ["balance_id"], name: "index_second_levels_on_balance_id"
-
-  create_table "seventh_levels", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
-    t.boolean  "analytic"
-    t.integer  "balance_id"
-    t.integer  "sixth_level_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "seventh_levels", ["balance_id"], name: "index_seventh_levels_on_balance_id"
-  add_index "seventh_levels", ["sixth_level_id"], name: "index_seventh_levels_on_sixth_level_id"
-
-  create_table "sixth_levels", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
-    t.boolean  "analytic"
-    t.integer  "balance_id"
-    t.integer  "fifth_level_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "sixth_levels", ["balance_id"], name: "index_sixth_levels_on_balance_id"
-  add_index "sixth_levels", ["fifth_level_id"], name: "index_sixth_levels_on_fifth_level_id"
-
-  create_table "third_levels", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
-    t.integer  "second_level_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "third_levels", ["second_level_id"], name: "index_third_levels_on_second_level_id"
+  add_index "synthetic_accounts", ["account_id"], name: "index_synthetic_accounts_on_account_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

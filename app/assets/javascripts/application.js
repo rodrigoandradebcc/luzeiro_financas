@@ -15,6 +15,5 @@
 //= require bootstrap
 //= require turbolinks
 //= require select2
-= require bootstrap-datepicker
 //= require select2_locale_"pt-BR"
 //= require_tree .

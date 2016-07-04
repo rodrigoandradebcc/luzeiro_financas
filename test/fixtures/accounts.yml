@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  name: MyString
+  description: MyText
+  analytic: false
+  balance: 1.5
+  account_type_id: 
+  chart_of_account_id: 
+
+two:
+  code: MyString
+  name: MyString
+  description: MyText
+  analytic: false
+  balance: 1.5
+  account_type_id: 
+  chart_of_account_id: 

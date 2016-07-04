@@ -38,6 +38,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "select2-rails"
 
+gem 'nested_form_fields'
+
 # gem 'xray-rails', group: :development
 
 group :development, :test do

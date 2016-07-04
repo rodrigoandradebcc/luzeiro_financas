@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+a1 = AnalyticAccount.new(id:1, name: "Conta analítica 1", balance: 20)
+a2 = AnalyticAccount.new(id:2, name: "Conta analítica 2", balance: 20)
