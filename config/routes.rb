@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :analytic_accounts
+  resources :analytic_accounts, param: :name
   resources :synthetic_accounts
   resources :operations
   resources :accounts
@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'ledger', to: 'operations#ledger', as: :ledger
 
-  resources :enterprises 
-  
+  resources :enterprises
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
