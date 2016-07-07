@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :analytic_accounts
-  get 'analytic_ledger/:id', to: 'analytic_accounts#analytic_ledger', as: :analytic_ledger
+  resources :analytic_accounts, param: :name
+  
   resources :synthetic_accounts
   resources :operations
   resources :accounts
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   resources :enterprises
 
+  get 'analytic_ledger/:id', to: 'analytic_accounts#analytic_ledger', as: :analytic_ledger
+  get 'select_account', to: 'welcome#select_account', as: :select_account
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

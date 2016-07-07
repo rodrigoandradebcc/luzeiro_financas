@@ -7,5 +7,8 @@ class WelcomeController < ApplicationController
   	@synthetic_accounts = SyntheticAccount.all
   end
 
+  def select_account
+  		
+  end
 
 end
