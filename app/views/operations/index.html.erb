@@ -1,8 +1,11 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div  class="row">
+    <p id="notice"><%= notice %></p>
 
-<h1>Listing Operations</h1>
+    <h1>Listing Operations</h1>
 
-<table>
+    <table class="table">
+
   <thead>
     <tr>
       <th>Value</th>
@@ -18,9 +21,9 @@
         <td><%= operation.value %></td>
         <td><%= operation.description %></td>
         <td><%= operation.release_date %></td>
-        <td><%= link_to 'Show', operation %></td>
-        <td><%= link_to 'Edit', edit_operation_path(operation) %></td>
-        <td><%= link_to 'Destroy', operation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', operation, class: "btn-primary btn-sm" %>
+        <%= link_to 'Edit', edit_operation_path(operation), class: "btn-primary btn-sm" %>
+        <%= link_to 'Destroy', operation, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-primary btn-sm" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Operation', new_operation_path %>
+<%= link_to 'New Operation', new_operation_path, class: "btn btn-primary" %>
