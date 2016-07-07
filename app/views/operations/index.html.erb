@@ -8,19 +8,25 @@
 
   <thead>
     <tr>
-      <th>Value</th>
-      <th>Description</th>
-      <th>Release date</th>
+            <th>Data</th>
+            <th>Numero da Operação</th>
+            <th>Conta a Débito </th>
+            <th>Conta a Crédito</th>
+            <th>Histórico</th>
+            
+            <th>Saldo</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
-  <tbody>
     <% @operations.each do |operation| %>
+     <tbody>
       <tr>
-        <td><%= operation.value %></td>
-        <td><%= operation.description %></td>
         <td><%= operation.release_date %></td>
+        <td><%= operation.id %></td>
+        <td><%= %></td>
+        <td><%= %></td>
+        <td><%= operation.value %></td>
+        <td><%= operation.description %></td>       
         <td><%= link_to 'Show', operation, class: "btn-primary btn-sm" %>
         <%= link_to 'Edit', edit_operation_path(operation), class: "btn-primary btn-sm" %>
         <%= link_to 'Destroy', operation, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-primary btn-sm" %></td>

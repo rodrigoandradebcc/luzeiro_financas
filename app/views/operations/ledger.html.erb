@@ -7,9 +7,11 @@
 				<thead>
 					<tr>
 						<th>Data</th>
+						<th>Numero da Operação</th>
+						<th>Conta a Débito </th>
+						<th>Conta a Crédito</th>
 						<th>Histórico</th>
-						<th>Débito</th>
-						<th>Crédito</th>
+						
 						<th>Saldo</th>
 						<th colspan="3"></th>
 					</tr>
@@ -19,7 +21,9 @@
 					
 					<tr>
 						<td><%= op.release_date %></td>
-						<td><%= op.description %></td>
+						<td><%= op.id %></td>
+						<td><%= op.id %></td>
+						<td><%= op.id %></td>
 						<td>
 						<% if  op.release_account.synthetic_account.account.account_type.code != 0 %><%= op.value%>
 						<% end %></td>

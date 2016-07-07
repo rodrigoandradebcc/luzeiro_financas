@@ -7,9 +7,7 @@
     <table class="table">
   <thead>
     <tr>
-      <th>Conta 1º- Nivel</th>
-      <th>Conta 2º- Nivel</th>
-      <th>Conta 3º- Nivel</th>
+      <th>Code</th>
       <th>Name</th>
       <th>Description</th>
       <th>Balance</th>
@@ -22,7 +20,7 @@
   <tbody>
     <% @synthetic_accounts.each do |synthetic_account| %>
       <tr>
-        <td><%= synthetic_account.account.account_type.code %>.<td><%= synthetic_account.account.code %>.</td><td><%= synthetic_account.code %></td>
+        <td><%= synthetic_account.account.account_type.code %>.<%= synthetic_account.account.code %>.<%= synthetic_account.code %></td>
         <td><%= synthetic_account.name %></td>
         <td><%= synthetic_account.description %></td>
         <td><%= synthetic_account.balance %></td>

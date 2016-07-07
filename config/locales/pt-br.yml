@@ -213,6 +213,7 @@ pt-BR:
       synthetic_account: Conta Sintetica
       account: Conta
       account_type: Tipo de Conta
+      analytic_account: Conta Analitica
     attributes:
       user:
         name: Nome
@@ -220,7 +221,8 @@ pt-BR:
         release_date: "Data de Lançamento"
         description: "Descrição"
         value: "Valor"
-      synthetic_account:    
+      synthetic_account:  
+        account_type: "Tipo de Conta"  
         account: "Conta"
         code: "Código"
         name: "Nome"
@@ -233,6 +235,12 @@ pt-BR:
       account_type: 
         code: "Código"
         name: "Nome"
+      analytic_account:
+        synthetic_account: "Conta Sintetica"
+        code: "Código"
+        name: "Nome"
+        description: "Descrição"
+        balance: "Saldo"
 
     errors:
       <<: *errors
