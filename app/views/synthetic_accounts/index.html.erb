@@ -1,15 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div  class="row">
+    <p id="notice"><%= notice %></p>
 
-<h1>Listing Synthetic Accounts</h1>
+    <h1>Listing Synthetic Account</h1>
 
-<table>
+    <table class="table">
   <thead>
     <tr>
-      <th>Code</th>
+      <th>Conta 1º- Nivel</th>
+      <th>Conta 2º- Nivel</th>
+      <th>Conta 3º- Nivel</th>
       <th>Name</th>
       <th>Description</th>
       <th>Balance</th>
-      <th>Account</th>
+      <th>Conta Pai</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,9 +27,9 @@
         <td><%= synthetic_account.description %></td>
         <td><%= synthetic_account.balance %></td>
         <td><%= synthetic_account.account.name %></td>
-        <td><%= link_to 'Show', synthetic_account %></td>
-        <td><%= link_to 'Edit', edit_synthetic_account_path(synthetic_account) %></td>
-        <td><%= link_to 'Destroy', synthetic_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', synthetic_account, class: "btn-primary btn-sm" %>
+        <%= link_to 'Edit', edit_synthetic_account_path(synthetic_account), class: "btn-primary btn-sm" %>
+        <%= link_to 'Destroy', synthetic_account, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-primary btn-sm" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +37,4 @@
 
 <br>
 
-<%= link_to 'New Synthetic account', new_synthetic_account_path %>
+<%= link_to 'New Synthetic account', new_synthetic_account_path, class: "btn btn-primary" %>
