@@ -1,8 +1,10 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div  class="row">
+    <p id="notice"><%= notice %></p>
 
-<h1>Listing Analytic Accounts</h1>
+    <h1>Listing Analytics accounts</h1>
 
-<table>
+    <table class="table">
   <thead>
     <tr>
       <th>Code</th>
@@ -22,9 +24,9 @@
         <td><%= analytic_account.description %></td>
         <td><%= analytic_account.balance %></td>
         <td><%= analytic_account.synthetic_account.name %></td>
-        <td><%= link_to 'Show', analytic_account %></td>
-        <td><%= link_to 'Edit', edit_analytic_account_path(analytic_account) %></td>
-        <td><%= link_to 'Destroy', analytic_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', analytic_account, class: "btn-primary btn-sm" %>
+        <%= link_to 'Edit', edit_analytic_account_path(analytic_account), class: "btn-primary btn-sm" %>
+        <%= link_to 'Destroy', analytic_account, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-primary btn-sm" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Analytic account', new_analytic_account_path %>
+<%= link_to 'New Analytic account', new_analytic_account_path, class: "btn btn-primary " %>
