@@ -209,9 +209,14 @@ pt-BR:
   activerecord:
     models:
       user: Usuário
+      operation: Operação
     attributes:
       user:
         name: Nome
+      operation:
+        release_date: "Data de Lançamento"
+        description: "Descrição"
+        value: "Valor"
 
     errors:
       <<: *errors
@@ -221,6 +226,8 @@ pt-BR:
       user:
         create: 'Novo %{model}'
         update: 'Salvar'
+      operation:
+        create: 'Criar Operação'
 
   views:
     pagination:

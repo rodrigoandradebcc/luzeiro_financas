@@ -15,6 +15,9 @@ pt-BR:
       defaults:
         password: Senha
         name: Nome
+      operation:
+        release_date: "Data de Lançamento"
+
     # hints:
     #   defaults:
     #     password: 'Mínimo de 8 caracteres.'

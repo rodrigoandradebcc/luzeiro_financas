@@ -1,25 +1,26 @@
 <%= form_for(@operation) do |f| %>
-  <% if @operation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@operation.errors.count, "error") %> prohibited this operation from being saved:</h2>
+<% if @operation.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@operation.errors.count, "error") %> prohibited this operation from being saved:</h2>
 
-      <ul>
-      <% @operation.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @operation.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
+<form class="form-">
   <div class="field">
     <%= f.label :value %><br>
     <%= f.text_field :value %>
   </div>
-   <div class="field">
+  <div class="field">
     <%= f.label :retrieve_account_id, "Para onde vai" %><br>
     <%= f.collection_select :retrieve_account_id, AnalyticAccount.all, :id, :name , default: AnalyticAccount.take, include_blank: false %>
   </div>
-   <div class="field">
+  <div class="field">
     <%= f.label :release_account_id, "De onde vem" %><br>
     <%= f.collection_select :release_account_id, AnalyticAccount.all, :id, :name , default: AnalyticAccount.take, include_blank: false %>
   </div>
@@ -34,4 +35,34 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+</form>
+
 <% end %>
+<br>
+<br>
+<form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Email:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">Password:</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label><input type="checkbox"> Remember me</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+  </div>
+</form>
