@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :analytic_accounts, param: :name
+  resources :analytic_accounts
   
   resources :synthetic_accounts
   resources :operations

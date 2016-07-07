@@ -32,7 +32,7 @@
 						  <%= button_to analytic_account.name.downcase, analytic_account_path(analytic_account), class: "btn btn-danger btn-outline btn-xs",method: :get%>
 						<td><%= analytic_account.balance %></td>
 						<td><%= link_to 'Show', analytic_account, class: "btn btn-primary btn-sm" %>
-						<%= link_to 'Ver Livro Razão', analytic_ledger_path(analytic_account.name), class: "btn btn-primary btn-sm" %></td>
+						<%= link_to 'Ver Livro Razão', analytic_ledger_path(analytic_account), class: "btn btn-primary btn-sm" %></td>
 					</tr>
 					<% end %>
 				</tbody>
