@@ -7,6 +7,8 @@
 				<thead>
 					<tr>
 						<th>Data</th>
+						<th>Número da Operação</th>
+						<th>Contrapartida</th>
 						<th>Histórico</th>
 						<th>Débito</th>
 						<th>Crédito</th>
@@ -19,20 +21,22 @@
 
 					<tr>
 						<td><%= op.release_date %></td>
+						<td><%= op.id %></td>
+						<td><%= @analytic_account.name %></td>
 						<td><%= op.description %></td>
-						<td>
-						<% if  op.release_account.synthetic_account.account.account_type.code != 0 %><%= op.value%>
-          	<% end %></td>
-						<td><%= op.value %></td>
-						<td>TTT</td>
-					</tr>
+						<td><%= op.value if op.retrieve_account.eql?(@analytic_account) %></td>
+						<td><%= op.value if op.release_account.eql?(@analytic_account) %></td>
+						<td><%= @analytic_account.balance %></td>
 
+		
+					</tr>
+	          			
 				</tbody>
         <% end %>
-        <tr>
-          <td>Total: <%= @analytic_account.balance%></td>
-        </tr>
-			</table>
+        <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
+        <strong><%= @analytic_account.balance%></strong></td></tr>
+        	</table>	
+			
 		</div>
 
 	</div>
