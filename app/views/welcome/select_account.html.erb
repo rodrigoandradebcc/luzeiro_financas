@@ -1,0 +1,67 @@
+
+        <div class="col-sm-12">
+            <div class="page-header">
+             Escolha o tipo de conta
+            </div>
+        </div>
+            <%= link_to analytic_accounts_path do%>
+    		<div class="col-sm-4">
+                
+        	    <div class="hero-widget well well-sm">
+                   
+                         <%= icon('list-ul', class: 'strong aumentaicon')%>
+
+                    <div class="text">
+                        
+                        <label class="text-muted">Conta Analítica</label>
+                    </div>
+                </div>
+                
+    		</div>
+            <% end%>
+            <%= link_to synthetic_accounts_path do%>
+            <div class="col-sm-4">
+                
+                <div class="hero-widget well well-sm">
+                          <%= icon('tasks', class: 'strong aumentaicon')%>
+                    <div class="text">
+                        
+                        <label class="text-muted">Conta Sintética de Terceiro Nível</label>
+                    </div>
+                    
+                </div>
+                
+    		</div>
+            <% end %>
+            <%= link_to accounts_path do%>
+            <div class="col-sm-4">
+            
+                <div class="hero-widget well well-sm">
+                    <%= icon('list-ul', class: 'strong aumentaicon')%>
+                    <div class="text">
+                        <label class="text-muted">Conta Sintética de Segundo Nível</label>
+                    </div>
+                    
+                </div>
+                
+        	</div>
+            <% end %>
+            <%= link_to account_types_path do%>
+            <div class="col-sm-4">
+            
+                <div class="hero-widget well well-sm">
+                    
+                         <%= icon('tasks', class: 'strong aumentaicon')%>
+                    
+                    <div class="text">
+                        
+                        <label class="text-muted">Conta Sintética de Primeiro Nível</label>
+                    </div>
+                    
+                </div>
+                
+    		</div>
+    		<% end %>
+
+
+

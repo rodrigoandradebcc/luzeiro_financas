@@ -8,7 +8,7 @@ class AnalyticAccountsController < ApplicationController
   end
 
   def analytic_ledger
-    @operations = Operation.includes(:release_account).where(release_account: @analytic_account)
+    @operations = Operation.includes(:retrieve_account, :release_account)
   end
 
   # GET /analytic_accounts/1
@@ -68,7 +68,7 @@ class AnalyticAccountsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_analytic_account
-      @analytic_account = AnalyticAccount.find(params[:id])
+      @analytic_account = AnalyticAccount.find_by(params[:name])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -4,10 +4,10 @@
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-xs-3">
-						<%= icon('suitcase', class: 'strong aumentaicon')%>
+						<%= icon('dashboard', class: 'strong aumentaicon')%>
 					</div>
 					<div class="col-xs-9 text-right">
-						<%= link_to "Empresas", companies_path, :class => "huge" %>
+						<%= link_to "Dashboard", "#", :class => "huge" %>
 					</div>
 				</div>
 			</div>
@@ -27,12 +27,12 @@
 						<td><%= analytic_account.synthetic_account.account.account_type.code %>.<%= analytic_account.synthetic_account.account.code %>.<%= analytic_account.synthetic_account.code %>.<%= analytic_account.code %></td>
 						<td>
 							<%= button_to analytic_account.synthetic_account.account.account_type.name, account_type_path(analytic_account.synthetic_account.account.account_type), class: "btn btn-primary btn-outline btn-xs",method: :get%>
-						  <%= button_to analytic_account.synthetic_account.account.name, account_path(analytic_account.synthetic_account.account), class: "btn btn-success btn-outline btn-xs",method: :get%>
-							<%= button_to analytic_account.synthetic_account.name, synthetic_account_path(analytic_account.synthetic_account), class: "btn btn-warning btn-outline btn-xs",method: :get%>
-						  <%= analytic_account.name %></td>
+						  <%= button_to analytic_account.synthetic_account.account.name.downcase, account_path(analytic_account.synthetic_account.account), class: "btn btn-success btn-outline btn-xs",method: :get%>
+							<%= button_to analytic_account.synthetic_account.name.downcase, synthetic_account_path(analytic_account.synthetic_account), class: "btn btn-warning btn-outline btn-xs",method: :get%>
+						  <%= button_to analytic_account.name.downcase, analytic_account_path(analytic_account), class: "btn btn-danger btn-outline btn-xs",method: :get%>
 						<td><%= analytic_account.balance %></td>
 						<td><%= link_to 'Show', analytic_account, class: "btn btn-primary btn-sm" %>
-						<%= link_to 'Ver Livro Razão', analytic_ledger_path(analytic_account.id), class: "btn btn-primary btn-sm" %></td>
+						<%= link_to 'Ver Livro Razão', analytic_ledger_path(analytic_account.name), class: "btn btn-primary btn-sm" %></td>
 					</tr>
 					<% end %>
 				</tbody>
@@ -68,3 +68,4 @@
 	</div>
 </div>
 </div>
+
