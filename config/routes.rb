@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :analytic_accounts, param: :name
+  resources :analytic_accounts
+  get 'analytic_ledger/:id', to: 'analytic_accounts#analytic_ledger', as: :analytic_ledger
   resources :synthetic_accounts
   resources :operations
   resources :accounts

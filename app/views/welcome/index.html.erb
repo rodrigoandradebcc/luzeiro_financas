@@ -31,7 +31,8 @@
 							<%= button_to analytic_account.synthetic_account.name, synthetic_account_path(analytic_account.synthetic_account), class: "btn btn-warning btn-outline btn-xs",method: :get%>
 						  <%= analytic_account.name %></td>
 						<td><%= analytic_account.balance %></td>
-						<td><%= link_to 'Show', analytic_account, class: "btn btn-primary btn-sm" %></td>
+						<td><%= link_to 'Show', analytic_account, class: "btn btn-primary btn-sm" %>
+						<%= link_to 'Ver Livro Razão', analytic_ledger_path(analytic_account.id), class: "btn btn-primary btn-sm" %></td>
 					</tr>
 					<% end %>
 				</tbody>

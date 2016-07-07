@@ -1,10 +1,14 @@
 class AnalyticAccountsController < ApplicationController
-  before_action :set_analytic_account, only: [:show, :edit, :update, :destroy]
+  before_action :set_analytic_account, only: [:show, :edit, :update, :destroy, :analytic_ledger]
 
   # GET /analytic_accounts
   # GET /analytic_accounts.json
   def index
     @analytic_accounts = AnalyticAccount.all
+  end
+
+  def analytic_ledger
+    @operatons = Operation.where()
   end
 
   # GET /analytic_accounts/1
@@ -64,7 +68,7 @@ class AnalyticAccountsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_analytic_account
-      @analytic_account = AnalyticAccount.find(params[:name])
+      @analytic_account = AnalyticAccount.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
