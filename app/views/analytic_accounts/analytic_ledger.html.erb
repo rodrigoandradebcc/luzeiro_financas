@@ -22,13 +22,16 @@
 						<td><%= op.description %></td>
 						<td>
 						<% if  op.release_account.synthetic_account.account.account_type.code != 0 %><%= op.value%>
-						<% end %></td>
+          	<% end %></td>
 						<td><%= op.value %></td>
 						<td>TTT</td>
 					</tr>
-				</tbody>
-				<% end %>
 
+				</tbody>
+        <% end %>
+        <tr>
+          <td>Total: <%= @analytic_account.balance%></td>
+        </tr>
 			</table>
 		</div>
 

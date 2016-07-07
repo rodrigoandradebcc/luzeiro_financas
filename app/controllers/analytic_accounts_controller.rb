@@ -8,7 +8,7 @@ class AnalyticAccountsController < ApplicationController
   end
 
   def analytic_ledger
-    @operatons = Operation.where()
+    @operations = Operation.includes(:release_account).where(release_account: @analytic_account)
   end
 
   # GET /analytic_accounts/1
