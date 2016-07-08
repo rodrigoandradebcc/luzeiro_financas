@@ -8,8 +8,11 @@ class AnalyticAccountsController < ApplicationController
   end
 
   def analytic_ledger
-    @operations = Operation.includes(:retrieve_account, :release_account)
+    @operations = Operation.includes(:retrieve_account).where(retrieve_account:
+                                                             @analytic_account) 
+    @operations += Operation.includes(:release_account).where(release_account: @analytic_account)
   end
+
 
   # GET /analytic_accounts/1
   # GET /analytic_accounts/1.json

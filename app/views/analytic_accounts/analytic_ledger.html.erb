@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<h1 class="page-header"><strong>Livro Razão</strong></h1>
+	<h1 class="page-header"><strong>Livro Razão <%= @analytic_account.name %></strong></h1>
 	<div class="row">
 		<div class="panel panel-default">
 			<div class="panel-heading text-center"><strong><%= Company.last.name %></strong></div>
@@ -8,6 +8,7 @@
 					<tr>
 						<th>Data</th>
 						<th>Número da Operação</th>
+						
 						<th>Contrapartida</th>
 						<th>Histórico</th>
 						<th>Débito</th>
@@ -22,7 +23,13 @@
 					<tr>
 						<td><%= op.release_date %></td>
 						<td><%= op.id %></td>
-						<td><%= @analytic_account.name %></td>
+						<% if op.release_account.eql?(@analytic_account)%>
+						
+						<td><%= op.retrieve_account.name %></td>
+						<% else %>
+						
+						<td><%= op.release_account.name %></td>
+						<% end %>
 						<td><%= op.description %></td>
 						<td><%= op.value if op.retrieve_account.eql?(@analytic_account) %></td>
 						<td><%= op.value if op.release_account.eql?(@analytic_account) %></td>
