@@ -1,7 +1,7 @@
 class CreateAccountTypes < ActiveRecord::Migration
   def change
     create_table :account_types do |t|
-      t.string :code
+      t.integer :code
       t.string :name
       t.float :total_balance, default: 0.0
       t.references :chart_of_account, index: true, foreign_key: true

@@ -41,6 +41,7 @@ gem "select2-rails"
 
 gem 'nested_form_fields'
 
+gem 'pg'
 # gem 'xray-rails', group: :development
 
 group :development, :test do

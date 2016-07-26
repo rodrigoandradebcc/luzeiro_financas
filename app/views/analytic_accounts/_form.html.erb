@@ -12,7 +12,7 @@
   <% end %>
  <div class="field">
       <%= f.label :synthetic_account_id %><br>
-      <%= f.collection_select :synthetic_account_id, SyntheticAccount.all, :id, :name , default: SyntheticAccount.take, include_blank: false %>
+      <%= f.collection_select :synthetic_account_id, SyntheticAccount.all, :id, :account_name , default: SyntheticAccount.take, include_blank: false %>
     </div>
   <div class="field">
     <%= f.label :code %><br>

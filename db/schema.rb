@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703193316) do
+ActiveRecord::Schema.define(version: 20160724223553) do
 
   create_table "account_types", force: :cascade do |t|
-    t.string   "code"
+    t.integer  "code"
     t.string   "name"
     t.float    "total_balance",       default: 0.0
     t.integer  "chart_of_account_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20160703193316) do
   add_index "account_types", ["chart_of_account_id"], name: "index_account_types_on_chart_of_account_id"
 
   create_table "accounts", force: :cascade do |t|
-    t.string   "code"
+    t.integer  "code"
     t.string   "name"
     t.text     "description"
     t.float    "balance",         default: 0.0
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(version: 20160703193316) do
   end
 
   add_index "companies", ["user_id"], name: "index_companies_on_user_id"
+
+  create_table "old_balances", force: :cascade do |t|
+    t.integer  "operation_id"
+    t.integer  "analytic_account_id"
+    t.integer  "value"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "old_balances", ["analytic_account_id"], name: "index_old_balances_on_analytic_account_id"
+  add_index "old_balances", ["operation_id"], name: "index_old_balances_on_operation_id"
 
   create_table "operations", force: :cascade do |t|
     t.float    "value"

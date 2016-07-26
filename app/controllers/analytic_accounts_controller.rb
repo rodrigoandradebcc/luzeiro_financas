@@ -9,7 +9,7 @@ class AnalyticAccountsController < ApplicationController
 
   def analytic_ledger
     @operations = Operation.includes(:retrieve_account).where(retrieve_account:
-                                                             @analytic_account) 
+                                                             @analytic_account)
     @operations += Operation.includes(:release_account).where(release_account: @analytic_account)
   end
 

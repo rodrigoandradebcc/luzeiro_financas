@@ -2,7 +2,7 @@
   <div  class="row">
     <p id="notice"><%= notice %></p>
 
-    <h1>Listing Operations</h1>
+    <h1>Histórico de Operações</h1>
 
     <table class="table">
 
@@ -14,7 +14,6 @@
             <th>Conta a Crédito</th>
             <th>Histórico</th>
             
-            <th>Saldo</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,10 +22,11 @@
       <tr>
         <td><%= operation.release_date %></td>
         <td><%= operation.id %></td>
-        <td><%= %></td>
-        <td><%= %></td>
+        <td><%= operation.verify_account(operation.retrieve_account) %></td>
+        <td><%= operation.verify_account(operation.release_account) %></td>
         <td><%= operation.value %></td>
-        <td><%= operation.description %></td>       
+        <td><%= operation.description %></td>   
+
         <td><%= link_to 'Show', operation, class: "btn-primary btn-sm" %>
         <%= link_to 'Edit', edit_operation_path(operation), class: "btn-primary btn-sm" %>
         <%= link_to 'Destroy', operation, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-primary btn-sm" %></td>

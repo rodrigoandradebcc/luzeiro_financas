@@ -1,7 +1,7 @@
 class CreateAccounts < ActiveRecord::Migration
   def change
     create_table :accounts do |t|
-      t.string :code
+      t.integer :code
       t.string :name
       t.text :description
       t.float :balance, default: 0.0

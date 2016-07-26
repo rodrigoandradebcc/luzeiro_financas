@@ -17,7 +17,7 @@
 						<th colspan="3"></th>
 					</tr>
 				</thead>
-				<% @operations.each do |op| %>
+				<% @operations.sort_by{|task| task.id}.each do |op| %>
 				<tbody>
 
 					<tr>
@@ -33,7 +33,8 @@
 						<td><%= op.description %></td>
 						<td><%= op.value if op.retrieve_account.eql?(@analytic_account) %></td>
 						<td><%= op.value if op.release_account.eql?(@analytic_account) %></td>
-						<td><%= @analytic_account.balance %></td>
+						<td><%= OldBalance.find_by(operation: op,
+						 analytic_account: @analytic_account).value %></td>
 
 		
 					</tr>

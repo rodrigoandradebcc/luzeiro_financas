@@ -1,5 +1,5 @@
 class OperationsController < ApplicationController
-  before_action :set_operation, only: [:show, :edit, :update,  :destroy]
+  before_action :set_operation, only: [:show, :verify_account, :edit, :update,  :destroy]
 
   # GET /operations
   # GET /operations.json
@@ -30,8 +30,9 @@ class OperationsController < ApplicationController
   def create
     respond_to do |format|
       @operation = Operation.new(operation_params)
-      if @operation.save
-        format.html { redirect_to ledger_path, notice: 'Operation was successfully created.' }
+     
+      if @operation.save 
+        format.html { redirect_to operations_path, notice: 'Operation was successfully created.' }
         format.json { render :show, status: :created, location: @operation }
       else
         format.html { render :new }
@@ -64,6 +65,8 @@ class OperationsController < ApplicationController
     end
   end
 
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_operation
@@ -74,4 +77,9 @@ class OperationsController < ApplicationController
     def operation_params
       params.require(:operation).permit(:value, :description, :release_date, :retrieve_account_id, :release_account_id)
     end
+
+
+
+  
+
 end
