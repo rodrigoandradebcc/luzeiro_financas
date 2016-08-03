@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-gem 'boostrap-sass'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'sass-rails', '>= 3.2'
 gem 'devise'
 gem 'font-awesome-sass', '~> 4.6.2'
 gem 'bootstrap-datepicker-rails'
@@ -11,7 +12,7 @@ gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -40,8 +41,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "select2-rails"
 
 gem 'nested_form_fields'
-
-
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 # gem 'xray-rails', group: :development
 
 group :development, :test do

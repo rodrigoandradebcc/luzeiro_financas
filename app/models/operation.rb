@@ -27,9 +27,12 @@ def verify_account(account)
         # Ação para crédito/débito nas contas do Passivo
         if retrieve_account.synthetic_account.account.account_type.code.eql? 3
            retrieve_account.name
-        elsif release_account.eql? account
-           release_account.name
-          
+        elsif retrieve_account.synthetic_account.account.account_type.code.eql? 2
+          if retrieve_account.eql? account
+            release_account.name
+          else
+            retrieve_account.name
+          end
         else
            retrieve_account.name
         end
@@ -51,6 +54,114 @@ def verify_account(account)
         end
       end
   end
+
+  def show_value(account)
+    # switch/case para verificar tipo de conta pelo código 
+
+    # Verifica se é retrieve account
+    if account.eql? retrieve_account
+
+      case account.synthetic_account.account.account_type.code
+
+      when 1
+       if release_account.synthetic_account.account.account_type.code.eql? 1
+          value
+         
+       end
+          
+      when 2
+        # Ação para crédito/débito nas contas do Passivo
+        if retrieve_account.synthetic_account.account.account_type.code.eql? 3
+           retrieve_account.name
+        elsif retrieve_account.synthetic_account.account.account_type.code.eql? 2
+          if retrieve_account.eql? account
+            release_account.name
+          else
+            retrieve_account.name
+          end
+        else
+           retrieve_account.name
+        end
+
+      when 3
+        # Ação para crédito/débito nas contas do Passivo
+        if retrieve_account.eql? account
+           release_account.name
+        else
+           retrieve_account.name
+        end
+          
+      else
+        # Ação default
+        if release_account.eql? account
+           release_account.name
+        else
+           retrieve_account.name
+        end
+      end
+
+      # Verifica se é release account
+      elsif account.eql? release_account
+
+      case account.synthetic_account.account.account_type.code
+
+      when 1
+       if retrieve_account.synthetic_account.account.account_type.code.eql? 1
+          0
+        else
+          value
+         
+       end
+          
+      when 2
+        # Ação para crédito/débito nas contas do Passivo
+        if retrieve_account.synthetic_account.account.account_type.code.eql? 3
+           retrieve_account.name
+        elsif retrieve_account.synthetic_account.account.account_type.code.eql? 2
+          if retrieve_account.eql? account
+            release_account.name
+          else
+            retrieve_account.name
+          end
+        else
+           retrieve_account.name
+        end
+
+      when 3
+        # Ação para crédito/débito nas contas do Passivo
+        if retrieve_account.eql? account
+           release_account.name
+        else
+           retrieve_account.name
+        end
+          
+      else
+        # Ação default
+        if release_account.eql? account
+           release_account.name
+        else
+           retrieve_account.name
+        end
+      end
+        
+    end
+
+  end
+
+  
+def self.id_search(query)
+  where("id like ?", "%#{query}%") 
+end
+
+def self.date_search(init, final)
+  # where("created_at between %#{init}% and %#{final}%")
+  date1 = Date.strptime(init, "%m/%d/%Y")
+  date2 = Date.strptime(final, "%m/%d/%Y")
+
+  where(created_at: date1..date2)
+end
+
+  
 private
 
   
@@ -72,11 +183,15 @@ private
 
         if self.release_account.synthetic_account.account.account_type.code.eql? 3
           retrieve_value = self.retrieve_account.balance - self.value
+
+        else 
+          retrieve_value = self.retrieve_account.balance + self.value 
         end
 
-        retrieve_value = self.retrieve_account.balance + self.value
+
+        
       when 3
-        # Ação para crédito/débito nas contas do Passivo
+        # Ação para crédito/débito nas contas do Receitas
       
         retrieve_value = self.retrieve_account.balance + self.value
              

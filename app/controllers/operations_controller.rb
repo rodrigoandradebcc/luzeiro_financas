@@ -13,7 +13,14 @@ class OperationsController < ApplicationController
   end
 
   def ledger
-    @operations = Operation.all
+    if params[:id_search]
+      @operations = Operation.id_search(params[:id_search]).order("id DESC")
+    elsif params[:date_init] and params[:date_final]
+      
+      @operations = Operation.date_search(params[:date_init], params[:date_final]).order("id DESC")
+    else
+      @operations = Operation.all.order('id DESC')
+    end
   end
 
   # GET /operations/new

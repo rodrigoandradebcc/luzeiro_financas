@@ -5,18 +5,34 @@ class AnalyticAccountsController < ApplicationController
   # GET /analytic_accounts.json
   def index
     @analytic_accounts = AnalyticAccount.all
+    
+
   end
 
   def analytic_ledger
     @operations = Operation.includes(:retrieve_account).where(retrieve_account:
                                                              @analytic_account)
     @operations += Operation.includes(:release_account).where(release_account: @analytic_account)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "file_name"   # Excluding ".pdf" extension.
+      end
+    end
+  
+
   end
+
 
 
   # GET /analytic_accounts/1
   # GET /analytic_accounts/1.json
   def show
+    @operations = Operation.includes(:retrieve_account).where(retrieve_account:
+                                                             @analytic_account)
+    @operations += Operation.includes(:release_account).where(release_account: @analytic_account)
+    
+ 
   end
 
   # GET /analytic_accounts/new
@@ -78,4 +94,6 @@ class AnalyticAccountsController < ApplicationController
     def analytic_account_params
       params.require(:analytic_account).permit(:code, :name, :description, :balance, :synthetic_account_id)
     end
+
+    
 end

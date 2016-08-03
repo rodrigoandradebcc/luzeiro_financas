@@ -11,9 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets 
 //= require jquery_ujs
-//= require bootstrap
 //= require turbolinks
 //= require select2
 //= require select2_locale_"pt-BR"
+//= require bootstrap-datepicker
 //= require_tree .
+
+
+
+

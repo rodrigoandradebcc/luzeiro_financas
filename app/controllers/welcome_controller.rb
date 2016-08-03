@@ -8,7 +8,8 @@ class WelcomeController < ApplicationController
   end
 
   def select_account
-  		
+  		@account_type = AccountType.new
   end
 
+  
 end
