@@ -28,8 +28,8 @@ class AccountTypesController < ApplicationController
 
     respond_to do |format|
       if @account_type.save
-        format.html { redirect_to @account_type, notice: 'Account type was successfully created.' }
-        format.json { render :show, status: :created, location: @account_type }
+        format.html { redirect_to wizard_index_path, notice: 'Account type was successfully created.' }
+        
       else
         format.html { render :new }
         format.json { render json: @account_type.errors, status: :unprocessable_entity }

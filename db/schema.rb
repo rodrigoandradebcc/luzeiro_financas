@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20160724223553) do
   create_table "old_balances", force: :cascade do |t|
     t.integer  "operation_id"
     t.integer  "analytic_account_id"
-    t.integer  "value"
+    t.float    "value"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end

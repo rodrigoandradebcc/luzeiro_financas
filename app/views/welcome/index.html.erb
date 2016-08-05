@@ -23,6 +23,7 @@
 				</thead>
 
 				<tbody>
+				 <p id="notice"><%= notice %></p>
 					<% @analytic_accounts.each do |analytic_account| %>
 					<tr>
 						<td><%= analytic_account.synthetic_account.account.account_type.code %>.<%= analytic_account.synthetic_account.account.code %>.<%= analytic_account.synthetic_account.code %>.<%= analytic_account.code %></td>
@@ -42,33 +43,5 @@
 			</table>
 		</div>
 	</div>
-
-
-<!-- <br><br><br><br><br>
-
-<% if user_signed_in? %>
-<ul>
-<li> <%= current_user.email %> </li>
-<li> <%= link_to "Sair", destroy_user_session_path, method: :delete %> </li>
-</ul>
-<% else %>
-<ul>
-<li> <%= link_to "Cadastrar novo usuário", new_user_registration_path %> </li>
-<li> <%= link_to "Logar", new_user_session_path %> </li>
-</ul>
--->
-
-<% end %>
-
-<div class="row centralizado">
-	<div class="col-md-12">
-		<div class="btn btn-default btn-lg">Gerar Relatório</div>
-		<div class="btn btn-default btn-lg">Cadastrar Empresa</div>
-		<div class="btn btn-default btn-lg"><%= link_to 'Cadastrar Operação', new_operation_path %></div>
-		<div class="btn btn-default btn-lg">Cadastrar Conta</div>
-		<div class="btn btn-default btn-lg">Calculadora</div>
-		<div class="btn btn-default btn-lg"><%= link_to 'Livro Diário', ledger_path %></div>
-	</div>
-</div>
 </div>
 

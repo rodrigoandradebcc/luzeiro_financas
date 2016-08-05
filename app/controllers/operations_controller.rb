@@ -39,8 +39,8 @@ class OperationsController < ApplicationController
       @operation = Operation.new(operation_params)
      
       if @operation.save 
-        format.html { redirect_to operations_path, notice: 'Operation was successfully created.' }
-        format.json { render :show, status: :created, location: @operation }
+        format.html { redirect_to root_path, notice: 'Operation was successfully created.' }
+        
       else
         format.html { render :new }
         format.json { render json: @operation.errors, status: :unprocessable_entity }

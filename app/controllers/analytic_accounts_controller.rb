@@ -51,8 +51,8 @@ class AnalyticAccountsController < ApplicationController
 
     respond_to do |format|
       if @analytic_account.save
-        format.html { redirect_to @analytic_account, notice: 'Analytic account was successfully created.' }
-        format.json { render :show, status: :created, location: @analytic_account }
+        format.html { redirect_to wizard_index_path, notice: 'Analytic account was successfully created.' }
+        
       else
         format.html { render :new }
         format.json { render json: @analytic_account.errors, status: :unprocessable_entity }

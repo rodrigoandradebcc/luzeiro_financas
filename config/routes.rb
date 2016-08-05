@@ -7,15 +7,16 @@ Rails.application.routes.draw do
   resources :account_types
   resources :chart_of_accounts
   resources :companies
+  resources :form_wizard
   get 'control_users/index'
   devise_for :users
   get 'welcome/index'
   get 'ledger', to: 'operations#ledger', as: :ledger
-
+  get 'cadastrar/contas', to: 'form_wizard#index', as: :wizard_index
   resources :enterprises
   
   get 'analytic_ledger/:id', to: 'analytic_accounts#analytic_ledger', as: :analytic_ledger
-  get 'select_account', to: 'welcome#select_account', as: :select_account
+ 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
