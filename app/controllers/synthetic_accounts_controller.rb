@@ -28,8 +28,8 @@ class SyntheticAccountsController < ApplicationController
 
     respond_to do |format|
       if @synthetic_account.save
-        format.html { redirect_to @synthetic_account, notice: 'Synthetic account was successfully created.' }
-        format.json { render :show, status: :created, location: @synthetic_account }
+        format.html { redirect_to wizard_index_path, notice: 'Synthetic account was successfully created.' }
+        
       else
         format.html { render :new }
         format.json { render json: @synthetic_account.errors, status: :unprocessable_entity }
