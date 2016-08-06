@@ -1,7 +1,9 @@
+
+
 <%= form_for(@synthetic_account) do |f| %>
   <% if @synthetic_account.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@synthetic_account.errors.count, "error") %> prohibited this synthetic_account from being saved:</h2>
+      <h2><%= pluralize(@synthetic_account.errors.count, "error") %> prohibited this account from being saved:</h2>
 
       <ul>
       <% @synthetic_account.errors.full_messages.each do |message| %>
@@ -10,28 +12,48 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :account_id %><br>
-    <%= f.collection_select :account_id, Account.all, :id, :name , default: Account.take, include_blank: false %>
-  </div>
-  <div class="field">
-    <%= f.label :code %><br>
-    <%= f.number_field :code %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :balance %><br>
-    <%= f.text_field :balance %>
-  </div>
- 
+
+      
+      <div class="row">
+      <div class="col-md-2">
+
+      <div class="input-group">
+        <span class="input-group-addon " id="basic-addon1"><i class="fa fa-tag" aria-hidden="true"></i></span>
+       <%= f.number_field :code, class:"form-control", describedby: "basic-addon1", placeholder: "Insira o número da conta"%>
+      </div>
+      </div>
+      </div>
+      <br>
+
+      <div class="row">
+      <div class="col-md-4">
+
+      <div class="input-group">
+        <span class="input-group-addon " id="basic-addon2"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
+       <%= f.text_field :name, class:"form-control", describedby: "basic-addon2", placeholder: "Insira o nome da conta"%>
+      </div>
+      </div>
+      </div>
+      </br>
+      <div class="row">
+      <div class="col-md-4">
+
+      <div class="input-group">
+        
+      <label for="account_type_id">
+      Click na caixa de seleção abaixo para selecionar a Conta ao qual pertence<br>
+      <%= f.collection_select :account_id, Account.all, :id, :name, {default: Account.take}, {class:"form-control", include_blank: false} %>
+   
+      </label>
+      </div>
+      </div>
+      </div>
+      <br>
+
   <div class="actions">
-    <%= f.submit %>
+  <div class="col-md-4">
+    <%= f.submit "Criar conta", class: "btn btn-primary" %>
+    <%= link_to 'Voltar', wizard_index_path, class: "btn btn-danger btn-sm pull-right" %>
+  </div>
   </div>
 <% end %>

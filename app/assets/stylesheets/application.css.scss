@@ -10,13 +10,17 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require bootstrap-datepicker
- *= require_self
- *= require select2
- *= require select2-bootstrap
- */
 
+	*= require bootstrap-datepicker
+	*= require select2
+	*= require select2-bootstrap
+	*= require_tree .
+	*= require_self
+ */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
 body{
 	margin-top: 80px;
 	margin-right: 10px;

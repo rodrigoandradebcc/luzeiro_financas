@@ -11,23 +11,47 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :code %><br>
-    <%= f.text_field :code %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  
-    
-    
- <label for="chart_of_account_id">
-  Click na caixa de seleção abaixo para selecionar um Plano de Contas<br>
+      
+      <div class="row">
+      <div class="col-md-2">
 
-  <%= f.collection_select :chart_of_account_id, ChartOfAccount.all, :id, :title,{}, {id: "e1"} %>
-</label>
+      <div class="input-group">
+        <span class="input-group-addon " id="basic-addon1"><i class="fa fa-tag" aria-hidden="true"></i></span>
+       <%= f.number_field :code, class:"form-control", describedby: "basic-addon1", placeholder: "Insira o número da conta"%>
+      </div>
+      </div>
+      </div>
+      <br>
+
+      <div class="row">
+      <div class="col-md-4">
+
+      <div class="input-group">
+        <span class="input-group-addon " id="basic-addon2"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
+       <%= f.text_field :name, class:"form-control", describedby: "basic-addon2", placeholder: "Insira o nome da conta"%>
+      </div>
+      </div>
+      </div>
+      </br>
+      <div class="row">
+      <div class="col-md-4">
+
+      <div class="input-group">
+        
+      <label for="chart_of_account_id">
+      Click na caixa de seleção abaixo para selecionar um Plano de Contas<br>
+
+      <%= f.collection_select :chart_of_account_id, ChartOfAccount.all, :id, :title,{}, {id: "e1",class:"form-control"} %>
+      </label>
+      </div>
+      </div>
+      </div>
+      <br>
+
   <div class="actions">
-    <%= f.submit %>
+  <div class="col-md-4">
+    <%= f.submit "Criar conta", class: "btn btn-primary" %>
+    <%= link_to 'Voltar', wizard_index_path, class: "btn btn-danger btn-sm pull-right" %>
+  </div>
   </div>
 <% end %>
