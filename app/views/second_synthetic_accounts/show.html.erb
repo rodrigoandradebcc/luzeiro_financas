@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @second_synthetic_account.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @second_synthetic_account.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @second_synthetic_account.description %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @second_synthetic_account.balance %>
+</p>
+
+<p>
+  <strong>Synthetic account:</strong>
+  <%= @second_synthetic_account.synthetic_account %>
+</p>
+
+<%= link_to 'Edit', edit_second_synthetic_account_path(@second_synthetic_account) %> |
+<%= link_to 'Back', second_synthetic_accounts_path %>

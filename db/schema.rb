@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160724223553) do
+ActiveRecord::Schema.define(version: 20160810134346) do
 
   create_table "account_types", force: :cascade do |t|
     t.integer  "code"
@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 20160724223553) do
     t.integer  "code"
     t.string   "name"
     t.text     "description"
-    t.float    "balance",              default: 0.0
-    t.integer  "synthetic_account_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.float    "balance",                     default: 0.0
+    t.integer  "second_synthetic_account_id"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
   end
 
-  add_index "analytic_accounts", ["synthetic_account_id"], name: "index_analytic_accounts_on_synthetic_account_id"
+  add_index "analytic_accounts", ["second_synthetic_account_id"], name: "index_analytic_accounts_on_second_synthetic_account_id"
 
   create_table "chart_of_accounts", force: :cascade do |t|
     t.string   "title"
@@ -93,6 +93,18 @@ ActiveRecord::Schema.define(version: 20160724223553) do
 
   add_index "operations", ["release_account_id"], name: "index_operations_on_release_account_id"
   add_index "operations", ["retrieve_account_id"], name: "index_operations_on_retrieve_account_id"
+
+  create_table "second_synthetic_accounts", force: :cascade do |t|
+    t.integer  "code"
+    t.string   "name"
+    t.text     "description"
+    t.float    "balance"
+    t.integer  "synthetic_account_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "second_synthetic_accounts", ["synthetic_account_id"], name: "index_second_synthetic_accounts_on_synthetic_account_id"
 
   create_table "synthetic_accounts", force: :cascade do |t|
     t.integer  "code"

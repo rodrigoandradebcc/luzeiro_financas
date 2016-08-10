@@ -1,5 +1,5 @@
 class AnalyticAccount < ActiveRecord::Base
-  belongs_to :synthetic_account
+  belongs_to :second_synthetic_account
   
   
   has_many :operations

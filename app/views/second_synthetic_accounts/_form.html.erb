@@ -1,12 +1,12 @@
 
 
-<%= form_for(@analytic_account) do |f| %>
-  <% if @analytic_account.errors.any? %>
+<%= form_for(@second_synthetic_account) do |f| %>
+  <% if @second_synthetic_account.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@analytic_account.errors.count, "error") %> prohibited this account from being saved:</h2>
+      <h2><%= pluralize(@second_synthetic_account.errors.count, "error") %> prohibited this account from being saved:</h2>
 
       <ul>
-      <% @analytic_account.errors.full_messages.each do |message| %>
+      <% @second_synthetic_account.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -15,7 +15,7 @@
 
       
       <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-2">
 
       <div class="input-group">
         <span class="input-group-addon " id="basic-addon1"><i class="fa fa-tag" aria-hidden="true"></i></span>
@@ -42,7 +42,7 @@
         
       <label for="account_type_id">
       Click na caixa de seleção abaixo para selecionar a Conta ao qual pertence<br>
-      <%= f.collection_select :second_synthetic_account_id, SecondSyntheticAccount.all, :id, :synthetic_account_name, {default: SecondSyntheticAccount.take}, {class:"form-control", include_blank: false} %>
+      <%= f.collection_select :synthetic_account_id, SyntheticAccount.all, :id, :account_name, {default: SyntheticAccount.take}, {class:"form-control", include_blank: false} %>
    
       </label>
       </div>

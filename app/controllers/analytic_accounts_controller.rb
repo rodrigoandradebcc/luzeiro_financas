@@ -92,7 +92,7 @@ class AnalyticAccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def analytic_account_params
-      params.require(:analytic_account).permit(:code, :name, :description, :balance, :synthetic_account_id)
+      params.require(:analytic_account).permit(:code, :name, :description, :balance, :second_synthetic_account_id)
     end
 
     

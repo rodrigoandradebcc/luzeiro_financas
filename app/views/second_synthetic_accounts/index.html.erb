@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Second Synthetic Accounts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Balance</th>
+      <th>Synthetic account</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @second_synthetic_accounts.each do |second_synthetic_account| %>
+      <tr>
+        <td><%= second_synthetic_account.code %></td>
+        <td><%= second_synthetic_account.name %></td>
+        <td><%= second_synthetic_account.description %></td>
+        <td><%= second_synthetic_account.balance %></td>
+        <td><%= second_synthetic_account.synthetic_account %></td>
+        <td><%= link_to 'Show', second_synthetic_account %></td>
+        <td><%= link_to 'Edit', edit_second_synthetic_account_path(second_synthetic_account) %></td>
+        <td><%= link_to 'Destroy', second_synthetic_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Second synthetic account', new_second_synthetic_account_path %>
