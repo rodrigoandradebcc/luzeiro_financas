@@ -32,6 +32,8 @@
 						<th colspan="3"></th>
 					</tr>
 				</thead>
+				<% if @operations %>	
+				
 				<% @operations.each do |op| %>	
 				<tbody>
 					
@@ -47,6 +49,7 @@
 						
 					</tr>
 				</tbody>
+				<% end %>
 				<% end %>
 
 			</table>
