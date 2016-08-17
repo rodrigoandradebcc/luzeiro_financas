@@ -42,7 +42,7 @@
         
       <label for="account_type_id">
       Click na caixa de seleção abaixo para selecionar a Conta ao qual pertence<br>
-      <%= f.collection_select :second_synthetic_account_id, SecondSyntheticAccount.all, :id, :synthetic_account_name, {default: SecondSyntheticAccount.take}, {class:"form-control", include_blank: false} %>
+      <%= f.collection_select :second_synthetic_account_id, SecondSyntheticAccount.all, :id, :synthetic_account_name, {}, {class:"form-control"} %>
    
       </label>
       </div>

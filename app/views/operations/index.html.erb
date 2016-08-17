@@ -22,8 +22,8 @@
       <tr>
         <td><%= operation.release_date %></td>
         <td><%= operation.id %></td>
-        <td><%= operation.verify_account(operation.retrieve_account) %></td>
-        <td><%= operation.verify_account(operation.release_account) %></td>
+        <td><%= operation.retrieve_account.name %></td>
+        <td><%= operation.release_account.name %></td>
         <td><%= operation.value %></td>
         <td><%= operation.description %></td>   
 

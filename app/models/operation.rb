@@ -2,7 +2,9 @@ class Operation < ActiveRecord::Base
 	belongs_to :release_account, class_name: "AnalyticAccount"
 	belongs_to :retrieve_account, class_name: "AnalyticAccount"
  
-	after_create :update_balance
+  has_many :oldbalances
+	after_save :update_balance
+  before_update :undo_last_operation
   # before_update :undo_operation
   # after_update :update_balance
   
@@ -10,220 +12,43 @@ class Operation < ActiveRecord::Base
   validates :value, presence: true
 
 
-def verify_account(account)
-    # switch/case para verificar tipo de conta pelo código 
-
-      case account.synthetic_account.account.account_type.code
-
-      when 1
-        # Ação para crédito/débito nas contas do Ativo
-        if retrieve_account.eql? account
-           retrieve_account.name
-        else
-           release_account.name
-        end
-          
-      when 2
-        # Ação para crédito/débito nas contas do Passivo
-        if retrieve_account.synthetic_account.account.account_type.code.eql? 3
-           retrieve_account.name
-        elsif retrieve_account.synthetic_account.account.account_type.code.eql? 2
-          if retrieve_account.eql? account
-            release_account.name
-          else
-            retrieve_account.name
-          end
-        else
-           retrieve_account.name
-        end
-
-      when 3
-        # Ação para crédito/débito nas contas do Passivo
-        if retrieve_account.eql? account
-           release_account.name
-        else
-           retrieve_account.name
-        end
-          
-      else
-        # Ação default
-        if release_account.eql? account
-           release_account.name
-        else
-           retrieve_account.name
-        end
-      end
-  end
-
-  def show_value(account)
-    # switch/case para verificar tipo de conta pelo código 
-
-    # Verifica se é retrieve account
-    if account.eql? retrieve_account
-
-      case account.synthetic_account.account.account_type.code
-
-      when 1
-       if release_account.synthetic_account.account.account_type.code.eql? 1
-          value
-         
-       end
-          
-      when 2
-        # Ação para crédito/débito nas contas do Passivo
-        if retrieve_account.synthetic_account.account.account_type.code.eql? 3
-           retrieve_account.name
-        elsif retrieve_account.synthetic_account.account.account_type.code.eql? 2
-          if retrieve_account.eql? account
-            release_account.name
-          else
-            retrieve_account.name
-          end
-        else
-           retrieve_account.name
-        end
-
-      when 3
-        # Ação para crédito/débito nas contas do Passivo
-        if retrieve_account.eql? account
-           release_account.name
-        else
-           retrieve_account.name
-        end
-          
-      else
-        # Ação default
-        if release_account.eql? account
-           release_account.name
-        else
-           retrieve_account.name
-        end
-      end
-
-      # Verifica se é release account
-      elsif account.eql? release_account
-
-      case account.synthetic_account.account.account_type.code
-
-      when 1
-       if retrieve_account.synthetic_account.account.account_type.code.eql? 1
-          0
-        else
-          value
-         
-       end
-          
-      when 2
-        # Ação para crédito/débito nas contas do Passivo
-        if retrieve_account.synthetic_account.account.account_type.code.eql? 3
-           retrieve_account.name
-        elsif retrieve_account.synthetic_account.account.account_type.code.eql? 2
-          if retrieve_account.eql? account
-            release_account.name
-          else
-            retrieve_account.name
-          end
-        else
-           retrieve_account.name
-        end
-
-      when 3
-        # Ação para crédito/débito nas contas do Passivo
-        if retrieve_account.eql? account
-           release_account.name
-        else
-           retrieve_account.name
-        end
-          
-      else
-        # Ação default
-        if release_account.eql? account
-           release_account.name
-        else
-           retrieve_account.name
-        end
-      end
-        
-    end
-
-  end
 
   
-def self.id_search(query)
-  where("id like ?", "%#{query}%") 
-end
+  def self.id_search(query)
+    where("id like ?", "%#{query}%") 
+  end
 
-def self.date_search(init, final)
-  # where("created_at between %#{init}% and %#{final}%")
-  date1 = Date.strptime(init, "%m/%d/%Y")
-  date2 = Date.strptime(final, "%m/%d/%Y")
+  def self.date_search(init, final)
+    # where("created_at between %#{init}% and %#{final}%")
+    date1 = Date.strptime(init, "%m/%d/%Y")
+    date2 = Date.strptime(final, "%m/%d/%Y")
 
-  where(created_at: date1..date2)
-end
+    where(created_at: date1..date2)
+  end
 
   
 private
 
   
+  def undo_last_operation
+      op= Operation.find(self)
 
+      value = OldBalance.find_by(operation: self).value
+      retrieve_value = op.retrieve_account.balance - value 
+      release_value = op.release_account.balance + value 
+      
+      op.release_account.update(balance: release_value)
+      op.retrieve_account.update(balance: retrieve_value)
+
+      OldBalance.where(operation: op).delete_all
+
+  end
 
   def update_balance
     
 
-    case self.retrieve_account.synthetic_account.account.account_type.code
-      
-      when 1
-        # Ação para crédito/débito nas contas do Ativo
-        
-        retrieve_value = self.retrieve_account.balance + self.value
-
-          
-      when 2
-        # Ação para crédito/débito nas contas do Passivo
-
-        if self.release_account.synthetic_account.account.account_type.code.eql? 3
-          retrieve_value = self.retrieve_account.balance - self.value
-
-        else 
-          retrieve_value = self.retrieve_account.balance + self.value 
-        end
-
-
-        
-      when 3
-        # Ação para crédito/débito nas contas do Receitas
-      
-        retrieve_value = self.retrieve_account.balance + self.value
-             
-      else
-       
-      end
-
-    case self.release_account.synthetic_account.account.account_type.code
-      when 1
-        # Ação para crédito/débito nas contas do Ativo
-        release_value = self.release_account.balance - self.value
-        
-          
-      when 2
-        # Ação para crédito/débito nas contas do Passivo
-        release_value = self.release_account.balance - self.value
-        
-
-        # Ação para crédito/débito nas contas do Receita
-      when 3
-        # Ação de crédito/débito quando o valor de onde vem é do ativo
-        if self.retrieve_account.synthetic_account.account.account_type.code.eql? 1
-          release_value = self.release_account.balance + self.value
-
-          # Ação de crédito/débito quando o valor de onde vem é do passivo
-        elsif self.retrieve_account.synthetic_account.account.account_type.code.eql? 2
-          release_value = self.release_account.balance - self.value 
-        end
-        
-      else
-        
-      end
+    retrieve_value = self.retrieve_account.balance + self.value 
+    release_value = self.release_account.balance - self.value 
     self.release_account.update(balance: release_value)
     self.retrieve_account.update(balance: retrieve_value)
     

@@ -3,7 +3,7 @@ class AnalyticAccount < ActiveRecord::Base
   
   
   has_many :operations
-
+  has_many :oldbalances	
   
   
 end

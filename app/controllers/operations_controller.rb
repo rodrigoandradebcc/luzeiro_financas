@@ -12,6 +12,7 @@ class OperationsController < ApplicationController
   def show
   end
 
+
   def ledger
     if params[:id_search]
       @operations = Operation.id_search(params[:id_search]).order("id DESC")

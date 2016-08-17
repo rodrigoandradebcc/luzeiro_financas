@@ -30,7 +30,7 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.save
-        format.html { redirect_to wizard_index_path, notice: 'Account was successfully created.' }
+        format.html { redirect_to new_synthetic_account_path, notice: 'Account was successfully created.' }
         
       else
         format.html { render :new }

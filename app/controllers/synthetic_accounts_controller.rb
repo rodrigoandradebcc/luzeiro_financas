@@ -28,7 +28,7 @@ class SyntheticAccountsController < ApplicationController
 
     respond_to do |format|
       if @synthetic_account.save
-        format.html { redirect_to wizard_index_path, notice: 'Conta criada com sucesso.' }
+        format.html { redirect_to new_second_synthetic_account_path, notice: 'Conta criada com sucesso.' }
         
       else
         format.html { render :new }

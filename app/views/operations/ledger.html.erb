@@ -38,11 +38,11 @@
 					<tr>
 						<td><%= op.release_date %></td>
 						<td><%= op.id %></td>
-						<td><%= op.verify_account(op.retrieve_account) %></td>
-						<td><%= op.verify_account(op.release_account) %></td>
+						<td><%= op.retrieve_account.name %></td>
+						<td><%= op.release_account.name %></td>
 						<td>
-						<% if  op.release_account.synthetic_account.account.account_type.code != 0 %><%= op.value%>
-						<% end %></td>
+						<%= op.value  %>
+						</td>
 
 						
 					</tr>

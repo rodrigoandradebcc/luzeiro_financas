@@ -28,7 +28,7 @@ class AccountTypesController < ApplicationController
 
     respond_to do |format|
       if @account_type.save
-        format.html { redirect_to wizard_index_path, notice: 'Account type was successfully created.' }
+        format.html { redirect_to new_account_path, notice: 'Account type was successfully created.' }
         
       else
         format.html { render :new }
