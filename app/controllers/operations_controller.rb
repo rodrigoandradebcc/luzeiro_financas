@@ -54,7 +54,7 @@ class OperationsController < ApplicationController
   def update
     respond_to do |format|
       if @operation.update(operation_params)
-        format.html { redirect_to @operation, notice: 'Operation was successfully updated.' }
+        format.html { redirect_to ledger_path, notice: 'Operation was successfully updated.' }
         format.json { render :show, status: :ok, location: @operation }
       else
         format.html { render :edit }
