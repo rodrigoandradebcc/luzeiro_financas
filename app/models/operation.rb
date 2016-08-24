@@ -1,7 +1,9 @@
 class Operation < ActiveRecord::Base
 	belongs_to :release_account, class_name: "AnalyticAccount"
 	belongs_to :retrieve_account, class_name: "AnalyticAccount"
- 
+
+  
+  
   has_many :oldbalances
 	after_save :update_balance
   before_update :undo_last_operation
@@ -23,7 +25,7 @@ class Operation < ActiveRecord::Base
     date1 = Date.strptime(init, "%m/%d/%Y")
     date2 = Date.strptime(final, "%m/%d/%Y")
 
-    where(created_at: date1..date2)
+    where(created_at: date1.beginning_of_day..date2.end_of_day)
   end
 
   

@@ -25,6 +25,7 @@ class AnalyticAccountsController < ApplicationController
 
 
 
+
   # GET /analytic_accounts/1
   # GET /analytic_accounts/1.json
   def show

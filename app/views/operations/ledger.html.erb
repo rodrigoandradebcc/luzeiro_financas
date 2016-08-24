@@ -34,7 +34,7 @@
 				</thead>
 				<% if @operations %>	
 				
-				<% @operations.each do |op| %>	
+				<% @operations.sort_by{|op| op.id }.each do |op| %>	
 				<tbody>
 					
 					<tr>

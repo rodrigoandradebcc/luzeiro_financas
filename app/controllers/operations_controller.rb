@@ -12,6 +12,8 @@ class OperationsController < ApplicationController
   def show
   end
 
+  
+
 
   def ledger
     if params[:id_search]
@@ -20,7 +22,7 @@ class OperationsController < ApplicationController
       
       @operations = Operation.date_search(params[:date_init], params[:date_final]).order("id DESC")
     else
-      @operations = Operation.all.order('id DESC')
+      @operations = Operation.all.order('created_at DESC')
     end
   end
 

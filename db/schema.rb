@@ -87,10 +87,13 @@ ActiveRecord::Schema.define(version: 20160724223553) do
     t.date     "release_date"
     t.integer  "release_account_id"
     t.integer  "retrieve_account_id"
+    t.integer  "operational_id"
+    t.string   "operational_type"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
 
+  add_index "operations", ["operational_type", "operational_id"], name: "index_operations_on_operational_type_and_operational_id"
   add_index "operations", ["release_account_id"], name: "index_operations_on_release_account_id"
   add_index "operations", ["retrieve_account_id"], name: "index_operations_on_retrieve_account_id"
 

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :second_synthetic_accounts
   resources :analytic_accounts
-  
+  resources :results
   resources :synthetic_accounts
   resources :operations
   resources :accounts
