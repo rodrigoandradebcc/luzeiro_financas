@@ -20,12 +20,14 @@ class Operation < ActiveRecord::Base
     where("id like ?", "%#{query}%") 
   end
 
+
+
   def self.date_search(init, final)
     # where("created_at between %#{init}% and %#{final}%")
     date1 = Date.strptime(init, "%m/%d/%Y")
     date2 = Date.strptime(final, "%m/%d/%Y")
 
-    where(created_at: date1.beginning_of_day..date2.end_of_day)
+    where(release_date: date1..date2)
   end
 
   

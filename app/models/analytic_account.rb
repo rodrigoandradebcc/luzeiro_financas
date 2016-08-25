@@ -9,20 +9,13 @@ class AnalyticAccount < ActiveRecord::Base
   has_many :oldbalances
   
 
-  def operations
-
-  		self.credits + self.debits
-
-  end
-
-  def self.date_search(init, final)
-    # where("created_at between %#{init}% and %#{final}%")
+  def self.operations init, final
     date1 = Date.strptime(init, "%m/%d/%Y")
     date2 = Date.strptime(final, "%m/%d/%Y")
-    includes(second_synthetic_account: {synthetic_account: {account: :account_type}}).where(account_types: {code: [3,4,5]}, created_at: date1.beginning_of_day..date2.end_of_day)
+    debit.where(release_date: date1..date2 ) + where(release_date: date1..date2)
+    
     
   end
-
 
   def old_balance op
   	
