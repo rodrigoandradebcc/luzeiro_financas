@@ -1,92 +1,112 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+* or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any styles
+* defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+* file per style scope.
+*
 
-	*= require bootstrap-datepicker
-	*= require select2
-	*= require select2-bootstrap
-	*= require_tree .
-	*= require_self
- */
- @import "bootstrap-sprockets";
- @import "bootstrap";
- @import "font-awesome-sprockets";
- @import "font-awesome";
-body{
-	margin-top: 80px;
-	margin-right: 10px;
-	margin-left: 10px;
+*= require bootstrap-datepicker
+*= require select2
+*= require select2-bootstrap
+*= require_tree .
+*= require_self
+*/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+.body{
+  margin-top: 80px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 /*TEXTO GRANDE*/
 
 .huge{
-	font-size: 40px;
+  font-size: 40px;
 }
 
 .panel-yellow {
-    border-color: #f0ad4e !important;
-    background: #f0ad4e !important;
-   	color: #ffffff !important;
+  border-color: #f0ad4e !important;
+  background: #f0ad4e !important;
+  color: #ffffff !important;
 }
 
 .panel-green{
-	border-color: #5cb85c;
-	background: #5cb85c !important;
-   	color: #ffffff !important;
+  border-color: #5cb85c;
+  background: #5cb85c !important;
+  color: #ffffff !important;
 }
 
 .panel-red{
-	border-color: #d9534f;
-	background: #d9534f !important;
-   	color: #ffffff !important;
+  border-color: #d9534f;
+  background: #d9534f !important;
+  color: #ffffff !important;
 }
 
 .mudabordaramarelo{
-	border-color: #f0ad4e !important;
+  border-color: #f0ad4e !important;
 }
 
 .mudabordarverde{
-	border-color: #5cb85c !important;
+  border-color: #5cb85c !important;
 }
 
 .mudabordarvermelho{
-	border-color: #d9534f !important;
+  border-color: #d9534f !important;
 }
 
 a{
-	color: inherit;
+  color: inherit;
 }
 
 a:hover{
-	color: inherit;
+  color: inherit;
 }
 
 /*AUMENTA TAMANHO DOS ICONES*/
 .aumentaicon{
-	font-size: 44px;
+  font-size: 44px;
 }
 
 .page-header{
-	padding-bottom: 9px;
-	margin: 40px 0 20px;
-	border-bottom: 2px solid #eee;
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: 2px solid #eee;
 }
 
 .centralizado {
-    margin: 0 auto;
-    float: none;
+  margin: 0 auto;
+  float: none;
 }
 
 .fundobranco{
-	background: #ffffff !important;
+  background: #ffffff !important;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.corfooterpreto{
+  background-color: #000000 !important;
+  background: #000000 !important;
+  color: #fff;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  text-align: center;
+}
+
+.espaco{
+  padding-top: 60px !important;
 }
