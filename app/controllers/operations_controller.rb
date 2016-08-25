@@ -88,8 +88,4 @@ class OperationsController < ApplicationController
       params.require(:operation).permit(:value, :description, :release_date, :retrieve_account_id, :release_account_id)
     end
 
-
-
-  
-
 end

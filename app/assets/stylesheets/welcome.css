@@ -7,13 +7,12 @@
 .button_to{
   display: inline;
 }
-.btn-primary.btn-outline {
-    color: #428bca;
-}
 
-.btn-success.btn-outline {
-    color: #5cb85c;
-}
+.icon-btn {
+  border-radius:50px !important;
+  text-align: center !important;
+ }
+
 
 .btn-info.btn-outline {
     color: #5bc0de;
@@ -93,7 +92,7 @@ span.round-tab i{
 .wizard li.active span.round-tab {
     background: #fff;
     border: 2px solid #5bc0de;
-    
+
 }
 .wizard li.active span.round-tab i{
     color: #5bc0de;

@@ -4,7 +4,7 @@
 	<title>LuzeiroFinancao</title>
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-	
+
 	<%= csrf_meta_tags %>
 </head>
 <body>
@@ -21,7 +21,7 @@
 						<ul class="dropdown-menu" >
 							<li> <%= link_to "Cadastrar Contas", wizard_index_path%> </li>
 							<li> <%= link_to "Cadastrar Empresa", new_company_path%> </li>
-							
+
 						</ul>
 					</li>
 					<li><%= link_to "Nova Operação", new_operation_path%></li>
@@ -29,30 +29,19 @@
 					<li><%= link_to "Livro Razão", root_path %></li>
 					<li><%= link_to "Resultados", results_path %></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Login<span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<% if user_signed_in? %>
-							<li> <%= current_user.email %> </li>
-							<li> <%= link_to "Sair", destroy_user_session_path, method: :delete %> </li>
-							<% else %>
-							<li> <%= link_to "Cadastrar-se", new_user_registration_path %> </li>
-							<li> <%= link_to "Logar-se", new_user_session_path %> </li>
-							<% end %>
-							<li class="divider"></li>
-							<li><a href="#">Controle de Usuários</a></li>
-							
-							
-						</ul>
-					</li>
-				</ul>
+				
 			</div>
 		</div>
 	</div>
 
-
+	<div class="espaco">
 	<%= yield %>
+	</div>
 
+	<div class="footer-below fixed-bottom corfooterpreto">
+		Copyright &copy; DevIn6 2016
+	</div>
 </body>
+
+
 </html>
