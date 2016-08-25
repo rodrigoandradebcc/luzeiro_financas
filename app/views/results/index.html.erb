@@ -39,7 +39,7 @@
           </tr>
         </thead>
         
-        <%anal.credits.sort_by{|op| op.release_date }.each do |op|  %>
+        <%anal.credits.where(release_account: anal, release_date: @date1..@date2).sort_by{|op| op.release_date }.each do |op|  %>
         <tbody>
 
           <tr>
@@ -64,43 +64,15 @@
         </tbody>
         <% end %>
 
-         <%anal.debits.sort_by{|op| op.release_date }.each do |op|  %>
-        <tbody>
-
-          <tr>
-
-            <td><%= op.release_date %></td>
-            <td><%= op.id %></td>
-            <% if op.release_account.eql?(anal)%>
-            
-            <td><%= op.retrieve_account.name %></td>
-            <% else %>
-            
-            <td><%= op.release_account.name %></td>
-            <% end %>
-            <td><%= op.description %></td>
-            <td><%= op.value if op.retrieve_account.eql?(anal) %></td>
-            <td><%= op.value if op.release_account.eql?(anal) %></td>
-            <td><%= anal.old_balance(op).value unless anal.nil?   %></td>
-
     
-          </tr>
-                  
-        </tbody>
-        <% end %>
         
 
           
           <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
           <strong><%= anal.balance%></strong></td></tr>
         </table> 
-     
-
     </div>
-    
- 
-
-  </div>
+  </div> 
 <% end %>
 <% end %>
 
@@ -134,32 +106,9 @@
           </tr>
         </thead>
         
-        <%anal.credits.sort_by{|op| op.release_date }.each do |op|  %>
-        <tbody>
+        
 
-          <tr>
-
-            <td><%= op.release_date %></td>
-            <td><%= op.id %></td>
-            <% if op.release_account.eql?(anal)%>
-            
-            <td><%= op.retrieve_account.name %></td>
-            <% else %>
-            
-            <td><%= op.release_account.name %></td>
-            <% end %>
-            <td><%= op.description %></td>
-            <td><%= op.value if op.retrieve_account.eql?(anal) %></td>
-            <td><%= op.value if op.release_account.eql?(anal) %></td>
-            <td><%= anal.old_balance(op).value unless anal.nil?   %></td>
-
-    
-          </tr>
-                  
-        </tbody>
-        <% end %>
-
-         <%anal.debits.sort_by{|op| op.release_date }.each do |op|  %>
+         <%anal.debits.where(retrieve_account: anal, release_date: @date1..@date2).sort_by{|op| op.release_date }.each do |op|  %>
         <tbody>
 
           <tr>
@@ -205,4 +154,5 @@
 
 
 </div>
+
 
