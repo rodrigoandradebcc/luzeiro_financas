@@ -1,21 +1,20 @@
 <div class="container-fluid">
 <div class="row">
 	<div class="col-md-4"><h1><strong>Livro Diário</strong></h1></div>
-	<div class="col-md-4">Buscar por periodo<%= form_tag(ledger_path, :method => "get", id: "date_search") do %>
-	  <%= text_field_tag :date_init, params[:date_init], placeholder: "Periodo inicial", data: {provide: "datepicker"} %>
-	  <%= text_field_tag :date_final, params[:date_final], placeholder: "Periodo final", data: {provide: "datepicker"} %>
-	  
-	  <%= submit_tag "Search", :created_at => nil %>
+	<div class="col-md-4">Buscar por periodo <%= form_tag(ledger_path, :method => "get", id: "date_search") do %>
+		<%= date_field :date_init, params[:date_init]  %>
+		<%= date_field :date_final, params[:date_final]  %>
+		<%= submit_tag "Search", :created_at => nil %>
+
 	<% end %></div>
 	<div class="col-md-4">Buscar por Operação
 	<%= form_tag(ledger_path, :method => "get", id: "id_search") do %>
 	  <%= text_field_tag :id_search, params[:id_search], placeholder: "Busca por Operação" %>
 	  <%= submit_tag "Search", :name => nil %>
 	<% end %>
+
 	</div>
-
-	
-
+ 
 	</div>
 	<div class="row">
 		<div class="panel panel-default">
@@ -38,7 +37,7 @@
 				<tbody>
 					
 					<tr>
-						<td><%= op.release_date %></td>
+						<td><%= l(op.release_date) %></td>
 						<td><%= op.id %></td>
 						<td><%= op.retrieve_account.name %></td>
 						<td><%= op.release_account.name %></td>
