@@ -30,6 +30,12 @@ class Operation < ActiveRecord::Base
     where(release_date: date1..date2)
   end
 
+  def result
+
+
+
+  end
+
   
 private
 
