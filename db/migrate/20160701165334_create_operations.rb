@@ -9,6 +9,6 @@ class CreateOperations < ActiveRecord::Migration
       t.references :operational, polymorphic: true, index: true
       t.timestamps null: false
     end
-    
+
   end
 end

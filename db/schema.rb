@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 20160724223553) do
   create_table "account_types", force: :cascade do |t|
     t.integer  "code"
     t.string   "name"
-    t.float    "total_balance",       default: 0.0
+    t.float    "total_balance"
     t.integer  "chart_of_account_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   add_index "account_types", ["chart_of_account_id"], name: "index_account_types_on_chart_of_account_id"
@@ -28,10 +28,10 @@ ActiveRecord::Schema.define(version: 20160724223553) do
     t.integer  "code"
     t.string   "name"
     t.text     "description"
-    t.float    "balance",         default: 0.0
+    t.float    "balance"
     t.integer  "account_type_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "accounts", ["account_type_id"], name: "index_accounts_on_account_type_id"
@@ -40,10 +40,10 @@ ActiveRecord::Schema.define(version: 20160724223553) do
     t.integer  "code"
     t.string   "name"
     t.text     "description"
-    t.float    "balance",                     default: 0.0
+    t.float    "balance"
     t.integer  "second_synthetic_account_id"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "analytic_accounts", ["second_synthetic_account_id"], name: "index_analytic_accounts_on_second_synthetic_account_id"
@@ -113,10 +113,10 @@ ActiveRecord::Schema.define(version: 20160724223553) do
     t.integer  "code"
     t.string   "name"
     t.text     "description"
-    t.float    "balance",     default: 0.0
+    t.float    "balance"
     t.integer  "account_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "synthetic_accounts", ["account_id"], name: "index_synthetic_accounts_on_account_id"

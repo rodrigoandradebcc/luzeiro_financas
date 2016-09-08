@@ -4,7 +4,7 @@ class CreateAccounts < ActiveRecord::Migration
       t.integer :code
       t.string :name
       t.text :description
-      t.float :balance, default: 0.0
+      t.float :balance
       t.references :account_type, index: true, foreign_key: true
       
       t.timestamps null: false

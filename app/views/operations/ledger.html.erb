@@ -2,8 +2,8 @@
 <div class="row">
 	<div class="col-md-4"><h1><strong>Livro Diário</strong></h1></div>
 	<div class="col-md-4">Buscar por periodo <%= form_tag(ledger_path, :method => "get", id: "date_search") do %>
-		<%= date_field :date_init, params[:date_init]  %>
-		<%= date_field :date_final, params[:date_final]  %>
+		<%= date_field :date_init, params[:date_init] %>
+		<%= date_field :date_final, params[:date_final] %>
 		<%= submit_tag "Search", :created_at => nil %>
 
 	<% end %></div>

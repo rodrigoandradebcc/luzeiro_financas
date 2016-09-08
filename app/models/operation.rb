@@ -50,7 +50,6 @@ private
 
   def update_balance 
     
-
     retrieve_value = self.retrieve_account.balance + self.value 
     release_value = self.release_account.balance - self.value 
     self.release_account.update(balance: release_value)
