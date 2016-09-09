@@ -41,7 +41,7 @@ private
 
   
   def undo_last_operation
-      op= Operation.find(self)
+      op = Operation.find(self)
 
       value = op.value
       retrieve_value = op.retrieve_account.balance - value 
@@ -56,7 +56,6 @@ private
 
   def update_balance 
     
-
     retrieve_value = self.retrieve_account.balance + self.value 
     release_value = self.release_account.balance - self.value 
     self.release_account.update(balance: release_value)
