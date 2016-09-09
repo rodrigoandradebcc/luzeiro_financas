@@ -24,7 +24,7 @@
         <td><%= operation.id %></td>
         <td><%= operation.retrieve_account.name %></td>
         <td><%= operation.release_account.name %></td>
-        <td><%= to_f(operation.value) %></td>
+        <td><%= operation.value %></td>
         <td><%= operation.description %></td>   
 
         <td><%= link_to 'Show', operation, class: "btn-primary btn-sm" %>

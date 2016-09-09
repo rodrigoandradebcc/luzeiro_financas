@@ -35,7 +35,7 @@ private
 
   
   def undo_last_operation
-      op= Operation.find(self)
+      op = Operation.find(self)
 
       value = op.value
       retrieve_value = op.retrieve_account.balance - value 

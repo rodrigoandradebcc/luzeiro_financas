@@ -3,7 +3,7 @@ class CreateOldBalances < ActiveRecord::Migration
     create_table :old_balances do |t|
       t.references :operation, index: true, foreign_key: true
       t.references :analytic_account, index: true, foreign_key: true
-      t.float :value
+      t.decimal :value, :decimal, :precision => 10, :scale => 2
 
       t.timestamps null: false
     end

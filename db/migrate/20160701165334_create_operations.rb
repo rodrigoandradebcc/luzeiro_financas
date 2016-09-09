@@ -1,7 +1,7 @@
 class CreateOperations < ActiveRecord::Migration
   def change
     create_table :operations do |t|
-      t.float :value
+      t.decimal :value, :decimal, :precision => 10, :scale => 2
       t.text :description
       t.date :release_date
       t.references :release_account, index: true

@@ -4,7 +4,7 @@ class CreateSyntheticAccounts < ActiveRecord::Migration
       t.integer :code
       t.string :name
       t.text :description
-      t.float :balance
+      t.decimal :balance, :decimal, :precision => 10, :scale => 2
       t.references :account, index: true, foreign_key: true
 
       t.timestamps null: false
