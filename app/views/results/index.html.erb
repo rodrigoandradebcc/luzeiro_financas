@@ -1,19 +1,25 @@
 
 <div class="container-fluid">
-<div class="row">
-
-  <div class="col-md-8"><h1 class="page-header"><strong>Livro Razão Resultado</strong></h1></div>
-  <div class="col-md-4">Insira o período<%= form_tag(results_path, :method => "get", id: "date_search") do %>
+ <div class="col-md-4">Insira o período<%= form_tag(results_path, :method => "get", id: "date_search") do %>
     <%= text_field_tag :date_init, params[:date_init], placeholder: "Periodo inicial", data: {provide: "datepicker"} %>
     <%= text_field_tag :date_final, params[:date_final], placeholder: "Periodo final", data: {provide: "datepicker"} %>
     
     <%= submit_tag "Search", :created_at => nil %>
   <% end %></div>
-</div>
+
+<div class="row">
+
+ <div class="col-md-12"><h1 class="page-header text-center"><strong>Livro Razão Resultado</strong></h1></div>
+ <% if @date_init and @date_final %>
+ <div class="col-md-12"><strong>Período:</strong> <%= @date_init %> à <%= @date_final %></div>
+
+ </div>
+ <% end %>
  <% if @credit_accounts %>
 <% @credit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
 
   <div class="row">
+
     <div class="panel panel-default">
      <div class="row">
       <div class="col-md-6">
@@ -64,10 +70,6 @@
         </tbody>
         <% end %>
 
-    
-        
-
-          
           <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
           <strong><%= anal.balance%></strong></td></tr>
         </table> 
@@ -127,7 +129,7 @@
             <td><%= op.value if op.release_account.eql?(anal) %></td>
             <td><%= anal.old_balance(op).value unless anal.nil?   %></td>
 
-    
+      
           </tr>
                   
         </tbody>
@@ -136,7 +138,7 @@
 
           
           <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
-          <strong><%= anal.balance%></strong></td></tr>
+          <strong><%= anal.balance %></strong></td></tr>
         </table> 
      
 
@@ -145,11 +147,30 @@
  
 
   </div>
-<% end %>
-<% end %>
+        <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+     
+
+        <th class="pull-right"> Crédito: <%= @credit_value %></th>  
+        <th class="pull-right"> Debito: <%= @debit_value %></th>
+      </tr>
+    </thead>
+    
+  </table>
+  <% end %>
+  
+
+
 
 <% if @debit_accounts.nil? and @credit_accounts.nil? %>
-  <h2> REALIZE A BUSCA PARA EXIBIR OS RESULTADOS DISPONÍVEIS </h2>
+
+  <div class="col-md-12 "><h3> REALIZE A BUSCA PARA EXIBIR OS RESULTADOS DISPONÍVEIS </h3></div>
+<% elsif @debit_accounts.empty? and @credit_accounts.empty? %>
+    <div class="col-md-12 "> <h4> Não foram econtrados resultados neste período, por favor verifique se as informações estão corretas. </h4></div>
+<% elsif !@debit_accounts.empty? and !@credit_accounts.empty? %>
+     <%= link_to 'Lançar resultado', new_company_path, data: { confirm: 'Confirme o lançamento' }, class: "btn btn-primary" %>
 <% end %>
 
 

@@ -9,13 +9,15 @@ class AnalyticAccount < ActiveRecord::Base
   has_many :oldbalances
   
 
-  def self.operations init, final
+  def self.operations init=nil, final=nil
     date1 = Date.strptime(init, "%m/%d/%Y")
     date2 = Date.strptime(final, "%m/%d/%Y")
-    debit.where(release_date: date1..date2 ) + where(release_date: date1..date2)
-    
-    
+    debit.where(release_date: date1..date2 ) + credit.where(release_date: date1..date2)
+      
   end
+
+
+  
 
   def old_balance op
   	

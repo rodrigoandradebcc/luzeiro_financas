@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'welcome/index'
   get 'ledger', to: 'operations#ledger', as: :ledger
+  
   get 'cadastrar/contas', to: 'form_wizard#index', as: :wizard_index
   resources :enterprises
   
