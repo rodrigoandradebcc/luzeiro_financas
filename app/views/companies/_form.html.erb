@@ -19,10 +19,11 @@
         <%= f.label :name %><br>
         <%= f.text_field :name %>
       </div>
-      <div class="field">
+      <div class="field" >
         <%= f.label :cnpj %><br>
-        <%= f.text_field :cnpj %>
+        <%= f.text_field :cnpj,  id: "cnpj"%>
       </div>
+
       <div class="field">
         <%= f.label :field_of_work %><br>
         <%= f.text_field :field_of_work %>
@@ -33,8 +34,10 @@
       </div>
       <div class="field">
         <%= f.label :cep %><br>
-        <%= f.text_field :cep %>
+        <%= f.text_field :cep, id: "cep" %>
       </div>
+
+
     </div>
 
     <div class="col-md-8">

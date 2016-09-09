@@ -50,7 +50,7 @@
 
           <tr>
 
-            <td><%= op.release_date %></td>
+            <td><%= l(op.release_date) %></td>
             <td><%= op.id %></td>
             <% if op.release_account.eql?(anal)%>
             
@@ -70,10 +70,6 @@
         </tbody>
         <% end %>
 
-    
-        
-
-          
           <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
           <strong><%= anal.balance%></strong></td></tr>
         </table> 
@@ -119,7 +115,7 @@
 
           <tr>
 
-            <td><%= op.release_date %></td>
+            <td><%= l(op.release_date) %></td>
             <td><%= op.id %></td>
             <% if op.release_account.eql?(anal)%>
             
