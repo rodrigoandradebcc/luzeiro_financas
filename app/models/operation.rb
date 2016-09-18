@@ -2,6 +2,8 @@ class Operation < ActiveRecord::Base
 	belongs_to :release_account, class_name: "AnalyticAccount"
 	belongs_to :retrieve_account, class_name: "AnalyticAccount"
 
+  # shared interface
+  belongs_to :operational, polymorphic: true
   
   
   has_many :oldbalances

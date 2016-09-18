@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @result.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @result.description %>
+</p>
+
+<p>
+  <strong>Analytic account:</strong>
+  <%= @result.analytic_account %>
+</p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @result.kind %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @result.balance %>
+</p>
+
+<%= link_to 'Edit', edit_result_path(@result) %> |
+<%= link_to 'Back', results_path %>

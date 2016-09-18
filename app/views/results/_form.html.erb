@@ -1,14 +1,14 @@
 <div class="container-fluid">
-  <div class="row">
+<div class="row">
 
  <div class="col-md-12"><h1 class="page-header text-center"><strong>Livro Razão Resultado</strong></h1></div>
- <% if gon.date_init and gon.date_final %>
- <div class="col-md-12"><strong>Período:</strong> <%= gon.date_init %> à <%= gon.date_final %></div>
+ <% if @date_init and @date_final %>
+ <div class="col-md-12"><strong>Período:</strong> <%= @date_init %> à <%= @date_final %></div>
 
  </div>
  <% end %>
- <% if gon.credit_accounts %>
-<% gon.credit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
+ <% if @credit_accounts %>
+<% @credit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
 
   <div class="row">
 
@@ -37,12 +37,12 @@
           </tr>
         </thead>
         
-        <%anal.credits.where(release_account: anal, release_date: gon.date1..gon.date2).sort_by{|op| op.release_date }.each do |op|  %>
+        <%anal.credits.sort_by{|op| op.release_date }.each do |op|  %>
         <tbody>
 
           <tr>
 
-            <td><%= l(op.release_date) %></td>
+            <td><%= op.release_date %></td>
             <td><%= op.id %></td>
             <% if op.release_account.eql?(anal)%>
             
@@ -71,8 +71,8 @@
 <% end %>
 
 
-<% if gon.debit_accounts %>
-<% gon.debit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
+<% if @debit_accounts %>
+<% @debit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
 
   <div class="row">
     <div class="panel panel-default">
@@ -102,12 +102,12 @@
         
         
 
-         <%anal.debits.where(retrieve_account: anal, release_date: gon.date1..gon.date2).sort_by{|op| op.release_date }.each do |op|  %>
+         <%anal.debits.sort_by{|op| op.release_date }.each do |op|  %>
         <tbody>
 
           <tr>
 
-            <td><%= l(op.release_date) %></td>
+            <td><%= op.release_date %></td>
             <td><%= op.id %></td>
             <% if op.release_account.eql?(anal)%>
             
@@ -145,8 +145,8 @@
       <tr>
      
 
-        <th class="pull-right"> Crédito: <%= gon.credit_value %></th>  
-        <th class="pull-right"> Debito: <%= gon.debit_value %></th>
+        <th class="pull-right"> Crédito: <%= @credit_value %></th>  
+        <th class="pull-right"> Debito: <%= @debit_value %></th>
       </tr>
     </thead>
     
@@ -156,72 +156,47 @@
 
 
 
-<% if gon.debit_accounts.nil? and gon.credit_accounts.nil? %>
+<% if @debit_accounts.nil? and @credit_accounts.nil? %>
 
   <div class="col-md-12 "><h3> REALIZE A BUSCA PARA EXIBIR OS RESULTADOS DISPONÍVEIS </h3></div>
-<% elsif gon.debit_accounts.empty? and gon.credit_accounts.empty? %>
+<% elsif @debit_accounts.empty? and @credit_accounts.empty? %>
     <div class="col-md-12 "> <h4> Não foram econtrados resultados neste período, por favor verifique se as informações estão corretas. </h4></div>
-<% elsif !gon.debit_accounts.empty? and !gon.credit_accounts.empty? %>
-     <%= link_to 'Lançar resultado', new_company_path, data: { confirm: 'Confirme o lançamento' }, class: "btn btn-primary" %>
-<% end %>
-
-
-<%= form_for(gon.analytic_account) do |f| %>
-  <% if gon.analytic_account.errors.any? %>
+    <%= link_to "Voltar", result_search_path %>
+<% elsif !@debit_accounts.empty? and !@credit_accounts.empty? %>
+     <%= form_for(@result) do |f| %>
+  <% if @result.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(gon.analytic_account.errors.count, "error") %> prohibited this account from being saved:</h2>
+      <h2><%= pluralize(@result.errors.count, "error") %> prohibited this result from being saved:</h2>
 
       <ul>
-      <% gon.analytic_account.errors.full_messages.each do |message| %>
+      <% @result.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-      
-      <div class="row">
-      <div class="col-md-4">
-
-      <div class="input-group">
-        <span class="input-group-addon " id="basic-addon1"><i class="fa fa-tag" aria-hidden="true"></i></span>
-       <%= f.number_field :code, class:"form-control", describedby: "basic-addon1", placeholder: "Insira o número da conta"%>
-      </div>
-      </div>
-      </div>
-      <br>
-
-      <div class="row">
-      <div class="col-md-4">
-
-      <div class="input-group">
-        <span class="input-group-addon " id="basic-addon2"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
-       <%= f.text_field :name, class:"form-control", describedby: "basic-addon2", placeholder: "Insira o nome da conta"%>
-      </div>
-      </div>
-      </div>
-      </br>
-      <div class="row">
-      <div class="col-md-4">
-
-      <div class="input-group">
-        
-      <label for="account_type_id">
-      Click na caixa de seleção abaixo para selecionar a Conta ao qual pertence<br>
-      <%= f.collection_select :second_synthetic_account_id, SecondSyntheticAccount.all, :id, :synthetic_account_name, {}, {class:"form-control"} %>
-   
-      </label>
-      </div>
-      </div>
-      </div>
-      <br>
-
-  <div class="actions">
-  <div class="col-md-4">
-    <%= f.submit "Criar conta", class: "btn btn-primary" %>
-    <%= link_to 'Voltar', wizard_index_path, class: "btn btn-danger btn-sm pull-right" %>
+ 
+  <div class="field">
+    <%= f.label "Descrição" %><br>
+    <%= f.text_area :description, placeholder: "Deixe aqui uma breve descrição do resultado" %>
   </div>
-  </div>
-<% end %>
+
   
+
+  <div class="field">
+    
+    <% f.text_field :balance, as: :hidden, input_html: { value: @balance } %>
+    <% f.text_field :analytic_account, as: :hidden, input_html: { value: @balance } %>
+  </div>
+
+  
+  <div class="actions">
+  <%= f.submit "Enviar" %>
+    
+  </div>
+  <% end %>
+  <% end %>
+
+
 </div>

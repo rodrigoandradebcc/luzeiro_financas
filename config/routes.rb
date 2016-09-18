@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  resources :results
   resources :second_synthetic_accounts
   resources :analytic_accounts
-  resources :results
   resources :synthetic_accounts
   resources :operations
   resources :accounts
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :chart_of_accounts
   resources :companies
   resources :form_wizard
+  get 'selecionar_periodo', to: 'results#selecionar_periodo', as: :result_search
   get 'control_users/index'
   devise_for :users
   get 'welcome/index'

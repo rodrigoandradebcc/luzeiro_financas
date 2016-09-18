@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160724223553) do
+ActiveRecord::Schema.define(version: 20160911012146) do
 
   create_table "account_types", force: :cascade do |t|
     t.integer  "code"
     t.string   "name"
     t.decimal  "total_balance",       precision: 10, scale: 2
-    t.decimal  "decimal",             precision: 10, scale: 2
     t.integer  "chart_of_account_id"
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
@@ -30,7 +29,6 @@ ActiveRecord::Schema.define(version: 20160724223553) do
     t.string   "name"
     t.text     "description"
     t.decimal  "balance",         precision: 10, scale: 2
-    t.decimal  "decimal",         precision: 10, scale: 2
     t.integer  "account_type_id"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
@@ -42,13 +40,15 @@ ActiveRecord::Schema.define(version: 20160724223553) do
     t.integer  "code"
     t.string   "name"
     t.text     "description"
-    t.decimal  "balance",                     precision: 10, scale: 2
-    t.decimal  "decimal",                     precision: 10, scale: 2
+    t.decimal  "balance",                     precision: 10, scale: 5, default: 0.0
     t.integer  "second_synthetic_account_id"
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
+    t.integer  "listenable_id"
+    t.string   "listenable_type"
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
   end
 
+  add_index "analytic_accounts", ["listenable_type", "listenable_id"], name: "index_analytic_accounts_on_listenable_type_and_listenable_id"
   add_index "analytic_accounts", ["second_synthetic_account_id"], name: "index_analytic_accounts_on_second_synthetic_account_id"
 
   create_table "chart_of_accounts", force: :cascade do |t|
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 20160724223553) do
     t.integer  "operation_id"
     t.integer  "analytic_account_id"
     t.decimal  "value",               precision: 10, scale: 2
-    t.decimal  "decimal",             precision: 10, scale: 2
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
   end
@@ -86,8 +85,7 @@ ActiveRecord::Schema.define(version: 20160724223553) do
   add_index "old_balances", ["operation_id"], name: "index_old_balances_on_operation_id"
 
   create_table "operations", force: :cascade do |t|
-    t.decimal  "value",               precision: 10, scale: 2
-    t.decimal  "decimal",             precision: 10, scale: 2
+    t.decimal  "value",               precision: 10, scale: 5
     t.text     "description"
     t.date     "release_date"
     t.integer  "release_account_id"
@@ -102,12 +100,23 @@ ActiveRecord::Schema.define(version: 20160724223553) do
   add_index "operations", ["release_account_id"], name: "index_operations_on_release_account_id"
   add_index "operations", ["retrieve_account_id"], name: "index_operations_on_retrieve_account_id"
 
+  create_table "results", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "analytic_account_id"
+    t.string   "kind"
+    t.decimal  "balance"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "results", ["analytic_account_id"], name: "index_results_on_analytic_account_id"
+
   create_table "second_synthetic_accounts", force: :cascade do |t|
     t.integer  "code"
     t.string   "name"
     t.text     "description"
     t.decimal  "balance",              precision: 10, scale: 2
-    t.decimal  "decimal",              precision: 10, scale: 2
     t.integer  "synthetic_account_id"
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
@@ -120,7 +129,6 @@ ActiveRecord::Schema.define(version: 20160724223553) do
     t.string   "name"
     t.text     "description"
     t.decimal  "balance",     precision: 10, scale: 2
-    t.decimal  "decimal",     precision: 10, scale: 2
     t.integer  "account_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
