@@ -5,12 +5,5 @@ class Result < ActiveRecord::Base
   has_many :operations, as: :operational
   has_one :analytic_account
 
-  
-
-  private
-
-  
-
-  
-
+  	
 end

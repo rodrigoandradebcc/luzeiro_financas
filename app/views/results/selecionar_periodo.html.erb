@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= alert %></p>
  <div class="col-md-4 ">Insira o período<%= form_tag(result_search_path, :method => "get", id: "date_search", class: "input-daterange sandbox-container") do %>
     <%= text_field_tag :date_init, params[:date_init], placeholder: "Periodo inicial", data: {provide: "datepicker"}, class: "input-sm" %>
     <%= text_field_tag :date_final, params[:date_final], placeholder: "Periodo final", data: {provide: "datepicker"}, class: "input-sm"%>

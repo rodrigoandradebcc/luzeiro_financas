@@ -1,5 +1,7 @@
+
 class ResultsController < ApplicationController
-  before_action :set_result, only: [:show, :edit, :update, :destroy]
+ 
+  before_action :set_result, only: [ :show, :edit, :update, :destroy]
   
   # GET /results
   # GET /results.json
@@ -15,24 +17,33 @@ class ResultsController < ApplicationController
   def selecionar_periodo
     if params[:date_init] and params[:date_final]
       
-     redirect_to action: :new, params: params
-    else
-      respond_to do |format|
-      
-        format.html { render :selecionar_periodo, notice: 'Insira o período para continuar.' }
+     redirect_to action: :check_valid_date, params: params
 
-      end
     end
       
     
   end
+
+  def check_valid_date
+    unless params[:date_init].empty? and params[:date_final].empty?
+       @init_date = Date.strptime(params[:date_init], "%m/%d/%Y") 
+       @final_date = Date.strptime(params[:date_final], "%m/%d/%Y")
+
+    end
+  
+  if @init_date && @final_date && @init_date < @final_date
+    redirect_to action: :new, params: params
+  else
+    redirect_to :back, alert: "Por favor, insira uma data válida."
+  end
+end
   
 
   # GET /results/new
   def new
-          
-      session[:init_date]=@init_date = Date.strptime(params[:date_init], "%m/%d/%Y")
-      session[:final_date]=@final_date = Date.strptime(params[:date_final], "%m/%d/%Y")
+     @result = Result.new
+      @init_date = Date.strptime(params[:date_init], "%m/%d/%Y") 
+      @final_date = Date.strptime(params[:date_final], "%m/%d/%Y")
       
       @credit_accounts = AnalyticAccount.
       includes(:credits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
@@ -50,12 +61,7 @@ class ResultsController < ApplicationController
       @debit_value = 0
       @credit_accounts.each{|c|@credit_value+=c.balance}
       @debit_accounts.each{|d|@debit_value+=d.balance}
-      @balance = @credit_value - @debit_value
-      
-
-    @result = Result.new
-
-
+      session[:balance]=@balance = @credit_value - @debit_value
   end
 
   # GET /results/1/edit
@@ -67,8 +73,10 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(result_params)
     
-    unless set_result_accounts.nil? 
+    unless set_result_accounts.nil? and set_analytic_account.nil?
       @result.analytic_accounts = set_result_accounts
+      @result.name = "Resultado do Exercício: #{session[:init_date]} à #{session[:final_date]}"
+      @result.balance = session[:balance]
 
       respond_to do |format|
         if @result.save
@@ -125,10 +133,14 @@ class ResultsController < ApplicationController
          AnalyticAccount.result_accounts init, final
     end
 
-    def set_analytic_account
-
+    
+    
+    # def set_analytic_account result
+    #   if result.balance < 0
+    #     AnalyticAccount.infind_or_create_by()
+    #   end
         
-    end
+    # end
 
     # def set_result_operations
     #        init =session[:init_date]
