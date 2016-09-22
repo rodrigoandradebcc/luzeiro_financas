@@ -6,4 +6,3 @@ $(document).on 'ready page:load', ->
   $('.simple-test').select2()
   return
 
-
