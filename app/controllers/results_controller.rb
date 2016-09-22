@@ -42,8 +42,8 @@ end
   # GET /results/new
   def new
      @result = Result.new
-      @init_date = Date.strptime(params[:date_init], "%m/%d/%Y") 
-      @final_date = Date.strptime(params[:date_final], "%m/%d/%Y")
+     session[:init_date] = @init_date = Date.strptime(params[:date_init], "%m/%d/%Y") 
+     session[:final_date] =  @final_date = Date.strptime(params[:date_final], "%m/%d/%Y")
       
       @credit_accounts = AnalyticAccount.
       includes(:credits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
