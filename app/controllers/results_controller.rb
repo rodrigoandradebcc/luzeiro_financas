@@ -61,7 +61,7 @@ end
       @debit_value = 0
       @credit_accounts.each{|c|@credit_value+=c.balance}
       @debit_accounts.each{|d|@debit_value+=d.balance}
-      session[:balance]=@balance = @credit_value - @debit_value
+      session[:balance]= @balance =  - @credit_value - @debit_value
   end
 
   # GET /results/1/edit
