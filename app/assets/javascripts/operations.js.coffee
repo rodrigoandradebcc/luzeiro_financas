@@ -5,7 +5,7 @@
 $(document).on 'ready page:load', ->
   # Configuração padrão.
   $('#valor').maskMoney
-    decimal: '.'
+    decimal: ','
     thousands: '.'
     
   return
