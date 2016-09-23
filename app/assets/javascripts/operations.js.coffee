@@ -6,6 +6,6 @@ $(document).on 'ready page:load', ->
   # Configuração padrão.
   $('#valor').maskMoney
     decimal: ','
-    thousands: '.'
+    thousands: ''
     
   return

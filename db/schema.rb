@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20160911012146) do
     t.integer  "code"
     t.string   "name"
     t.text     "description"
-    t.decimal  "balance",                     precision: 10, scale: 5, default: 0.0
+    t.decimal  "balance",                     precision: 10, scale: 2, default: 0.0
     t.integer  "second_synthetic_account_id"
     t.integer  "listenable_id"
     t.string   "listenable_type"
