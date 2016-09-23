@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20160911012146) do
     t.integer  "code"
     t.string   "name"
     t.text     "description"
-    t.decimal  "balance",                     precision: 10, scale: 5, default: 0.0
+    t.decimal  "balance",                     precision: 10, scale: 2, default: 0.0
     t.integer  "second_synthetic_account_id"
     t.integer  "listenable_id"
     t.string   "listenable_type"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20160911012146) do
   add_index "old_balances", ["operation_id"], name: "index_old_balances_on_operation_id"
 
   create_table "operations", force: :cascade do |t|
-    t.decimal  "value",               precision: 10, scale: 5
+    t.decimal  "value",               precision: 10, scale: 2
     t.text     "description"
     t.date     "release_date"
     t.integer  "release_account_id"
@@ -105,9 +105,9 @@ ActiveRecord::Schema.define(version: 20160911012146) do
     t.text     "description"
     t.integer  "analytic_account_id"
     t.string   "kind"
-    t.decimal  "balance"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.decimal  "balance",             precision: 10, scale: 2, default: 0.0
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
   end
 
   add_index "results", ["analytic_account_id"], name: "index_results_on_analytic_account_id"
