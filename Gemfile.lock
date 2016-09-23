@@ -96,6 +96,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.9.0)
     multi_json (1.12.1)
+    mysql2 (0.3.20)
     nested_form_fields (0.7.8)
       coffee-rails (>= 3.2.1)
       jquery-rails
@@ -202,6 +203,7 @@ DEPENDENCIES
   jquery-rails
   maskmoney-rails
   meiomask-rails
+  mysql2
   nested_form_fields
   pg
   rails (= 4.2.6)
