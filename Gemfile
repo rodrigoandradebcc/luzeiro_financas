@@ -43,6 +43,9 @@ gem "select2-rails"
 gem 'nested_form_fields'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'meiomask-rails'
+gem 'maskmoney-rails'
+
 # gem 'xray-rails', group: :development
 gem 'gon'
 group :development, :test do

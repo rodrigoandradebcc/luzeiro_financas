@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'ready page:load', ->
-  $('.simple-test').select2()
+  # Configuração padrão.
+  $('#valor').maskMoney
+    decimal: '.'
+    thousands: '.'
+    
   return
-

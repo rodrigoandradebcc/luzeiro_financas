@@ -18,8 +18,5 @@
 //= require select2
 //= require select2_locale_"pt-BR"
 //= require bootstrap-datepicker
+//= require maskmoney
 //= require_tree .
-
-
-
-

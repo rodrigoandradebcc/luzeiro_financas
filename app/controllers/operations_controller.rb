@@ -1,4 +1,5 @@
 class OperationsController < ApplicationController
+  include OperationsHelper
   before_action :set_operation, only: [:show, :verify_account, :edit, :update,  :destroy]
 
   # GET /operations
@@ -40,7 +41,7 @@ class OperationsController < ApplicationController
   def create
     respond_to do |format|
       @operation = Operation.new(operation_params)
-     
+      
       if @operation.save 
         format.html { redirect_to root_path, notice: 'Operation was successfully created.' }
         
