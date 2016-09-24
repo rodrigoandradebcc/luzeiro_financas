@@ -30,7 +30,8 @@
 				 <p id="notice"><%= notice %></p>
 					<% @analytic_accounts.sort.each do |analytic_account| %>
 					<tr>
-						<td><%= analytic_account.second_synthetic_account.synthetic_account.account.account_type.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.account.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.code %>.<%= analytic_account.second_synthetic_account.code %>.<%= analytic_account.code %></td>
+						<td><%= analytic_account.second_synthetic_account.synthetic_account.account.account_type.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.account.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.code %>.<%= analytic_account.second_synthetic_account.code %>.<%= analytic_account.code %>
+						</td>
 						<td>
 							<%= button_to analytic_account.second_synthetic_account.synthetic_account.account.account_type.name, account_type_path(analytic_account.second_synthetic_account.synthetic_account.account.account_type), class: "btn btn-primary icon-btn btn-xs",method: :get%>
 						  <%= button_to analytic_account.second_synthetic_account.synthetic_account.account.name.downcase, account_path(analytic_account.second_synthetic_account.synthetic_account.account), class: "btn btn-primary icon-btn btn-xs",method: :get%>

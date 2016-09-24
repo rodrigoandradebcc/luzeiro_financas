@@ -10,6 +10,19 @@
   <%= @result.description %>
 </p>
 
+	<p>
+	
+        <td>
+        <strong>Contas analisadas</strong>
+        <% @result.analytic_accounts.each do |analytic_account| %>
+        <ul>
+        <li><strong><%= analytic_account.second_synthetic_account.synthetic_account.account.account_type.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.account.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.code %>.<%= analytic_account.second_synthetic_account.code %>.<%= analytic_account.code %></strong> 
+        <%= analytic_account.name %></li>            
+        </ul>
+        <% end %>
+        </td>
+  </p>
+
 
 <p>
   <strong>Saldo:</strong>

@@ -43,7 +43,7 @@
         </tbody>
         <% end %>
         <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
-        <strong><%= @analytic_account.balance%></strong></td></tr>
+        <strong><%= number_to_currency(@analytic_account.balance, unit: "R$", separator: ",", delimiter: ".")  %></strong></td></tr>
           </table>  
       
     </div>
