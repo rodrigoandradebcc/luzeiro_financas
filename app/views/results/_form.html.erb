@@ -52,8 +52,9 @@
             <td><%= op.release_account.name %></td>
             <% end %>
             <td><%= op.description %></td>
-            <td><%= op.value if op.retrieve_account.eql?(anal) %></td>
-            <td><%= op.value if op.release_account.eql?(anal) %></td>
+            <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.retrieve_account.eql?(anal) %></td>
+            <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.release_account.eql?(anal) %></td>
+            
             <td><%= anal.old_balance(op).value unless anal.nil?   %></td>
 
     
@@ -63,7 +64,7 @@
         <% end %>
 
           <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
-          <strong><%= anal.balance%></strong></td></tr>
+          <strong><%=number_to_currency(anal.balance, unit: "R$", separator: ",", delimiter: ".") %></strong></td></tr>
         </table> 
     </div>
   </div> 
@@ -117,8 +118,8 @@
             <td><%= op.release_account.name %></td>
             <% end %>
             <td><%= op.description %></td>
-            <td><%= op.value if op.retrieve_account.eql?(anal) %></td>
-            <td><%= op.value if op.release_account.eql?(anal) %></td>
+            <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.retrieve_account.eql?(anal) %></td>
+            <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.release_account.eql?(anal) %></td>
             <td><%= anal.old_balance(op).value unless anal.nil?   %></td>
 
       
@@ -130,7 +131,7 @@
 
           
           <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
-          <strong><%= anal.balance %></strong></td></tr>
+          <strong><%=number_to_currency(anal.balance, unit: "R$", separator: ",", delimiter: ".")  %></strong></td></tr>
         </table> 
      
 
@@ -145,8 +146,8 @@
       <tr>
      
 
-        <th class="pull-right"> Crédito: <%= @credit_value %></th>  
-        <th class="pull-right"> Debito: <%= @debit_value %></th>
+        <th class="pull-right"> Crédito: <%= number_to_currency(@credit_value, unit: "R$", separator: ",", delimiter: ".") %></th>  
+        <th class="pull-right"> Debito: <%=number_to_currency(@debit_value, unit: "R$", separator: ",", delimiter: ".")  %></th>
       </tr>
     </thead>
     
