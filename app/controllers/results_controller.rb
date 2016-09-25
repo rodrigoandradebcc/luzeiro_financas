@@ -73,10 +73,11 @@ end
   def create
     @result = Result.new(result_params)
     
-    unless set_result_accounts.nil? and set_analytic_account.nil?
+    unless set_result_accounts.nil?
       @result.analytic_accounts = set_result_accounts
-      @result.name = "Resultado do Exercício: #{session[:init_date]} à #{session[:final_date]}"
+      @result.name = "#{session[:init_date]} à #{session[:final_date]}"
       @result.balance = session[:balance]
+      
 
       respond_to do |format|
         if @result.save
@@ -133,14 +134,10 @@ end
          AnalyticAccount.result_accounts init, final
     end
 
+   
     
     
-    # def set_analytic_account result
-    #   if result.balance < 0
-    #     AnalyticAccount.infind_or_create_by()
-    #   end
-        
-    # end
+    
 
     # def set_result_operations
     #        init =session[:init_date]

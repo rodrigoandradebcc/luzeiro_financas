@@ -9,17 +9,15 @@ class AnalyticAccount < ActiveRecord::Base
                           foreign_key: "release_account_id"                          
   has_many :oldbalances
   
-
+  has_one :result
   def self.debits
-    date1 = Date.strptime(init, "%m/%d/%Y")
-    date2 = Date.strptime(final, "%m/%d/%Y")
+    
     debit.where(release_date: date1..date2 )
       
   end
 
-  def self.credits init=nil, final=nil
-    date1 = Date.strptime(init, "%m/%d/%Y")
-    date2 = Date.strptime(final, "%m/%d/%Y")
+  def self.credits
+    
     credit.where(release_date: date1..date2 )
       
   end

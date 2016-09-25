@@ -37,17 +37,15 @@ ActiveRecord::Schema.define(version: 20160911012146) do
   add_index "accounts", ["account_type_id"], name: "index_accounts_on_account_type_id", using: :btree
 
   create_table "analytic_accounts", force: :cascade do |t|
-
-    t.integer  "code"
-    t.string   "name"
-    t.text     "description"
-    t.decimal  "balance",                     precision: 10, scale: 2, default: 0.0
-    t.integer  "second_synthetic_account_id"
-    t.integer  "listenable_id"
-    t.string   "listenable_type"
-    t.datetime "created_at",                                                         null: false
-    t.datetime "updated_at",                                                         null: false
-
+    t.integer  "code",                        limit: 4
+    t.string   "name",                        limit: 255
+    t.text     "description",                 limit: 65535
+    t.decimal  "balance",                                   precision: 10, scale: 2, default: 0.0
+    t.integer  "second_synthetic_account_id", limit: 4
+    t.integer  "listenable_id",               limit: 4
+    t.string   "listenable_type",             limit: 255
+    t.datetime "created_at",                                                                       null: false
+    t.datetime "updated_at",                                                                       null: false
   end
 
   add_index "analytic_accounts", ["listenable_type", "listenable_id"], name: "index_analytic_accounts_on_listenable_type_and_listenable_id", using: :btree
@@ -87,16 +85,15 @@ ActiveRecord::Schema.define(version: 20160911012146) do
   add_index "old_balances", ["operation_id"], name: "index_old_balances_on_operation_id", using: :btree
 
   create_table "operations", force: :cascade do |t|
-
-    t.decimal  "value",               precision: 10, scale: 2
-    t.text     "description"
+    t.decimal  "value",                             precision: 10, scale: 2
+    t.text     "description",         limit: 65535
     t.date     "release_date"
     t.integer  "release_account_id",  limit: 4
     t.integer  "retrieve_account_id", limit: 4
     t.integer  "operational_id",      limit: 4
     t.string   "operational_type",    limit: 255
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
   end
 
   add_index "operations", ["operational_type", "operational_id"], name: "index_operations_on_operational_type_and_operational_id", using: :btree
@@ -104,15 +101,13 @@ ActiveRecord::Schema.define(version: 20160911012146) do
   add_index "operations", ["retrieve_account_id"], name: "index_operations_on_retrieve_account_id", using: :btree
 
   create_table "results", force: :cascade do |t|
-
-    t.string   "name"
-    t.text     "description"
-    t.integer  "analytic_account_id"
-    t.string   "kind"
-    t.decimal  "balance",             precision: 10, scale: 2, default: 0.0
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
-
+    t.string   "name",                limit: 255
+    t.text     "description",         limit: 65535
+    t.integer  "analytic_account_id", limit: 4
+    t.string   "kind",                limit: 255
+    t.decimal  "balance",                           precision: 10, scale: 2, default: 0.0
+    t.datetime "created_at",                                                               null: false
+    t.datetime "updated_at",                                                               null: false
   end
 
   add_index "results", ["analytic_account_id"], name: "index_results_on_analytic_account_id", using: :btree
