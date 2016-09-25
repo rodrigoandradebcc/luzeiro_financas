@@ -42,7 +42,7 @@
 						<td><%= op.retrieve_account.name %></td>
 						<td><%= op.release_account.name %></td>
 						<td>
-						<%= number_with_precision(op.value, precision: 2, separator: ',')  %>
+						<%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".")  %>
 					    </td>
 						<td><%= link_to 'Edit', edit_operation_path(op), class: "btn-primary btn-sm" %></td>
 						
