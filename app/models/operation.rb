@@ -57,16 +57,28 @@ private
   end
 
   def update_balance 
-    
-    retrieve_value = self.retrieve_account.balance + self.value 
-    release_value = self.release_account.balance - self.value 
-    self.release_account.update(balance: release_value)
-    self.retrieve_account.update(balance: retrieve_value)
-    
-    @ob1 = OldBalance.new(operation: self, analytic_account: self.retrieve_account, value: retrieve_value)
-    @ob1.save
-    @ob2 = OldBalance.new(operation: self, analytic_account: self.release_account, value: release_value)
-    @ob2.save
+    if self.release_account.second_synthetic_account.synthetic_account.account.account_type.code == 2
+      retrieve_value = self.retrieve_account.balance + self.value
+      release_value = self.release_account.balance
+      
+      
+    elsif self.retrieve_account.second_synthetic_account.synthetic_account.account.account_type.code == 2
+      retrieve_value = self.retrieve_account.balance
+      release_value = self.release_account.balance - self.value 
+      
+    else
+      retrieve_value = self.retrieve_account.balance + self.value 
+      release_value = self.release_account.balance - self.value 
+      
+      
+     
+    end
+      self.release_account.update(balance: release_value)
+      self.retrieve_account.update(balance: retrieve_value)
+      @ob1 = OldBalance.new(operation: self, analytic_account: self.retrieve_account, value: retrieve_value)
+      @ob1.save
+      @ob2 = OldBalance.new(operation: self, analytic_account: self.release_account, value: release_value)
+      @ob2.save
   end
   
 end

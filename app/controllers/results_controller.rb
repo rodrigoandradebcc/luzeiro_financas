@@ -78,10 +78,12 @@ end
       @result.name = "#{session[:init_date]} à #{session[:final_date]}"
       @result.balance = session[:balance]
       
-
+      
       respond_to do |format|
         if @result.save
-
+          session.delete(:balance)
+          session.delete(:init_date)
+          session.delete(:final_date)
           format.html { redirect_to @result, notice: 'Result was successfully created.' }
           format.json { render :show, status: :created, location: @result }
         else

@@ -7,39 +7,41 @@ class Result < ActiveRecord::Base
 
 
   before_save :set_result_accounts
+  after_commit :result_operations
   
 
-
   def set_result_accounts
-  	account_type = AccountType.find_or_create_by(code: 2, name: "Passivo")
-  		
-  	account = Account.find_or_create_by(account_type: account_type, code: 2)
-  		
-  	synthetic_account = SyntheticAccount.find_or_create_by(account: account, code: 2)
-  		
-  	ssyn = SecondSyntheticAccount.find_or_create_by(synthetic_account: synthetic_account, code: 2)
-	if ssyn.analytic_accounts.any?
-		self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
-		
-	else
-		self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
-		
-	end
   	Result.transaction do
-  	  	raise "Transaction Failed" unless account_type.save && account.save && synthetic_account.save && ssyn.save && self.analytic_account.save
+	  	@account_type = AccountType.find_or_create_by(code: 2, name: "Passivo")
+	  		
+	  	@account = Account.find_or_create_by(account_type: @account_type, code: 2)
+	  		
+	  	@synthetic_account = SyntheticAccount.find_or_create_by(account: @account, code: 2)
+	  		
+	  	@ssyn = SecondSyntheticAccount.find_or_create_by(synthetic_account: @synthetic_account, code: 2)
+		if @ssyn.analytic_accounts.any?
+			@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
+			
+		else
+			@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
+			
+		end
+		
   	end
+  	
   end
+
 
   	
 
-  	def result_operations
+  	def result_operations 
 		self.analytic_accounts.each do |a|
 			if a.second_synthetic_account.synthetic_account.account.account_type.code == 3
-				op = Operation.create(value: a.balance, retrieve_account: a, release_account: self.analytic_account, description: "Fechamento do exercício findo em #{self.name}" )
-				op.save!
+				@op = Operation.create(value: -a.balance, retrieve_account: a, release_account: self.analytic_account, description: "Fechamento do exercício findo em #{self.analytic_account.name}" )
+				
 			elsif a.second_synthetic_account.synthetic_account.account.account_type.code == 4 or a.second_synthetic_account.synthetic_account.account.account_type.code == 5
-				op = Operation.create(release_date: Time.now,value: a.balance, retrieve_account: self.analytic_account, release_account: a, description: "Fechamento do exercício findo em #{self.name}" )
-				op.save!
+				@op = Operation.create(release_date: Time.now,value: a.balance, retrieve_account: self.analytic_account, release_account: a, description: "Fechamento do exercício findo em #{self.analytic_account.name}" )
+				
 			else  
 				raise ActiveRecord::Rollback			
 			end
