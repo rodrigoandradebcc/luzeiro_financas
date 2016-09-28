@@ -72,10 +72,11 @@ end
   # POST /results.json
   def create
     @result = Result.new(result_params)
-    
+    @init_date = session[:init_date].to_date.strftime("%d/%m/%Y")
+    @final_date = session[:final_date].to_date.strftime("%d/%m/%Y")
     unless set_result_accounts.nil?
       @result.analytic_accounts = set_result_accounts
-      @result.name = "#{session[:init_date]} à #{session[:final_date]}"
+      @result.name = "#{@init_date} à #{@final_date}"
       @result.balance = session[:balance]
       
       

@@ -22,7 +22,7 @@
         <tbody>
 
           <tr>
-            <td><%= op.release_date %></td>
+            <td><%= op.release_date.strftime("%d/%m/%Y") %></td>
             <td><%= op.id %></td>
             <% if op.release_account.eql?(@analytic_account)%>
             

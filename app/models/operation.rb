@@ -40,7 +40,7 @@ class Operation < ActiveRecord::Base
 
   
 private
-
+  
   
   def undo_last_operation
       op = Operation.find(self)

@@ -37,10 +37,10 @@ class Result < ActiveRecord::Base
   	def result_operations 
 		self.analytic_accounts.each do |a|
 			if a.second_synthetic_account.synthetic_account.account.account_type.code == 3
-				@op = Operation.create(value: -a.balance, retrieve_account: a, release_account: self.analytic_account, description: "Fechamento do exercício findo em #{self.analytic_account.name}" )
+				 Operation.create(release_date: Time.now, value: -a.balance, retrieve_account: a, release_account: self.analytic_account, description: "Fechamento do exercício findo em #{self.analytic_account.name}" )
 				
 			elsif a.second_synthetic_account.synthetic_account.account.account_type.code == 4 or a.second_synthetic_account.synthetic_account.account.account_type.code == 5
-				@op = Operation.create(release_date: Time.now,value: a.balance, retrieve_account: self.analytic_account, release_account: a, description: "Fechamento do exercício findo em #{self.analytic_account.name}" )
+				 Operation.create(release_date: Time.now,value: a.balance, retrieve_account: self.analytic_account, release_account: a, description: "Fechamento do exercício findo em #{self.analytic_account.name}" )
 				
 			else  
 				raise ActiveRecord::Rollback			

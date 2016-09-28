@@ -3,7 +3,7 @@
 
  <div class="col-md-12"><h1 class="page-header text-center"><strong>Livro Razão Resultado</strong></h1></div>
  <% if @init_date and @final_date %>
- <div class="col-md-12"><strong>Perído: </strong><%= @init_date %> à <%= @final_date %></div>
+ <div class="col-md-12"><strong>Período: </strong><%= @init_date.strftime("%d/%m/%Y") %> à <%= @final_date.strftime("%d/%m/%Y") %></div>
 
  </div>
  <% end %>
@@ -42,7 +42,7 @@
 
           <tr>
 
-            <td><%= op.release_date %></td>
+            <td><%= op.release_date.strftime("%d/%m/%Y") %></td>
             <td><%= op.id %></td>
             <% if op.release_account.eql?(anal)%>
             
@@ -108,7 +108,7 @@
 
           <tr>
 
-            <td><%= op.release_date %></td>
+            <td><%= op.release_date.strftime("%d/%m/%Y") %></td>
             <td><%= op.id %></td>
             <% if op.release_account.eql?(anal)%>
             
