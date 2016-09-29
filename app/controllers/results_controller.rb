@@ -26,8 +26,8 @@ class ResultsController < ApplicationController
 
   def check_valid_date
     unless params[:date_init].empty? and params[:date_final].empty?
-       @init_date = Date.strptime(params[:date_init], "%m/%d/%Y") 
-       @final_date = Date.strptime(params[:date_final], "%m/%d/%Y")
+       @init_date = Date.strptime(params[:date_init], "%d/%m/%Y") 
+       @final_date = Date.strptime(params[:date_final], "%d/%m/%Y")
 
     end
   
@@ -42,8 +42,8 @@ end
   # GET /results/new
   def new
      @result = Result.new
-     session[:init_date] = @init_date = Date.strptime(params[:date_init], "%m/%d/%Y") 
-     session[:final_date] =  @final_date = Date.strptime(params[:date_final], "%m/%d/%Y")
+     session[:init_date] = @init_date = Date.strptime(params[:date_init], "%d/%m/%Y") 
+     session[:final_date] =  @final_date = Date.strptime(params[:date_final], "%d/%m/%Y")
       
       @credit_accounts = AnalyticAccount.
       includes(:credits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
