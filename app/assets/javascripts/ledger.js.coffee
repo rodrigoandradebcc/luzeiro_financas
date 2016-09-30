@@ -1,6 +1,6 @@
 
 $(document).on 'ready page:load', ->
-	$('#date_init, #date_final').datepicker 
+	$('#date_init, #date_final, #operation_release_date').datepicker 
   todayBtn: true
   language: 'pt-BR'
   autoclose: true

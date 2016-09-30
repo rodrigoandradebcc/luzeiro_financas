@@ -9,7 +9,6 @@ $(document).on 'ready page:load', ->
     decimal: '.'
     thousands: ''
   $('#operation_release_date').mask '00/00/0000'
+  return
 
-  return
-  return
-  return
+
