@@ -21,7 +21,7 @@ class Result < ActiveRecord::Base
 	  	@ssyn = SecondSyntheticAccount.find_or_create_by(synthetic_account: @synthetic_account, code: 2)
 		begin
 			if @ssyn.analytic_accounts.any?
-				@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
+				@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: @ssyn.analytic_accounts.last.code.next, description: self.description, balance: self.balance)
 			else
 				@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
 			end
