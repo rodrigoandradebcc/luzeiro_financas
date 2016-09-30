@@ -12,18 +12,19 @@ class Result < ActiveRecord::Base
 
   def set_result_accounts
   	Result.transaction do
-	  	@account_type = AccountType.find_or_create_by(code: 2, name: "Passivo")
+	  	@account_type = AccountType.find_or_create_by!(code: 2, name: "Passivo")
 	  		
-	  	@account = Account.find_or_create_by(account_type: @account_type, code: 2)
+	  	@account = Account.find_or_create_by!(account_type: @account_type, code: 2)
 	  		
-	  	@synthetic_account = SyntheticAccount.find_or_create_by(account: @account, code: 2)
+	  	@synthetic_account = SyntheticAccount.find_or_create_by!(account: @account, code: 2)
 	  		
-	  	@ssyn = SecondSyntheticAccount.find_or_create_by(synthetic_account: @synthetic_account, code: 2)
+	  	@ssyn = SecondSyntheticAccount.find_or_create_by!(synthetic_account: @synthetic_account, code: 2)
 		begin
 			if @ssyn.analytic_accounts.any?
-				@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: @ssyn.analytic_accounts.last.code.next, description: self.description, balance: self.balance)
+				@anal = self.analytic_account = AnalyticAccount.find_or_create_by!(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: @ssyn.analytic_accounts.last.code.next, description: self.description, balance: self.balance)
+			
 			else
-				@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
+				@anal = self.analytic_account = AnalyticAccount.find_or_create_by!(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
 			end
 		rescue ActiveRecord::RecordNotUnique
   			retry
