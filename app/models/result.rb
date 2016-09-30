@@ -19,16 +19,16 @@ class Result < ActiveRecord::Base
 	  	@synthetic_account = SyntheticAccount.find_or_create_by(account: @account, code: 2)
 	  		
 	  	@ssyn = SecondSyntheticAccount.find_or_create_by(synthetic_account: @synthetic_account, code: 2)
-		if @ssyn.analytic_accounts.any?
-			@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
-			
-		else
-			@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
-			
+		begin
+			if @ssyn.analytic_accounts.any?
+				@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
+			else
+				@anal = self.analytic_account = AnalyticAccount.find_or_create_by(second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
+			end
+		rescue ActiveRecord::RecordNotUnique
+  			retry
 		end
-		
   	end
-  	
   end
 
 

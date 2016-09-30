@@ -136,19 +136,4 @@ end
           final =session[:final_date]
          AnalyticAccount.result_accounts init, final
     end
-
-   
-    
-    
-    
-
-    # def set_result_operations
-    #        init =session[:init_date]
-    #       final =session[:final_date]
-    #      AnalyticAccount.result_accounts init, final
-    # end
-
-    
-
-    
 end
