@@ -23,7 +23,7 @@ class Operation < ActiveRecord::Base
 
 
   def self.id_search(query)
-    where("id like ?", "%#{query}%") 
+    where(id: query) 
   end
 
 

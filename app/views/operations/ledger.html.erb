@@ -1,24 +1,35 @@
 <div class="container-fluid">
 <div class="row">
-	<div class="col-md-4"><h1><strong>Livro Diário</strong></h1></div>
-	<div class="col-md-4">Buscar por periodo <%= form_tag(ledger_path, :method => "get", id: "date_search") do %>
+	<div class="col-md-12">
+		<h1><strong>Livro Diário</strong></h1>
+	</div>
+</div>
+	<div class="row">
+	<div class="col-md-12">
+		<div class="col-md-6 pull-right">Buscar por periodo <%= form_tag(ledger_path, :method => "get", id: "date_search") do %>
 
-		<%= text_field_tag :date_init, params[:date_init], placeholder: "Periodo inicial",  class: "input-sm"%>
-    	<%= text_field_tag :date_final, params[:date_final], placeholder: "Periodo final",  class: "input-sm"%>
-    	
-		<%= submit_tag "Search", :created_at => nil %>
+			<%= text_field_tag :date_init, params[:date_init], placeholder: "Periodo inicial",  class: "input-sm date"%>
+	    	<%= text_field_tag :date_final, params[:date_final], placeholder: "Periodo final",  class: "input-sm date"%>
+	    	
+			<%= submit_tag "Buscar", :created_at => nil %>
 
-	<% end %></div>
-	<div class="col-md-4">Buscar por Operação
+			<% end %>
+		</div>
+	
+
+	<div class="col-md-6 pull-right">Buscar por Operação
 	<%= form_tag(ledger_path, :method => "get", id: "id_search") do %>
-	  <%= text_field_tag :id_search, params[:id_search], placeholder: "Busca por Operação" %>
-	  <%= submit_tag "Search", :name => nil %>
+	  <%= text_field_tag :id_search, params[:id_search], placeholder: "Insira nº da operação", class: "xd" %>
+	  <%= submit_tag "Buscar", :name => nil %>
 	<% end %>
 
 	</div>
+	</div>
  
 	</div>
+	<br>
 	<div class="row">
+	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading text-center"><strong><%= Company.last.name if Company.last %></strong></div>
 			<table class="table ">
@@ -58,4 +69,5 @@
 
 	</div>
 
+</div>
 </div>
