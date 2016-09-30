@@ -13,11 +13,15 @@ class Operation < ActiveRecord::Base
   # after_update :update_balance
   
 
-  validates :value, :release_date, presence: true
+  validates :value, :only_one_account_per_select_box, :release_date, presence: true
+
+  def only_one_account_per_select_box
+    unless retrieve_account != release_account
+      errors.add("Contas iguais:", "As contas devem ser diferentes umas das outras")
+    end
+  end
 
 
-
-  
   def self.id_search(query)
     where("id like ?", "%#{query}%") 
   end
