@@ -1,10 +1,13 @@
 class WelcomeController < ApplicationController
   def index
-    @companies = Company.all
-  	@accounts = Account.all
-    @ats = AccountType.all
-  	@analytic_accounts = AnalyticAccount.all
-  	@synthetic_accounts = SyntheticAccount.all
+    
+  	@analytic_accounts = AnalyticAccount.
+      includes(second_synthetic_account: {synthetic_account: {account: :account_type}}).
+      order('account_types.code').order('accounts.code').order('synthetic_accounts.code').
+      order('second_synthetic_accounts.code').order(:code)
+
+        
+  	
   	
   	respond_to do |format|
       format.html

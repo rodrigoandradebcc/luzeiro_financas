@@ -1,76 +1,78 @@
-    <p id="notice"><%= notice %></p>
+<div class="container-fluid">
+<p id="notice"><%= notice %></p>
 
-     <div class="col-sm-12">
-                <div class="page-header">
-                 Escolha o tipo de conta
-                </div>
+<div class="col-sm-12">
+    <div class="page-header">
+        Escolha o tipo de conta
+    </div>
     <%= link_to new_account_type_path do%>
-        <div class="col-sm-4">
-        
-            <div class="hero-widget well well-sm">
-                
-                     <%= icon('tasks', class: 'strong aumentaicon')%>
-                
-                <div class="text">
-                    
-                    <label class="text-muted">Conta Sintética de Primeiro Nível</label>
-                </div>
-                
+    <div class="col-sm-4">
+
+        <div class="hero-widget well well-sm">
+
+            <%= icon('tasks', class: 'strong aumentaicon')%>
+
+            <div class="text">
+
+                <label class="text-muted">Conta Sintética de Primeiro Nível</label>
             </div>
-            
+
         </div>
+
+    </div>
     <% end %>
-            
-                <%= link_to new_account_path do%>
-                <div class="col-sm-4">
-                
-                    <div class="hero-widget well well-sm">
-                        <%= icon('list-ul', class: 'strong aumentaicon')%>
-                        <div class="text">
-                            <label class="text-muted">Conta Sintética de Segundo Nível</label>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <% end %>
-    
+
+    <%= link_to new_account_path do%>
+    <div class="col-sm-4">
+
+        <div class="hero-widget well well-sm">
+            <%= icon('list-ul', class: 'strong aumentaicon')%>
+            <div class="text">
+                <label class="text-muted">Conta Sintética de Segundo Nível</label>
+            </div>
+
+        </div>
+
+    </div>
+    <% end %>
+
     <%= link_to new_synthetic_account_path do%>
     <div class="col-sm-4">
-        
+
         <div class="hero-widget well well-sm">
-                  <%= icon('tasks', class: 'strong aumentaicon')%>
+            <%= icon('tasks', class: 'strong aumentaicon')%>
             <div class="text">
-                
+
                 <label class="text-muted">Conta Sintética de Terceiro Nível</label>
             </div>
-            
+
         </div>
-        
+
     </div>
     <% end %>
 
-      <%= link_to new_second_synthetic_account_path do%>
-        <div class="col-sm-4">
-            <div class="hero-widget well well-sm">
-                <%= icon('list-ul', class: 'strong aumentaicon')%>
-                <div class="text">
-                    <label class="text-muted">Conta Sintética de Quarto Nível</label>
-                </div>
-            </div>   
-        </div>
+    <%= link_to new_second_synthetic_account_path do%>
+    <div class="col-sm-4">
+        <div class="hero-widget well well-sm">
+            <%= icon('list-ul', class: 'strong aumentaicon')%>
+            <div class="text">
+                <label class="text-muted">Conta Sintética de Quarto Nível</label>
+            </div>
+        </div>   
+    </div>
     <% end%>
-             
+
 
     <%= link_to new_analytic_account_path do%>
-        <div class="col-sm-4">
-            <div class="hero-widget well well-sm">
-                <%= icon('list-ul', class: 'strong aumentaicon')%>
-                <div class="text">
-                    <label class="text-muted">Conta Analítica</label>
-                </div>
-            </div>   
-        </div>
+    <div class="col-sm-4">
+        <div class="hero-widget well well-sm">
+            <%= icon('list-ul', class: 'strong aumentaicon')%>
+            <div class="text">
+                <label class="text-muted">Conta Analítica</label>
+            </div>
+        </div>   
+    </div>
     <% end%>
 
-    </div>
+</div>
+</div>

@@ -19,7 +19,7 @@
 
       <div class="input-group">
         <span class="input-group-addon " id="basic-addon1"><i class="fa fa-tag" aria-hidden="true"></i></span>
-       <%= f.number_field :code, class:"form-control", describedby: "basic-addon1", placeholder: "Insira o número da conta"%>
+       <%= f.text_field :code, class:"form-control", describedby: "basic-addon1", placeholder: "Insira o número da conta", id: "code"%>
       </div>
       </div>
       </div>
@@ -42,7 +42,7 @@
         
       <label for="account_type_id">
       Click na caixa de seleção abaixo para selecionar a Conta ao qual pertence<br>
-      <%= f.collection_select :account_id, Account.all, :id, :name, {default: Account.take}, {class:"form-control", include_blank: false} %>
+      <%= f.collection_select :account_id, Account.all, :id, :account_name, {default: Account.take}, {class:"form-control parent_account", include_blank: false} %>
    
       </label>
       </div>

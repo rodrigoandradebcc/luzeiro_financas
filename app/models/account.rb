@@ -5,5 +5,8 @@ class Account < ActiveRecord::Base
 
   has_many :synthetic_accounts, dependent: :destroy
   
+  def account_name
+    "#{account_type.code}.#{code} - #{name}"
+  end
 
 end

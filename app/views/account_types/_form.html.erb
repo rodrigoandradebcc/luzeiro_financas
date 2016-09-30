@@ -17,7 +17,7 @@
 
       <div class="input-group">
         <span class="input-group-addon " id="basic-addon1"><i class="fa fa-tag" aria-hidden="true"></i></span>
-       <%= f.number_field :code, class:"form-control", describedby: "basic-addon1", placeholder: "Insira o número da conta"%>
+       <%= f.text_field :code, class:"form-control", describedby: "basic-addon1", placeholder: "Insira o número da conta", id: "code"%>
       </div>
       </div>
       </div>
@@ -41,7 +41,7 @@
       <label for="chart_of_account_id">
       Click na caixa de seleção abaixo para selecionar um Plano de Contas<br>
 
-      <%= f.collection_select :chart_of_account_id, ChartOfAccount.all, :id, :title,{}, {id: "e1",class:"form-control"} %>
+      <%= f.collection_select :chart_of_account_id, ChartOfAccount.all, :id, :title,{}, {id: "e1",class:"form-control parent_account"} %>
       </label>
       </div>
       </div>

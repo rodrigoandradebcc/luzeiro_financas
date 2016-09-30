@@ -3,7 +3,7 @@ class SecondSyntheticAccount < ActiveRecord::Base
 
   has_many :analytic_accounts, dependent: :destroy
 
-  def synthetic_account_name
-    "#{synthetic_account.account.account_type.name} #{synthetic_account.account.name} #{synthetic_account.name} #{name}"
+  def second_synthetic_account_name
+    "#{synthetic_account.account.account_type.code}.#{synthetic_account.account.code}.#{synthetic_account.code}.#{code} - #{name}"
   end
 end

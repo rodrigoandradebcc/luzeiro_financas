@@ -28,7 +28,7 @@
 
 				<tbody>
 				 <p id="notice"><%= notice %></p>
-					<% @analytic_accounts.sort.each do |analytic_account| %>
+					<% @analytic_accounts.each do |analytic_account| %>
 					<tr>
 						<td><%= analytic_account.second_synthetic_account.synthetic_account.account.account_type.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.account.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.code %>.<%= analytic_account.second_synthetic_account.code %>.<%= analytic_account.code %>
 						</td>
