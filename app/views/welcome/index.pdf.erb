@@ -2,19 +2,16 @@
  <html>
   <head>
     <meta charset='utf-8' />
+    
     <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
-    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+    <%= wicked_pdf_javascript_include_tag "application", "data-turbolinks-track" => true %>
   </head>
-  <body onload='number_pages'>
+  <body onload='welcome'>
     <div id="header">
       <%= wicked_pdf_image_tag 'mysite.jpg' %>
     </div>
     <div id="content">
-      <%= yield %>
-    </div>
-  </body>
-</html>
-<div class="container-fluid">
+      <div class="container-fluid">
   <div class="col-md-12">
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -60,3 +57,7 @@
   </div>
 </div>
 
+
+    </div>
+  </body>
+</html>
