@@ -30,7 +30,7 @@
 	<div class="form-group">
 		<%= f.label :retrieve_account_id, "Para onde vai", class: "control-label col-sm-2" %><br>
 		<div class="col-sm-10">
-			<%= f.collection_select :retrieve_account_id, AnalyticAccount.all, :id, :name , {}, {class: "simple-test"} %>
+			<%= f.collection_select :retrieve_account_id, AnalyticAccount.order_by_code, :id, :analytic_account_name , {}, {class: "simple-test"} %>
 		</div>
 	</div>
 
@@ -39,7 +39,7 @@
 	<div class="form-group">
 		<%=  f.label :release_account_id, "De onde vem", class: "control-label col-sm-2" %><br>
 		<div class="col-sm-10">
-			<%= f.collection_select :release_account_id, AnalyticAccount.all, :id, :name , {}, {class: "simple-test"} %>
+			<%= f.collection_select :release_account_id, AnalyticAccount.order_by_code, :id, :analytic_account_name , {}, {class: "simple-test"} %>
 		</div>
 	</div>
 
@@ -57,7 +57,7 @@
 	<div class="form-group">
 		<%= f.label :release_date, class: "control-label col-sm-2" %>
 		<div class="col-sm-10">
-			<%= f.date_select :release_date, class: "form-control", placeholder: "Digite a descrição da operação" %>
+			<%= f.text_field :release_date, class: "form-control", placeholder: Time.now.strftime("%d/%m/%Y") %>
 
 		</div>
 	</div>

@@ -13,7 +13,7 @@ class Operation < ActiveRecord::Base
   # after_update :update_balance
   
 
-  validates :value, presence: true
+  validates :value, :release_date, presence: true
 
 
 

@@ -3,4 +3,5 @@ module AnalyticAccountsHelper
 		@accounts = SecondSyntheticAccount.all
 		
 	end
+	
 end

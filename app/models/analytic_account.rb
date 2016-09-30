@@ -21,6 +21,13 @@ class AnalyticAccount < ActiveRecord::Base
     credit.where(release_date: date1..date2 )
       
   end
+
+  def self.order_by_code
+      includes(second_synthetic_account: {synthetic_account: {account: :account_type}}).
+      order('account_types.code').order('accounts.code').order('synthetic_accounts.code').
+      order('second_synthetic_accounts.code').order(:code)
+    
+  end
   
   def self.result_accounts date1, date2
       
@@ -36,7 +43,12 @@ class AnalyticAccount < ActiveRecord::Base
         credits + debits
   end
 
-  def self.result_analytic_account
+  def analytic_account_name
+    "#{second_synthetic_account.synthetic_account.account.account_type.code}.
+    #{second_synthetic_account.synthetic_account.account.code}.
+    #{second_synthetic_account.synthetic_account.code}.
+    #{second_synthetic_account.code}.
+    #{code} - #{name}"
       
   end
 
@@ -44,4 +56,5 @@ class AnalyticAccount < ActiveRecord::Base
   	
   		OldBalance.find_by(operation: op, analytic_account: self)
   end
+
 end
