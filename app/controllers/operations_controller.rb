@@ -98,23 +98,10 @@ class OperationsController < ApplicationController
  
 
   def undo_last_operation
-    
-    retrieve_anal = AnalyticAccount.find(@operation.retrieve_account.id)
-    release_anal = AnalyticAccount.find(@operation.release_account.id)
-    release_ob = @operation.old_balances.find_by(operation: @operation, analytic_account: @operation.release_account)
-    retrieve_ob = @operation.old_balances.find_by(operation: @operation, analytic_account: @operation.retrieve_account)
-    retrieve_value = retrieve_ob.value 
-    release_value = release_ob.value
-    if retrieve_ob.value < 0
-      retrieve_value *=  (-1)
-    end
-    if release_ob.value < 0
-      release_value *=  (-1) 
-    end
-    retrieve_balance = retrieve_anal.balance - retrieve_value
-    release_balance = release_anal.balance + release_value
-    retrieve_anal.update(balance: retrieve_balance)
-    release_anal.update(balance: release_balance)
+    retrieve_balance =  @operation.retrieve_account.balance - @operation.value
+    release_balance = @operation.release_account.balance + @operation.value
+    @operation.retrieve_account.update(balance: retrieve_balance)
+    @operation.release_account.update(balance: release_balance)
   end
 
   
