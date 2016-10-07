@@ -2,12 +2,12 @@ class AnalyticAccount < ActiveRecord::Base
   belongs_to :second_synthetic_account
   
   belongs_to :listenable, polymorphic: true
-
+  
   has_many :debits, class_name: "Operation",
                           foreign_key: "retrieve_account_id"
   has_many :credits, class_name: "Operation",
                           foreign_key: "release_account_id"                          
-  has_many :oldbalances
+  has_many :old_balances
   
   has_one :result
   def self.debits

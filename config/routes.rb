@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :second_synthetic_accounts
   resources :analytic_accounts
   resources :synthetic_accounts
-  resources :operations
+  resources :operations, except: [:edit, :update]
   resources :accounts
   resources :account_types
   resources :chart_of_accounts
@@ -14,8 +14,7 @@ Rails.application.routes.draw do
   get 'control_users/index'
   devise_for :users
   get 'welcome/index'
-  get 'ledger', to: 'operations#ledger', as: :ledger
-  
+  get 'livro_diario', to: 'operations#index', as: :ledger
   get 'cadastrar/contas', to: 'form_wizard#index', as: :wizard_index
   resources :enterprises
   
@@ -23,7 +22,6 @@ Rails.application.routes.draw do
  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 

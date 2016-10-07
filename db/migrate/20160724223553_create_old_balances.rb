@@ -4,7 +4,7 @@ class CreateOldBalances < ActiveRecord::Migration
       t.references :operation, index: true, foreign_key: true
       t.references :analytic_account, index: true, foreign_key: true
       t.decimal :value, precision: 10, scale: 2
-
+      
       t.timestamps null: false
     end
   end
