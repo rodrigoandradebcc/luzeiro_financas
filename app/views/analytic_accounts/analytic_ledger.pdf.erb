@@ -24,11 +24,18 @@
    <div class="panel panel-default">
      <table class="table table-bordered2">
      <thead>
+
        <tr>
      <th><div class="panel-heading text-center"><strong>Livro Razão</strong></div></th>
    </tr>
-     <table class="table table-bordered">
-       <p class = "page-header text-right font-size"><strong> Conta contabil: <%= @analytic_account.code%></strong><%= @analytic_account.name %></p>
+
+     <table class="table table-bordered">        <!-- MOSTRAR TODAS AS CONTAS PAI  -->
+       <p class = "page-header text-right font-size"><strong> Conta contabil:
+         <%= @analytic_account.second_synthetic_account.synthetic_account.account.account_type.code %>.
+         <%= @analytic_account.second_synthetic_account.synthetic_account.account.code %>
+         .<%= @analytic_account.second_synthetic_account.synthetic_account.code %>
+         .<%= @analytic_account.second_synthetic_account.code %>
+         .<%= @analytic_account.code %></strong> <span style ="padding-left:40px"><%= @analytic_account.name %></span></p>
      <thead>
          <tr>
            <th>Data</th>
@@ -46,9 +53,11 @@
            <td><%= op.release_date.strftime("%d/%m/%Y") %></td>
          <!--   -->
            <% if op.release_account.eql?(@analytic_account)%>
-           <td><%= op.retrieve_account.name %></td>
+           <!-- falta implementar os codigos pai-->
+           <td align="center"><%= op.retrieve_account.code%></td>
            <% else %>
-           <td><%= op.release_account.name %></td>
+           <!-- falta implementar os codigos pai-->
+           <td align="center"><%= op.release_account.code %></td>
            <% end %>
            <td><%= op.description %></td>
            <td align= "center"><%= op.id %></td>
