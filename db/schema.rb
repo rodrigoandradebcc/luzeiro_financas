@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 20160911012146) do
     t.integer  "analytic_account_id", limit: 4
     t.string   "kind",                limit: 255
     t.decimal  "balance",                           precision: 10, scale: 2, default: 0.0
+    t.date     "init"
+    t.date     "final"
     t.datetime "created_at",                                                               null: false
     t.datetime "updated_at",                                                               null: false
   end

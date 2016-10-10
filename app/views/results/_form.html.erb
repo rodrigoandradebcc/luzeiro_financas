@@ -146,10 +146,19 @@
       <tr>
      
 
-        <th class="pull-right"> Crédito: <%= number_to_currency(@credit_value, unit: "R$", separator: ",", delimiter: ".") %></th>  
-        <th class="pull-right"> Debito: <%=number_to_currency(@debit_value, unit: "R$", separator: ",", delimiter: ".")  %></th>
+        <th > Total de Crédito</th>  
+        <th > Total de Debito </th>
+        <th>Resultado</th>
+
       </tr>
     </thead>
+    <tbody>
+      <tr>
+        <td><%= number_to_currency(@credit_value, unit: "R$", separator: ",", delimiter: ".") %></td>
+        <td><%=number_to_currency(@debit_value, unit: "R$", separator: ",", delimiter: ".")  %></td>
+        <td ><%=number_to_currency(@balance, unit: "R$", separator: ",", delimiter: ".")  %></td>
+      </tr>
+    </tbody>
     
   </table>
   <% end %>
@@ -164,7 +173,7 @@
     <div class="col-md-12 "> <h4> Não foram econtrados resultados neste período, por favor verifique se as informações estão corretas. </h4></div>
     
 <% elsif !@debit_accounts.empty? and !@credit_accounts.empty? %>
-     <%= form_for(@result) do |f| %>
+<%= form_for(@result) do |f| %>
   <% if @result.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@result.errors.count, "error") %> prohibited this result from being saved:</h2>
@@ -182,8 +191,8 @@
     <%= f.label "Descrição" %><br>
     <%= f.text_area :description, placeholder: "Deixe aqui uma breve descrição do resultado" %>
   </div>
-
- 
+  <%= f.hidden_field(:init, value: params[:date_init]) %>
+  <%= f.hidden_field(:final, value: params[:date_final]) %>
 
   
   <div class="actions">

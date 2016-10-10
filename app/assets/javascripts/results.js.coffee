@@ -3,14 +3,14 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'ready page:load', ->
-	$('#date_init').datepicker 
+	$('#init').datepicker 
   todayBtn: true
   language: 'pt-BR'
   autoclose: true
 
 	return
 $(document).on 'ready page:load', ->
-	$('#date_final').datepicker 
+	$('#final').datepicker 
   todayBtn: true
   language: 'pt-BR'
   autoclose: true

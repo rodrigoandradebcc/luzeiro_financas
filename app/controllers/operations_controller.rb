@@ -1,7 +1,6 @@
 class OperationsController < ApplicationController
   include OperationsHelper
-  before_action :set_operation, only: [:show, :edit, :update,  :destroy, :create_balance,
-   :undo_last_operation]
+  before_action :set_operation, only: [:show, :edit, :update,  :destroy]
 
 
   # GET /operations
@@ -35,7 +34,6 @@ class OperationsController < ApplicationController
     respond_to do |format|
       @operation = Operation.new(operation_params)
       if @operation.save
-          create_balance
          format.html { redirect_to root_path, notice: 'Operation was successfully created.' }
         
       else
@@ -64,7 +62,6 @@ class OperationsController < ApplicationController
   # DELETE /operations/1
   # DELETE /operations/1.json
   def destroy
-    undo_last_operation
     @operation.destroy
     respond_to do |format|
       format.html { redirect_to operations_url, notice: 'Operation was successfully destroyed.' }
@@ -83,26 +80,10 @@ class OperationsController < ApplicationController
      params.require(:operation).permit(:value, :description, :release_date, :retrieve_account_id, :release_account_id)
   end
 
-  def create_balance
-    
-      retrieve_value = @operation.retrieve_account.balance + @operation.value 
-      release_value = @operation.release_account.balance - @operation.value      
-      @operation.release_account.update(balance: release_value)
-      @operation.retrieve_account.update(balance: retrieve_value)
-      retrieve_ob  = OldBalance.new(operation: @operation, analytic_account: @operation.retrieve_account, value:  retrieve_value)
-      release_ob = OldBalance.new(operation: @operation, analytic_account: @operation.release_account, value: release_value)  
-      retrieve_ob.save!
-      release_ob.save!
-
-  end
+  
  
 
-  def undo_last_operation
-    retrieve_balance =  @operation.retrieve_account.balance - @operation.value
-    release_balance = @operation.release_account.balance + @operation.value
-    @operation.retrieve_account.update(balance: retrieve_balance)
-    @operation.release_account.update(balance: release_balance)
-  end
+  
 
   
 

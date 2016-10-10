@@ -27,13 +27,13 @@
           <td><%= result.kind %></td>
           <td><%= number_to_currency(result.balance, unit: "R$", separator: ",", delimiter: ".") %></td>
           <td>
-            <%= link_to 'Detalhes', result_path(result), class: "btn btn-primary" %>  
-          </td>
-          <td>                         
-            <%= link_to result, method: :delete, data: { confirm: 'Are you sure?' } do%>
-                  <i class="icon-remove">
+            <%= button_to result, method: :delete, data: { confirm: 'Are you sure?' } do%>
+                  Remover<i class="icon-remove">
                 <% end %>
           </td>
+          </td>
+          <td>                         
+            
         </tr>
         <% end %>
       </tbody>

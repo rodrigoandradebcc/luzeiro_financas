@@ -1,20 +1,13 @@
 class Operation < ActiveRecord::Base
   belongs_to :release_account, class_name: "AnalyticAccount"
   belongs_to :retrieve_account, class_name: "AnalyticAccount"
-
   # shared interface
   belongs_to :operational, polymorphic: true
-  
-  
   has_many :old_balances, dependent: :destroy
-  
-
- 
-
-
   validates :value, :release_date, presence: true
   validate :only_one_account_per_select_box
- 
+  before_destroy :undo_last_operation 
+  after_save :create_balance
   def only_one_account_per_select_box
     unless retrieve_account != release_account
       errors.add("Contas iguais:", "As contas devem ser diferentes umas das outras")
@@ -40,7 +33,27 @@ class Operation < ActiveRecord::Base
   
   private
 
+  def create_balance
+    unless destroyed?
+      
+    
+      retrieve_value = self.retrieve_account.balance + self.value 
+      release_value = self.release_account.balance - self.value      
+      self.release_account.update(balance: release_value) 
+      self.retrieve_account.update(balance: retrieve_value) 
+      retrieve_ob  = OldBalance.new(operation: self, analytic_account: self.retrieve_account, value:  retrieve_value)
+      release_ob = OldBalance.new(operation: self, analytic_account: self.release_account, value: release_value)  
+      retrieve_ob.save!
+      release_ob.save!
+    end
+  end
 
+  def undo_last_operation
+    retrieve_balance =  self.retrieve_account.balance - self.value
+    release_balance = self.release_account.balance + self.value
+    self.retrieve_account.update(balance: retrieve_balance)
+    self.release_account.update(balance: release_balance)
+  end
 
   # def validate_value release_ob=nil, retrieve_ob=nil
   #     if release_ob

@@ -4,9 +4,9 @@ class AnalyticAccount < ActiveRecord::Base
   belongs_to :listenable, polymorphic: true
   
   has_many :debits, class_name: "Operation",
-                          foreign_key: "retrieve_account_id"
+                          foreign_key: "retrieve_account_id", dependent: :destroy
   has_many :credits, class_name: "Operation",
-                          foreign_key: "release_account_id"                          
+                          foreign_key: "release_account_id", dependent: :destroy                        
   has_many :old_balances
   
   has_one :result
@@ -29,18 +29,35 @@ class AnalyticAccount < ActiveRecord::Base
     
   end
   
-  def self.result_accounts date1, date2
+  def self.result_accounts date_init, date_final, nature
       
-      credits = 
-      includes(:credits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
-        where(account_types: {code: [3]}).where(operations: {release_date: date1..date2}).
-        where.not(second_synthetic_accounts: {code: [2]})
-       debits = 
+
+      if nature.eql?"D"
+        @init_date = Date.strptime(date_init, "%d/%m/%Y")
+      @final_date = Date.strptime(date_final, "%d/%m/%Y") 
         includes(:debits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
         where(account_types: {code: [4,5]}).
-        where(operations: {release_date: date1..date2})
+        where(operations: {release_date: @init_date..@final_date})
 
+      elsif nature.eql?"C"
+        @init_date = Date.strptime(date_init, "%d/%m/%Y")
+      @final_date = Date.strptime(date_final, "%d/%m/%Y") 
+        includes(:credits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
+        where(account_types: {code: [3]}).where(operations: {release_date: @init_date..@final_date}).
+        where.not(second_synthetic_accounts: {code: [2]})
+      elsif nature.eql?"BOTH"
+      @init_date = date_init
+      @final_date = date_final
+        credits = includes(:debits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
+        where(account_types: {code: [4,5]}).
+        where(operations: {release_date: @init_date..@final_date})
+        debits = includes(:credits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
+        where(account_types: {code: [3]}).where(operations: {release_date: @init_date..@final_date}).
+        where.not(second_synthetic_accounts: {code: [2]})
         credits + debits
+      else
+        nil
+      end        
   end
 
   def analytic_account_name

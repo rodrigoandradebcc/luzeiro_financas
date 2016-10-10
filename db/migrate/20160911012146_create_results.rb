@@ -6,7 +6,8 @@ class CreateResults < ActiveRecord::Migration
       t.references :analytic_account, index: true, foreign_key: true
       t.string :kind
       t.decimal :balance, precision: 10, scale: 2, default: 0.0
-      
+      t.date :init
+      t.date :final
       t.timestamps null: false
     end
   end

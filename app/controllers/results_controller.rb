@@ -2,7 +2,8 @@
 class ResultsController < ApplicationController
  
   before_action :set_result, only: [ :show, :edit, :update, :destroy]
-  
+  before_action :set_debit_accounts, :set_credit_accounts, only: [:new]
+
   # GET /results
   # GET /results.json
   def index
@@ -41,27 +42,10 @@ end
 
   # GET /results/new
   def new
-     @result = Result.new
-     session[:init_date] = @init_date = Date.strptime(params[:date_init], "%d/%m/%Y") 
-     session[:final_date] =  @final_date = Date.strptime(params[:date_final], "%d/%m/%Y")
-      
-      @credit_accounts = AnalyticAccount.
-      includes(:credits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
-        where(account_types: {code: [3]}).where(operations: {release_date: @init_date..@final_date}).
-        where.not(second_synthetic_accounts: {code: [2]})
-        
-
-      @debit_accounts = AnalyticAccount.
-        includes(:debits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
-        where(account_types: {code: [4,5]}).
-        where(operations: {release_date: @init_date..@final_date})
-
-    
-      @credit_value = 0
-      @debit_value = 0
-      @credit_accounts.each{|c|@credit_value+=c.balance}
-      @debit_accounts.each{|d|@debit_value+=d.balance}
-      session[:balance]= @balance =  - @credit_value - @debit_value
+      @result = Result.new
+      @credit_value = @credit_accounts.sum(:balance).abs
+      @debit_value = @debit_accounts.sum(:balance).abs
+      @balance = @credit_value.abs  -  @debit_value.abs
   end
 
   # GET /results/1/edit
@@ -72,19 +56,10 @@ end
   # POST /results.json
   def create
     @result = Result.new(result_params)
-    @init_date = session[:init_date].to_date.strftime("%d/%m/%Y")
-    @final_date = session[:final_date].to_date.strftime("%d/%m/%Y")
-    unless set_result_accounts.nil?
-      @result.analytic_accounts = set_result_accounts
-      @result.name = "#{@init_date} à #{@final_date}"
-      @result.balance = session[:balance]
-      
-      
+    
       respond_to do |format|
-        if @result.save
-          session.delete(:balance)
-          session.delete(:init_date)
-          session.delete(:final_date)
+        if  @result.save
+          
           format.html { redirect_to @result, notice: 'Result was successfully created.' }
           format.json { render :show, status: :created, location: @result }
         else
@@ -92,7 +67,7 @@ end
           format.json { render json: @result.errors, status: :unprocessable_entity }
         end
       end
-    end
+    # end
   end
 
   # PATCH/PUT /results/1
@@ -120,6 +95,7 @@ end
   end
 
   private
+   
     # Use callbacks to share common setup or constraints between actions.
     def set_result
       @result = Result.find(params[:id])
@@ -127,13 +103,26 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def result_params
-      params.require(:result).permit(:name, :description, :analytic_account_id, :kind, :balance, :date_init,:date_final)
+      params.require(:result).permit(:name, :description, :analytic_account_id, :kind, :balance, :init, :final)
       
+    end
+     def set_credit_accounts
+           init =params[:date_init]
+          final =params[:date_final]
+        @credit_accounts = AnalyticAccount.result_accounts init, final, "C"
+    end
+
+    def set_debit_accounts
+           init =params[:date_init]
+          final =params[:date_final]
+         @debit_accounts = AnalyticAccount.result_accounts  init, final, "D"
     end
 
     def set_result_accounts
-           init =session[:init_date]
-          final =session[:final_date]
-         AnalyticAccount.result_accounts init, final
+         init =params[:date_init]
+         final =params[:date_final]
+         @result_accounts = AnalyticAccount.result_accounts  init, final, "BOTH"      
     end
+
+
 end
