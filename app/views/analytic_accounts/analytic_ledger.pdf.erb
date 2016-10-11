@@ -29,13 +29,13 @@
      <th><div class="panel-heading text-center"><strong>Livro Razão</strong></div></th>
    </tr>
 
-     <table class="table table-bordered">        <!-- MOSTRAR TODAS AS CONTAS PAI  -->
+     <table class="table table-bordered" cellspacing = 15>        <!-- MOSTRAR TODAS AS CONTAS PAI  -->
        <p class = "page-header text-right font-size"><strong> Conta contabil:
          <%= @analytic_account.second_synthetic_account.synthetic_account.account.account_type.code %>.
          <%= @analytic_account.second_synthetic_account.synthetic_account.account.code %>
          .<%= @analytic_account.second_synthetic_account.synthetic_account.code %>
          .<%= @analytic_account.second_synthetic_account.code %>
-         .<%= @analytic_account.code %></strong> <span style ="padding-left:40px"><%= @analytic_account.name %></span></p>
+         .<%= @analytic_account.code %></strong> <span style ="padding-left:100px"><%= @analytic_account.name %></span></p>
      <thead>
          <tr>
            <th>Data</th>
@@ -48,16 +48,24 @@
          </tr>
        </thead>
        <% @operations.sort_by{|task| task.id}.each do |op| %>
-       <tbody>
-           <tr>
+       <tbody >
+           <tr class="conta">
            <td><%= op.release_date.strftime("%d/%m/%Y") %></td>
          <!--   -->
            <% if op.release_account.eql?(@analytic_account)%>
-           <!-- falta implementar os codigos pai-->
-           <td align="center"><%= op.retrieve_account.code%></td>
+           <!-- codigo da contra partida-->
+           <td align="center"><%= op.retrieve_account.second_synthetic_account.synthetic_account.account.account_type.code %>.
+           <%= op.retrieve_account.second_synthetic_account.synthetic_account.account.code %>
+           .<%= op.retrieve_account.second_synthetic_account.synthetic_account.code %>
+           .<%= op.retrieve_account.second_synthetic_account.code %>
+           .<%= op.retrieve_account.code %></td>
            <% else %>
-           <!-- falta implementar os codigos pai-->
-           <td align="center"><%= op.release_account.code %></td>
+           <!-- codigo da contra partida-->
+           <td align="center"><%= op.release_account.second_synthetic_account.synthetic_account.account.account_type.code %>.
+           <%= op.release_account.second_synthetic_account.synthetic_account.account.code %>
+           .<%= op.release_account.second_synthetic_account.synthetic_account.code %>
+           .<%= op.release_account.second_synthetic_account.code %>
+           .<%= op.release_account.code %></td>
            <% end %>
            <td><%= op.description %></td>
            <td align= "center"><%= op.id %></td>
@@ -70,15 +78,10 @@
          </tbody>
        <% end %>
        <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
-       <strong><%= @analytic_account.balance%></strong></td></tr>
+       <strong class="total"><%= @analytic_account.balance%></strong></td></tr>
          </table>
-
-
    </div>
-
  </div>
-
 </div>
-
 </body>
 </html>
