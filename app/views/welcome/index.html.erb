@@ -1,52 +1,48 @@
 <div class="container-fluid">
-	<div class="col-md-12">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<div class="row">
-					<div class="col-xs-3">
-						<%= icon('dashboard', class: 'strong aumentaicon')%>
-					</div>
-					<div class="col-xs-4 text-right">
-
-					<%= link_to 'Gerar relatório', welcome_index_path(format: 'pdf'), class: "btn btn-primary" %>
-					</div>
-					<div class="col-xs-5 text-right">
-						<%= link_to "Dashboard", "#", :class => "huge" %>
-					</div>
-				</div>
-			</div>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Código</th>
-						<th>Nome</th>
-						<th>Saldo</th>
-						<th></th>
-
-					</tr>
-				</thead>
-
-				<tbody>
-				 <p id="notice"><%= notice %></p>
-					<% @analytic_accounts.each do |analytic_account| %>
-					<tr>
-						<td><%= analytic_account.second_synthetic_account.synthetic_account.account.account_type.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.account.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.code %>.<%= analytic_account.second_synthetic_account.code %>.<%= analytic_account.code %>
-						</td>
-						<td>
-							<%= button_to analytic_account.second_synthetic_account.synthetic_account.account.account_type.name, account_type_path(analytic_account.second_synthetic_account.synthetic_account.account.account_type), class: "btn btn-primary icon-btn btn-xs",method: :get%>
-						  <%= button_to analytic_account.second_synthetic_account.synthetic_account.account.name.downcase, account_path(analytic_account.second_synthetic_account.synthetic_account.account), class: "btn btn-primary icon-btn btn-xs",method: :get%>
-							<%= button_to analytic_account.second_synthetic_account.synthetic_account.name.downcase, synthetic_account_path(analytic_account.second_synthetic_account.synthetic_account), class: "btn btn-primary icon-btn btn-xs",method: :get%>
-							<%= button_to analytic_account.second_synthetic_account.name.downcase, second_synthetic_account_path(analytic_account.second_synthetic_account), class: "btn btn-primary icon-btn btn-xs",method: :get%>
-						  <%= button_to analytic_account.name.downcase, analytic_account_path(analytic_account), class: "btn btn-primary icon-btn btn-xs",method: :get%>
-						<td><%= number_to_currency(analytic_account.balance, unit: "R$", separator: ",", delimiter: ".")%></td>
-						<!-- <td><%= link_to 'Show', analytic_account, class: "btn btn-primary btn-sm" %> -->
-						<td><%= link_to 'Ver Livro Razão', analytic_ledger_path(analytic_account), class: "btn btn-success btn-sm" %></td>
-
-
-					</tr>
-					<% end %>
-				</tbody>
-			</table>
-		</div>
-	</div>
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <%= icon('dashboard', class: 'strong aumentaicon')%>
+          </div>
+          <div class="col-xs-4 text-right">
+            <%= link_to 'Gerar relatório', welcome_index_path(format: 'pdf'), class: "btn btn-primary" %>
+          </div>
+          <div class="col-xs-5 text-right">
+            <%= link_to "Dashboard", "#", :class => "huge" %>
+          </div>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+          	<th>Código</th>
+	<th>Nome</th>
+	<th>Saldo</th>
+	<th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <p id="notice"><%= notice %></p>
+          <% @analytic_accounts.each do |analytic_account| %>
+	<tr>
+	  <td><%= analytic_account.second_synthetic_account.synthetic_account.account.account_type.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.account.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.code %>.<%= analytic_account.second_synthetic_account.code %>.<%= analytic_account.code %>
+	  </td>
+	  <td>
+	    <%= button_to analytic_account.second_synthetic_account.synthetic_account.account.account_type.name, account_type_path(analytic_account.second_synthetic_account.synthetic_account.account.account_type), class: "btn btn-primary icon-btn btn-xs",method: :get%>
+	    <%= button_to analytic_account.second_synthetic_account.synthetic_account.account.name.downcase, account_path(analytic_account.second_synthetic_account.synthetic_account.account), class: "btn btn-primary icon-btn btn-xs",method: :get%>
+	    <%= button_to analytic_account.second_synthetic_account.synthetic_account.name.downcase, synthetic_account_path(analytic_account.second_synthetic_account.synthetic_account), class: "btn btn-primary icon-btn btn-xs",method: :get%>
+	    <%= button_to analytic_account.second_synthetic_account.name.downcase, second_synthetic_account_path(analytic_account.second_synthetic_account), class: "btn btn-primary icon-btn btn-xs",method: :get%>
+	    <%= button_to analytic_account.name.downcase, analytic_account_path(analytic_account), class: "btn btn-primary icon-btn btn-xs",method: :get%>
+	  </td>
+	  <td><%= number_to_currency(analytic_account.balance, unit: "R$", separator: ",", delimiter: ".")%></td>
+	  <td><%= link_to 'Ver Livro Razão', analytic_ledger_path(analytic_account), class: "btn btn-success btn-sm" %></td>
+	</tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12"><%= will_paginate @analytic_accounts, class: "apple_pagination" %></div>
+  </div>
 </div>

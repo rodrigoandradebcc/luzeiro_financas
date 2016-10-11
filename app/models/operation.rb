@@ -35,8 +35,6 @@ class Operation < ActiveRecord::Base
 
   def create_balance
     unless destroyed?
-      
-    
       retrieve_value = self.retrieve_account.balance + self.value 
       release_value = self.release_account.balance - self.value      
       self.release_account.update(balance: release_value) 

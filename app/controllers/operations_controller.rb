@@ -8,9 +8,9 @@ class OperationsController < ApplicationController
   def index
      if params[:date_init] and params[:date_final]
       
-      @operations = Operation.date_search(params[:date_init], params[:date_final]).order("id DESC")
+      @operations = Operation.paginate(:page => params[:page], :per_page => 20  ).date_search(params[:date_init], params[:date_final]).order("id DESC")
     else
-      @operations = Operation.all.order('created_at DESC')
+      @operations = Operation.all.paginate(:page => params[:page], :per_page => 20  ).order('created_at DESC')
     end
   end
 

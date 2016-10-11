@@ -45,7 +45,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'meiomask-rails'
 gem 'maskmoney-rails'
-
+gem 'will_paginate', '~> 3.1.0'
 # gem 'xray-rails', group: :development
 gem 'gon'
 group :development, :test do
