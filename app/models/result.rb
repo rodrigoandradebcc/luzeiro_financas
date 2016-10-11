@@ -12,23 +12,34 @@ class Result < ActiveRecord::Base
 
 	def set_result_attributes
 		if new_record?
+	         #    @init_date = "#{self.init}"
+        		# @final_date = "#{self.final}"
+		self.name = "Resultado do Exercício em: #{self.init} à #{self.final}"
+		@debit =  AnalyticAccount.result_accounts self.init , self.final, "D"
+		@credit = AnalyticAccount.result_accounts self.init , self.final, "C"
+		self.balance = @credit.sum(:balance).abs - @debit.sum(:balance).abs
+
+		if self.balance < 0
+			self.kind = "D"
+		else
+			self.kind = "C"
 			
-		
+		end
+
+
 		@account_type = AccountType.find_or_create_by!(code: 2, name: "Passivo")
 
 		@account = Account.find_or_create_by!(account_type: @account_type, code: 2)
 
 		@synthetic_account = SyntheticAccount.find_or_create_by!(account: @account, code: 2)
 
-		 @ssyn = SecondSyntheticAccount.find_or_create_by!( synthetic_account: @synthetic_account, code: 2)
+		@ssyn = SecondSyntheticAccount.find_or_create_by!( synthetic_account: @synthetic_account, code: 2)
 
-		
-		
 		if @ssyn.analytic_accounts.any?
-		self.analytic_account = AnalyticAccount.new( second_synthetic_account: @ssyn,name: "Resultado do Exercício em: #{self.name}", code: @ssyn.analytic_accounts.last.code.next, description: self.description, balance: self.balance)
+		self.analytic_account = AnalyticAccount.new( second_synthetic_account: @ssyn, name: self.name, code: @ssyn.analytic_accounts.last.code.next, description: self.description)
 
 		else
-		self.analytic_account = AnalyticAccount.new(second_synthetic_account: @ssyn, name: "Resultado do Exercício em: #{self.name}", code: 1, description: self.description, balance: self.balance)
+		self.analytic_account = AnalyticAccount.new(second_synthetic_account: @ssyn, name: self.name, code: 1, description: self.description)
 		end
 
 		self.analytic_accounts = AnalyticAccount.result_accounts self.init, self.final, "BOTH"
@@ -44,6 +55,8 @@ class Result < ActiveRecord::Base
 				false			
 			end
 		end
+		
+		self.balance = self.balance.abs
 		end
 	end
 

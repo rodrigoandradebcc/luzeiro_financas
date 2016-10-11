@@ -42,7 +42,11 @@ end
 
   # GET /results/new
   def new
-      @result = Result.new
+      @init_date = Date.strptime(params[:date_init], "%d/%m/%Y")
+      @final_date = Date.strptime(params[:date_final], "%d/%m/%Y") 
+
+      @result = Result.new(init: params[:date_init], final: params[:date_final])
+
       @credit_value = @credit_accounts.sum(:balance).abs
       @debit_value = @debit_accounts.sum(:balance).abs
       @balance = @credit_value.abs  -  @debit_value.abs
@@ -56,7 +60,7 @@ end
   # POST /results.json
   def create
     @result = Result.new(result_params)
-    
+
       respond_to do |format|
         if  @result.save
           
@@ -107,14 +111,14 @@ end
       
     end
      def set_credit_accounts
-           init =params[:date_init]
-          final =params[:date_final]
+        init =params[:date_init]
+        final =params[:date_final]
         @credit_accounts = AnalyticAccount.result_accounts init, final, "C"
     end
 
     def set_debit_accounts
-           init =params[:date_init]
-          final =params[:date_final]
+         init =params[:date_init]
+         final =params[:date_final]
          @debit_accounts = AnalyticAccount.result_accounts  init, final, "D"
     end
 

@@ -1,17 +1,14 @@
-<div class="container-fluid">
+
 <div class="row">
 
  <div class="col-md-12"><h1 class="page-header text-center"><strong>Livro Razão Resultado</strong></h1></div>
  <% if @init_date and @final_date %>
- <div class="col-md-12"><strong>Período: </strong><%= @init_date.strftime("%d/%m/%Y") %> à <%= @final_date.strftime("%d/%m/%Y") %></div>
+ <div class="col-md-12 "><h4 class="page-header"><strong >Período: </strong><%= @init_date %> à <%= @final_date %></h4></div>
 
  </div>
  <% end %>
  <% if @credit_accounts %>
 <% @credit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
-
-  <div class="row">
-
     <div class="panel panel-default">
      <div class="row">
       <div class="col-md-6">
@@ -67,7 +64,6 @@
           <strong><%=number_to_currency(anal.balance, unit: "R$", separator: ",", delimiter: ".") %></strong></td></tr>
         </table> 
     </div>
-  </div> 
 <% end %>
 <% end %>
 
@@ -75,7 +71,7 @@
 <% if @debit_accounts %>
 <% @debit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
 
-  <div class="row">
+  
     <div class="panel panel-default">
      <div class="row">
       <div class="col-md-6">
@@ -139,8 +135,7 @@
     
  
 
-  </div>
-        <% end %>
+  <% end %>
   <table class="table">
     <thead>
       <tr>
@@ -156,7 +151,7 @@
       <tr>
         <td><%= number_to_currency(@credit_value, unit: "R$", separator: ",", delimiter: ".") %></td>
         <td><%=number_to_currency(@debit_value, unit: "R$", separator: ",", delimiter: ".")  %></td>
-        <td ><%=number_to_currency(@balance, unit: "R$", separator: ",", delimiter: ".")  %></td>
+        <td ><%=number_to_currency(@balance, unit: "R$", separator: ",", delimiter: ".")  %> <strong><%= @result.kind %></strong></td>
       </tr>
     </tbody>
     
@@ -206,4 +201,3 @@
   <% end %>
  <%= button_to "Selecionar novo período", result_search_path, class: "btn btn-default", method: :get %>
 
-</div>

@@ -31,23 +31,27 @@ class AnalyticAccount < ActiveRecord::Base
   
   def self.result_accounts date_init, date_final, nature
       
+      if date_init.class.equal?Date and date_final.class.equal?Date
+        @init_date = date_init
+        @final_date = date_final
+      else
+        @init_date = Date.strptime(date_init, "%d/%m/%Y")
+        @final_date = Date.strptime(date_final, "%d/%m/%Y") 
+      end
 
       if nature.eql?"D"
-        @init_date = Date.strptime(date_init, "%d/%m/%Y")
-      @final_date = Date.strptime(date_final, "%d/%m/%Y") 
+        
         includes(:debits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
         where(account_types: {code: [4,5]}).
         where(operations: {release_date: @init_date..@final_date})
 
       elsif nature.eql?"C"
-        @init_date = Date.strptime(date_init, "%d/%m/%Y")
-      @final_date = Date.strptime(date_final, "%d/%m/%Y") 
+        
         includes(:credits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
         where(account_types: {code: [3]}).where(operations: {release_date: @init_date..@final_date}).
         where.not(second_synthetic_accounts: {code: [2]})
       elsif nature.eql?"BOTH"
-      @init_date = date_init
-      @final_date = date_final
+        
         credits = includes(:debits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
         where(account_types: {code: [4,5]}).
         where(operations: {release_date: @init_date..@final_date})
