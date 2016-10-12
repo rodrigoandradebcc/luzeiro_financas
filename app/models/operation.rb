@@ -6,14 +6,15 @@ class Operation < ActiveRecord::Base
   has_many :old_balances, dependent: :destroy
   validates :value, :release_date, presence: true
   validate :only_one_account_per_select_box
-  before_destroy :undo_last_operation 
+  before_destroy :undo_last_operation
   after_save :create_balance
+
+
   def only_one_account_per_select_box
     unless retrieve_account != release_account
       errors.add("Contas iguais:", "As contas devem ser diferentes umas das outras")
     end
   end
-
 
 
 
@@ -35,10 +36,21 @@ class Operation < ActiveRecord::Base
 
   def create_balance
     unless destroyed?
+      
       retrieve_value = self.retrieve_account.balance + self.value 
-      release_value = self.release_account.balance - self.value      
-      self.release_account.update(balance: release_value) 
-      self.retrieve_account.update(balance: retrieve_value) 
+      release_value = self.release_account.balance - self.value
+      
+      # if self.release_account.result
+      #    self.release_account.update(balance: release_value.abs)
+         
+      # elsif self.retrieve_account.result
+      #    self.release_account.update(balance: release_value) 
+      #    self.retrieve_account.update(balance: retrieve_value.abs) 
+      # else
+        self.release_account.update(balance: release_value) 
+        self.retrieve_account.update(balance: retrieve_value) 
+      # end      
+      
       retrieve_ob  = OldBalance.new(operation: self, analytic_account: self.retrieve_account, value:  retrieve_value)
       release_ob = OldBalance.new(operation: self, analytic_account: self.release_account, value: release_value)  
       retrieve_ob.save!
@@ -47,8 +59,14 @@ class Operation < ActiveRecord::Base
   end
 
   def undo_last_operation
-    retrieve_balance =  self.retrieve_account.balance - self.value
-    release_balance = self.release_account.balance + self.value
+    # if self.operational
+    #   retrieve_balance =  self.retrieve_account.balance + self.value
+    #   release_balance = self.release_account.balance - self.value
+    # else
+      retrieve_balance =  self.retrieve_account.balance - self.value
+      release_balance = self.release_account.balance + self.value
+    # end
+   
     self.retrieve_account.update(balance: retrieve_balance)
     self.release_account.update(balance: release_balance)
   end

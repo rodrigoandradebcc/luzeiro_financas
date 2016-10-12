@@ -12,9 +12,9 @@ class Result < ActiveRecord::Base
 
 	def set_result_attributes
 		if new_record?
-	         #    @init_date = "#{self.init}"
-        		# @final_date = "#{self.final}"
-		self.name = "Resultado do Exercício em: #{self.init} à #{self.final}"
+	            @init_date = init.strftime("%d/%m/%Y")
+        		@final_date = final.strftime( "%d/%m/%Y")
+		self.name = "Resultado do Exercício em: #{@init_date} à #{@final_date}"
 		@debit =  AnalyticAccount.result_accounts self.init , self.final, "D"
 		@credit = AnalyticAccount.result_accounts self.init , self.final, "C"
 		self.balance = @credit.sum(:balance).abs - @debit.sum(:balance).abs

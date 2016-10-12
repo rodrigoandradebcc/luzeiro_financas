@@ -62,11 +62,13 @@ class OperationsController < ApplicationController
   # DELETE /operations/1
   # DELETE /operations/1.json
   def destroy
+    
     @operation.destroy
-    respond_to do |format|
-      format.html { redirect_to operations_url, notice: 'Operation was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      respond_to do |format|
+        format.html { redirect_to operations_url, notice: 'Operação removida, valores atualizados com sucesso.' }
+        format.json { head :no_content }
+      end
+    
   end
 
   private

@@ -13,6 +13,20 @@ class ResultsController < ApplicationController
   # GET /results/1
   # GET /results/1.json
   def show
+        @init_date = @result.init.strftime("%d/%m/%Y")
+        @final_date = @result.final.strftime("%d/%m/%Y") 
+        
+        @credit_accounts = @result.analytic_accounts.includes(:credits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
+        where(account_types: {code: [3]}).where(operations: {release_date: @result.init..@result.final}).
+        where.not(second_synthetic_accounts: {code: [2]})
+        
+       
+        @debit_accounts = @result.analytic_accounts.includes(:debits, second_synthetic_account: {synthetic_account: {account: :account_type}}).
+        where(account_types: {code: [4,5]}).
+        where(operations: {release_date: @result.init..@result.final})
+        @credit_value = @credit_accounts.sum(:balance).abs
+      @debit_value = @debit_accounts.sum(:balance).abs
+
   end
 
   def selecionar_periodo

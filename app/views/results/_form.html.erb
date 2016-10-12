@@ -8,7 +8,7 @@
  </div>
  <% end %>
  <% if @credit_accounts %>
-<% @credit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
+  <% @credit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
     <div class="panel panel-default">
      <div class="row">
       <div class="col-md-6">
@@ -136,7 +136,7 @@
  
 
   <% end %>
-  <table class="table">
+  <!-- <table class="table">
     <thead>
       <tr>
      
@@ -155,7 +155,7 @@
       </tr>
     </tbody>
     
-  </table>
+  </table> -->
   <% end %>
   
 
@@ -191,7 +191,7 @@
 
   
   <div class="actions">
-  <%= f.submit "Enviar", class: "btn btn-success" %>
+  <%= f.submit "Lançar",data: { confirm: 'Você tem certeza que deseja lançar este resultado? Todas as contas selecionadas serão zeradas.' }, class: "btn btn-success" %>
   <br>
   <br>
  
