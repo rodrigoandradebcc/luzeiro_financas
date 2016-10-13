@@ -27,13 +27,16 @@
           <td><%= result.kind %></td>
           <td><%= number_to_currency(result.balance, unit: "R$", separator: ",", delimiter: ".") %></td>
           <td>
+            <%= button_to "Exibir", result_path(@result), method: :get %>
+          </td>
+          <td>
             <%= button_to result, method: :delete, data: { confirm: 'Você tem certeza que deseja remover este resultado? Todas as operações serão desfeitas.' } do%>
                   Remover<i class="icon-remove">
                 <% end %>
           </td>
           </td>
-          <td>                         
-            
+          <td>
+
         </tr>
         <% end %>
       </tbody>
