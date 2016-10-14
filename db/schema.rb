@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160911012146) do
+ActiveRecord::Schema.define(version: 20161014145210) do
 
   create_table "account_types", force: :cascade do |t|
     t.integer  "code",                limit: 4
@@ -114,6 +114,13 @@ ActiveRecord::Schema.define(version: 20160911012146) do
 
   add_index "results", ["analytic_account_id"], name: "index_results_on_analytic_account_id", using: :btree
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "type",       limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "second_synthetic_accounts", force: :cascade do |t|
     t.integer  "code",                 limit: 4
     t.string   "name",                 limit: 255
@@ -151,10 +158,12 @@ ActiveRecord::Schema.define(version: 20160911012146) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.integer  "role_id",                limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
   add_foreign_key "account_types", "chart_of_accounts"
   add_foreign_key "accounts", "account_types"
@@ -166,4 +175,5 @@ ActiveRecord::Schema.define(version: 20160911012146) do
   add_foreign_key "results", "analytic_accounts"
   add_foreign_key "second_synthetic_accounts", "synthetic_accounts"
   add_foreign_key "synthetic_accounts", "accounts"
+  add_foreign_key "users", "roles"
 end

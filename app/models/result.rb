@@ -8,58 +8,83 @@ class Result < ActiveRecord::Base
 
   after_initialize  :set_result_attributes, on: [:create]
 
-  
 
-	def set_result_attributes
-		if new_record?
-	            @init_date = init.strftime("%d/%m/%Y")
-        		@final_date = final.strftime( "%d/%m/%Y")
-		self.name = "Resultado do Exercício em: #{@init_date} à #{@final_date}"
-		@debit =  AnalyticAccount.result_accounts self.init , self.final, "D"
-		@credit = AnalyticAccount.result_accounts self.init , self.final, "C"
-		self.balance = @credit.sum(:balance).abs - @debit.sum(:balance).abs
-
-		if self.balance < 0
-			self.kind = "D"
-		else
-			self.kind = "C"
-			
-		end
+  validate :operation_needs_authorization
 
 
-		@account_type = AccountType.find_or_create_by!(code: 2, name: "Passivo")
+def operation_needs_authorization
+    analytic_accounts.each do |a|
+    	a.credits.each do |c|
+  	  if c.unauthorized?
+        	    errors.add("Operação pendente:", "Operação #{c.id} precisa ser autorizada antes de ser lançada")	
+      	  end	
+    	end
+    	a.debits.each do |d|
+  	  if d.unauthorized?
+        	    errors.add("Operação pendente:", "Operação #{d.id} precisa ser autorizada antes de ser lançada")	
+      	  end	
+    	end
+    end
+end
+ 
 
-		@account = Account.find_or_create_by!(account_type: @account_type, code: 2)
+  def set_result_attributes
+  	if new_record?
+  		@init_date = init.strftime("%d/%m/%Y")
+  		@final_date = final.strftime( "%d/%m/%Y")
+  		self.name = "Resultado do Exercício em: #{@init_date} à #{@final_date}"
+  		@debit =  AnalyticAccount.result_accounts self.init , self.final, "D"
+  		@credit = AnalyticAccount.result_accounts self.init , self.final, "C"
+  		self.balance = @credit.sum(:balance).abs - @debit.sum(:balance).abs
 
-		@synthetic_account = SyntheticAccount.find_or_create_by!(account: @account, code: 2)
+  		if self.balance < 0
+  			self.kind = "D"
+  		else
+  			self.kind = "C"
 
-		@ssyn = SecondSyntheticAccount.find_or_create_by!( synthetic_account: @synthetic_account, code: 2)
+  		end
 
-		if @ssyn.analytic_accounts.any?
-		self.analytic_account = AnalyticAccount.new( second_synthetic_account: @ssyn, name: self.name, code: @ssyn.analytic_accounts.last.code.next, description: self.description)
 
-		else
-		self.analytic_account = AnalyticAccount.new(second_synthetic_account: @ssyn, name: self.name, code: 1, description: self.description)
-		end
+  		@account_type = AccountType.find_or_create_by!(code: 2, name: "Passivo")
 
-		self.analytic_accounts = AnalyticAccount.result_accounts self.init, self.final, "BOTH"
-		
-		self.analytic_accounts.each do |a|
-			if a.second_synthetic_account.synthetic_account.account.account_type.code == 3
-				 self.operations <<  Operation.new(release_date: Time.now, value: a.balance.abs, retrieve_account: a, release_account: self.analytic_account, description: "Operação de fechamento do exercício em #{self.analytic_account.name}" )
-				
-			elsif a.second_synthetic_account.synthetic_account.account.account_type.code == 4 or a.second_synthetic_account.synthetic_account.account.account_type.code == 5
-				 self.operations << Operation.new(release_date: Time.now,value: a.balance.abs, retrieve_account: self.analytic_account, release_account: a, description: "Operação de fechamento do exercício em #{self.analytic_account.name}" )
-				 
-			else  
-				false			
-			end
-		end
-		
-		self.balance = self.balance.abs
-		end
-	end
+  		@account = Account.find_or_create_by!(account_type: @account_type, code: 2)
 
+  		@synthetic_account = SyntheticAccount.find_or_create_by!(account: @account, code: 2)
+
+  		@ssyn = SecondSyntheticAccount.find_or_create_by!( synthetic_account: @synthetic_account, code: 2)
+
+  		if @ssyn.analytic_accounts.any?
+  			self.analytic_account = AnalyticAccount.new( second_synthetic_account: @ssyn, name: self.name, code: @ssyn.analytic_accounts.last.code.next, description: self.description)
+
+  		else
+  			self.analytic_account = AnalyticAccount.new(second_synthetic_account: @ssyn, name: self.name, code: 1, description: self.description)
+  		end
+
+  		self.analytic_accounts = AnalyticAccount.result_accounts self.init, self.final, "BOTH"
+
+  		self.analytic_accounts.each do |a|
+  			if a.second_synthetic_account.synthetic_account.account.account_type.code == 3
+  				self.operations <<  Operation.new(release_date: Time.now, value: a.balance.abs, retrieve_account: a, release_account: self.analytic_account, description: "Operação de fechamento do exercício em #{self.analytic_account.name}" )
+
+  			elsif a.second_synthetic_account.synthetic_account.account.account_type.code == 4 or a.second_synthetic_account.synthetic_account.account.account_type.code == 5
+  				self.operations << Operation.new(release_date: Time.now,value: a.balance.abs, retrieve_account: self.analytic_account, release_account: a, description: "Operação de fechamento do exercício em #{self.analytic_account.name}" )
+
+  			else  
+  				false			
+  			end
+  		end
+
+  		self.balance = self.balance.abs
+  	end
+  end
+
+  # def account_to_authorize
+  #   self.analytic_accounts.each do |a| 
+  #     if a.old_balance.nil?
+      	
+  #     end
+  #   end	
+  # end
 
 
   	

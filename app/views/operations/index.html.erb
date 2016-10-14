@@ -48,10 +48,10 @@
               <td>
                 <%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".")  %>
               </td>
-                <% if op.operational %>
-                    <td><%= link_to 'Lançado', result_path(op.operational.id), class: "btn-success btn-sm" %>
-                  <% else %>
-                    <td><%= link_to 'Desfazer', op, method: :delete, data: { confirm: 'Você tem certeza que deseja desfazer a operação? O valor da operação será creditado/debitado nas respectivas contas.' }, class: "btn-danger btn-sm" %></td>
+                <% unless op.authorized? %>
+                  <td><%= link_to 'Autorizar', authorize_operation_path(op.id), method: :post, class: "btn-primary btn-sm" %></td>
+                  <td><%= link_to 'Desfazer', op, method: :delete, data: { confirm: 'Você tem certeza que deseja desfazer a operação? O valor da operação será creditado/debitado nas respectivas contas.' }, class: "btn-danger btn-sm" %></td>
+                  
                 <% end %>
             </tr>
           </tbody>

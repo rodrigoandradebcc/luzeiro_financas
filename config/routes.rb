@@ -3,27 +3,33 @@ Rails.application.routes.draw do
   resources :second_synthetic_accounts
   resources :analytic_accounts
   resources :synthetic_accounts
-  resources :operations, except: [:edit, :update]
+  resources :operations, except: [:edit, :update] 
   resources :accounts
   resources :account_types
   resources :chart_of_accounts
   resources :companies
   resources :form_wizard
+  
+  devise_for :users
+
+  authenticated :user do
+      root 'welcome#dashboard', as: :authenticated_root
+  end
+
   get 'checar_data', to: 'results#check_valid_date', as: :check_valid_date
   get 'selecionar_periodo', to: 'results#selecionar_periodo', as: :result_search
   get 'control_users/index'
-  devise_for :users
   get 'welcome/index'
   get 'livro_diario', to: 'operations#index', as: :ledger
   get 'cadastrar/contas', to: 'form_wizard#index', as: :wizard_index
   resources :enterprises
-  
+  post 'authorize_operation/:id', to: 'operations#authorize_operation', as: :authorize_operation
   get 'analytic_ledger/:id', to: 'analytic_accounts#analytic_ledger', as: :analytic_ledger
- 
+  get 'home', to: 'home#visitor', as: :visitors
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'home#visitors'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,6 +1,8 @@
 class OperationsController < ApplicationController
   include OperationsHelper
-  before_action :set_operation, only: [:show, :edit, :update,  :destroy]
+  before_action :set_operation, only: [:show, :edit, :update,  :destroy, :authorize_operation]
+
+
 
 
   # GET /operations
@@ -69,6 +71,15 @@ class OperationsController < ApplicationController
         format.json { head :no_content }
       end
     
+  end
+
+  # POST /operation
+  def authorize_operation
+      @operation.authorize
+      respond_to do |format|
+        format.html { redirect_to operations_url, notice: 'Operação Autorizada, valores atualizados com sucesso.' }
+        format.json { head :no_content }
+      end
   end
 
   private

@@ -7,7 +7,8 @@ class Operation < ActiveRecord::Base
   validates :value, :release_date, presence: true
   validate :only_one_account_per_select_box
   before_destroy :undo_last_operation
-  after_save :create_balance
+  after_save :is_operational?
+  # after_save :authorize
 
 
   def only_one_account_per_select_box
@@ -26,49 +27,53 @@ class Operation < ActiveRecord::Base
     where(release_date: date1..date2)
   end
 
-   # desfaz operação anterior e as contas
-   # antes de atualizar a operação
+  def is_operational?
+      self.operational ? authorize : false
+          
+  end
+   
   
-
-  # atualiza os old_balances e as contas após atualizar a operação
   
-  private
-
-  def create_balance
+  
+  def authorize
     unless destroyed?
+        retrieve_value = self.retrieve_account.balance + self.value 
+        release_value = self.release_account.balance - self.value
+        
+        # if self.release_account.result
+        #    self.release_account.update(balance: release_value.abs)
+           
+        # elsif self.retrieve_account.result
+        #    self.release_account.update(balance: release_value) 
+        #    self.retrieve_account.update(balance: retrieve_value.abs) 
+        # else
+          self.release_account.update(balance: release_value) 
+          self.retrieve_account.update(balance: retrieve_value) 
+        # end      
+        
+        retrieve_ob  = OldBalance.new(operation: self, analytic_account: self.retrieve_account, value:  retrieve_value)
+        release_ob = OldBalance.new(operation: self, analytic_account: self.release_account, value: release_value)  
+        retrieve_ob.save!
+        release_ob.save!
       
-      retrieve_value = self.retrieve_account.balance + self.value 
-      release_value = self.release_account.balance - self.value
-      
-      # if self.release_account.result
-      #    self.release_account.update(balance: release_value.abs)
-         
-      # elsif self.retrieve_account.result
-      #    self.release_account.update(balance: release_value) 
-      #    self.retrieve_account.update(balance: retrieve_value.abs) 
-      # else
-        self.release_account.update(balance: release_value) 
-        self.retrieve_account.update(balance: retrieve_value) 
-      # end      
-      
-      retrieve_ob  = OldBalance.new(operation: self, analytic_account: self.retrieve_account, value:  retrieve_value)
-      release_ob = OldBalance.new(operation: self, analytic_account: self.release_account, value: release_value)  
-      retrieve_ob.save!
-      release_ob.save!
     end
   end
 
+  def authorized?
+      self.old_balances.any? ? true : false      
+  end
+  def unauthorized?
+      self.old_balances.empty? ? true : false
+  end
+
+  private
   def undo_last_operation
-    # if self.operational
-    #   retrieve_balance =  self.retrieve_account.balance + self.value
-    #   release_balance = self.release_account.balance - self.value
-    # else
+    if authorized?
       retrieve_balance =  self.retrieve_account.balance - self.value
       release_balance = self.release_account.balance + self.value
-    # end
-   
-    self.retrieve_account.update(balance: retrieve_balance)
-    self.release_account.update(balance: release_balance)
+      self.retrieve_account.update(balance: retrieve_balance)
+      self.release_account.update(balance: release_balance)
+    end
   end
 
   # def validate_value release_ob=nil, retrieve_ob=nil

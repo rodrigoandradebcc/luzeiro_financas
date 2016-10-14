@@ -1,0 +1,159 @@
+
+<div class="row">
+
+ <div class="col-md-12"><h1 class="page-header text-center"><strong>Livro Razão Resultado</strong></h1></div>
+ <% if @init_date and @final_date %>
+ <div class="col-md-12 "><h4 class="page-header"><strong >Período: </strong><%= @init_date %> à <%= @final_date %></h4></div>
+
+ </div>
+ <% end %>
+ <% if @credit_accounts %>
+  <% @credit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
+    <div class="panel panel-default">
+     <div class="row">
+      <div class="col-md-6">
+        <strong>Conta Contábil: <%= anal.second_synthetic_account.synthetic_account.account.account_type.code %>.<%= anal.second_synthetic_account.synthetic_account.account.code %>.<%= anal.second_synthetic_account.synthetic_account.code %>.<%= anal.second_synthetic_account.code %>.<%= anal.code %></strong>
+      </div>
+      <div class="col-md-6">
+        <strong><%= anal.name %></strong>
+      </div>
+      </div>
+      <table class="table ">
+        <thead>
+          <tr>
+            
+            <th>Data</th>
+            <th>Número da Operação</th>
+            
+            <th>Contrapartida</th>
+            <th>Histórico</th>
+            <th>Débito</th>
+            <th>Crédito</th>
+            <th>Saldo</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        
+        <%anal.credits.sort_by{|op| op.release_date }.each do |op|  %>
+        <tbody>
+
+          <tr>
+
+            <td><%= op.release_date.strftime("%d/%m/%Y") %></td>
+            <td><%= op.id %></td>
+            <% if op.release_account.eql?(anal)%>
+            
+            <td><%= op.retrieve_account.name %></td>
+            <% else %>
+            
+            <td><%= op.release_account.name %></td>
+            <% end %>
+            <td><%= op.description %></td>
+            <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.retrieve_account.eql?(anal) %></td>
+            <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.release_account.eql?(anal) %></td>
+            
+            <td><%= anal.old_balance(op).value unless anal.nil? or anal.old_balance(op).nil? %></td>
+
+    
+          </tr>
+                  
+        </tbody>
+        <% end %>
+
+          <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
+          <strong><%=number_to_currency(anal.balance, unit: "R$", separator: ",", delimiter: ".") %></strong></td></tr>
+        </table> 
+    </div>
+<% end %>
+<% end %>
+
+
+<% if @debit_accounts %>
+<% @debit_accounts.sort_by{|a| a.id}.reverse.each  do |anal| %>
+
+  
+    <div class="panel panel-default">
+     <div class="row">
+      <div class="col-md-6">
+        <strong>Conta Contábil: <%= anal.second_synthetic_account.synthetic_account.account.account_type.code %>.<%= anal.second_synthetic_account.synthetic_account.account.code %>.<%= anal.second_synthetic_account.synthetic_account.code %>.<%= anal.second_synthetic_account.code %>.<%= anal.code %></strong>
+      </div>
+      <div class="col-md-6">
+        <strong><%= anal.name %></strong>
+      </div>
+      </div>
+      <table class="table ">
+        <thead>
+          <tr>
+            
+            <th>Data</th>
+            <th>Número da Operação</th>
+            
+            <th>Contrapartida</th>
+            <th>Histórico</th>
+            <th>Débito</th>
+            <th>Crédito</th>
+            <th>Saldo</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        
+        
+
+         <%anal.debits.sort_by{|op| op.release_date }.each do |op|  %>
+        <tbody>
+
+          <tr>
+
+            <td><%= op.release_date.strftime("%d/%m/%Y") %></td>
+            <td><%= op.id %></td>
+            <% if op.release_account.eql?(anal)%>
+            
+            <td><%= op.retrieve_account.name %></td>
+            <% else %>
+            
+            <td><%= op.release_account.name %></td>
+            <% end %>
+            <td><%= op.description %></td>
+            <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.retrieve_account.eql?(anal) %></td>
+            <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.release_account.eql?(anal) %></td>
+            <td><%= anal.old_balance(op).value unless anal.nil? or anal.old_balance(op).nil?  %></td>
+
+      
+          </tr>
+                  
+        </tbody>
+        <% end %>
+        
+
+          
+          <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
+          <strong><%=number_to_currency(anal.balance, unit: "R$", separator: ",", delimiter: ".")  %></strong></td></tr>
+        </table> 
+     
+
+    </div>
+    
+ 
+
+  <% end %>
+  <!-- <table class="table">
+    <thead>
+      <tr>
+     
+
+        <th > Total de Crédito</th>  
+        <th > Total de Debito </th>
+        <th>Resultado</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= number_to_currency(@credit_value, unit: "R$", separator: ",", delimiter: ".") %></td>
+        <td><%=number_to_currency(@debit_value, unit: "R$", separator: ",", delimiter: ".")  %></td>
+        <td ><%=number_to_currency(@balance, unit: "R$", separator: ",", delimiter: ".")  %> <strong><%= @result.kind %></strong></td>
+      </tr>
+    </tbody>
+    
+  </table> -->
+  <% end %>

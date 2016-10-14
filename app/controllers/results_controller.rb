@@ -112,6 +112,10 @@ end
     end
   end
 
+  def unauthorized_operation
+          
+  end
+
   private
    
     # Use callbacks to share common setup or constraints between actions.

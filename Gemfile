@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 gem 'sass-rails', '~> 5.0.1'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'devise'
+gem "pundit"
 gem 'font-awesome-sass', '~> 4.6.2'
 gem 'bootstrap-datepicker-rails'
 
