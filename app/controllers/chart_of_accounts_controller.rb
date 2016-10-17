@@ -1,4 +1,5 @@
 class ChartOfAccountsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_chart_of_account, only: [:show, :edit, :update, :destroy]
 
   # GET /chart_of_accounts

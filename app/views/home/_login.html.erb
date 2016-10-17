@@ -1,6 +1,8 @@
+
 <p class="lead">Faça o login para continuar a utilizar o Luzeiro Finanças</p>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  
+<%=  form_for(:user, :url => session_path(:user)) do |f| %>
+
+
 <fieldset>
   <%= f.text_field :login, autofocus: true, class: "form-control input-lg", placeholder: "Nome de Usuário ou Email" %>
   
@@ -23,4 +25,3 @@
 
 </fieldset>
 <% end %>
-

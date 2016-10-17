@@ -1,4 +1,5 @@
 class SecondSyntheticAccountsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_second_synthetic_account, only: [:show, :edit, :update, :destroy]
 
   # GET /second_synthetic_accounts

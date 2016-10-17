@@ -13,7 +13,7 @@
 
 	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery-ui.min.js"%>
 	<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"%>
-	<%= javascript_include_tag "dist/jquery.maskMoney.min.js"%>
+	
 	</head>
 <body>
 
@@ -36,6 +36,7 @@
 					<li><%= link_to "Livro Diário", ledger_path%></li>
 					<li><%= link_to "Livro Razão", root_path %></li>
 					<li><%= link_to "Resultados", results_path %></li>
+					<li><%= link_to 'Sair' , destroy_user_session_path, method: :delete, class: "pull-right" if user_signed_in? %></li>
 				</ul>
 				
 			</div>

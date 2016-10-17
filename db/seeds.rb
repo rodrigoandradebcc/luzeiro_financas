@@ -5,8 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+admin = Role.new(name: "Administrador", code: 1)
+func = Role.new(name: "Funcionário", code: 2)
 
+admin.save
+func.save
 
+u = User.new(username: "luzeiro", password: "luzeiroadmin123", email: "luzeiro@luzeiro.com",password_confirmation:"luzeiroadmin123", role: Role.find_by({code: 1}))
+u.save
+u = User.new(username: "edu",email: "edu@luzeiro.com", password: "luzeiro123", password_confirmation:"luzeiro123", role: Role.find_by({code: 2}))
+u.save
 c = Company.new(id: 1, name: "Luzeiro Navegação")
 c.save
 cc = ChartOfAccount.new(id: 1, title: "Balanço Patrimonial", company: c)

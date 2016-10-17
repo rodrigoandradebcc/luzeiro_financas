@@ -1,4 +1,5 @@
 class AnalyticAccountsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_analytic_account, only: [:show, :edit, :update, :destroy, :analytic_ledger]
 
   # GET /analytic_accounts

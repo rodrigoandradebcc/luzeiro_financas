@@ -1,6 +1,6 @@
 
 class ResultsController < ApplicationController
- 
+ before_action :authenticate_user!
   before_action :set_result, only: [ :show, :edit, :update, :destroy]
   before_action :set_debit_accounts, :set_credit_accounts, only: [:new]
 

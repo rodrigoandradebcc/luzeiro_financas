@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
-
-	def visitor
+layout 'devise'
+	def visitors
+		
+	end
+	def password
 		
 	end
 end

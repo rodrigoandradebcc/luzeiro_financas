@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
-  def dashboard
+  before_action :authenticate_user!
+  def index
   
   	@analytic_accounts = AnalyticAccount.paginate(:page => params[:page], :per_page => 20  ).
       includes(second_synthetic_account: {synthetic_account: {account: :account_type}}).

@@ -1,9 +1,8 @@
 class OperationsController < ApplicationController
   include OperationsHelper
+
+  before_action :authenticate_user!
   before_action :set_operation, only: [:show, :edit, :update,  :destroy, :authorize_operation]
-
-
-
 
   # GET /operations
   # GET /operations.json
