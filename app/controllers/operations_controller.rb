@@ -34,6 +34,7 @@ class OperationsController < ApplicationController
   def create
     respond_to do |format|
       @operation = Operation.new(operation_params)
+
       if @operation.save
          format.html { redirect_to root_path, notice: 'Operation was successfully created.' }
         
@@ -63,7 +64,7 @@ class OperationsController < ApplicationController
   # DELETE /operations/1
   # DELETE /operations/1.json
   def destroy
-    
+    authorize @operation
     @operation.destroy
       respond_to do |format|
         format.html { redirect_to operations_url, notice: 'Operação removida, valores atualizados com sucesso.' }
@@ -74,7 +75,9 @@ class OperationsController < ApplicationController
 
   # POST /operation
   def authorize_operation
+      authorize @operation
       @operation.authorize
+
       respond_to do |format|
         format.html { redirect_to operations_url, notice: 'Operação Autorizada, valores atualizados com sucesso.' }
         format.json { head :no_content }

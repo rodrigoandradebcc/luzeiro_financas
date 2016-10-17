@@ -32,4 +32,8 @@ after_initialize :set_default_role, :if => :new_record?
       end
     end
   end
+
+  def admin?
+      self.role.code == 1
+  end
 end

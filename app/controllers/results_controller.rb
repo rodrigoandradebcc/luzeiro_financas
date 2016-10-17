@@ -7,12 +7,22 @@ class ResultsController < ApplicationController
   # GET /results
   # GET /results.json
   def index
-    @results = Result.all
+    @results = policy_scope(Result)
+
+    if @results.nil?
+      respond_to do |format|
+        format.html { redirect_to welcome_path, notice: 'Não autorizado.' }
+        
+      end
+    end
+
+
   end
 
   # GET /results/1
   # GET /results/1.json
   def show
+        authorize @result
         @init_date = @result.init.strftime("%d/%m/%Y")
         @final_date = @result.final.strftime("%d/%m/%Y") 
         
@@ -56,11 +66,12 @@ end
 
   # GET /results/new
   def new
+
       @init_date = Date.strptime(params[:date_init], "%d/%m/%Y")
       @final_date = Date.strptime(params[:date_final], "%d/%m/%Y") 
 
       @result = Result.new(init: params[:date_init], final: params[:date_final])
-
+      authorize @result
       @credit_value = @credit_accounts.sum(:balance).abs
       @debit_value = @debit_accounts.sum(:balance).abs
       @balance = @credit_value.abs  -  @debit_value.abs
@@ -74,7 +85,7 @@ end
   # POST /results.json
   def create
     @result = Result.new(result_params)
-
+    authorize @result
       respond_to do |format|
         if  @result.save
           

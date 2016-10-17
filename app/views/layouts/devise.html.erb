@@ -23,8 +23,9 @@
       <div class="row">
        
         <div class="col-lg-12 text-center v-center">
-          <h4 class="notice"><%= notice %></h4>
-      	<h4 class="alert"><%= alert %></h4>
+          	<% flash.each do |name, msg| %>
+    	  <%= content_tag :div, msg, class: "alert alert-info" %>
+  	<% end %>
           <h1>Bem vindo de volta</h1>
          
           

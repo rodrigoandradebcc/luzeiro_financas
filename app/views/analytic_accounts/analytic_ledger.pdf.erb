@@ -29,7 +29,7 @@
      <th><div class="panel-heading text-center"><strong>Livro Razão</strong></div></th>
    </tr>
 
-     <table class="table table-bordered" cellspacing = 15>        <!-- MOSTRAR TODAS AS CONTAS PAI  -->
+     <table class="table1">        <!-- MOSTRAR TODAS AS CONTAS PAI  -->
        <p class = "page-header text-right font-size"><strong> Conta contabil:
          <%= @analytic_account.second_synthetic_account.synthetic_account.account.account_type.code %>.
          <%= @analytic_account.second_synthetic_account.synthetic_account.account.code %>
@@ -37,49 +37,48 @@
          .<%= @analytic_account.second_synthetic_account.code %>
          .<%= @analytic_account.code %></strong> <span style ="padding-left:100px"><%= @analytic_account.name %></span></p>
      <thead>
-         <tr>
-           <th>Data</th>
-           <th>Contrapartida</th>
-           <th>Histórico</th>
-           <th>Número da Operação</th>
-           <th>Débito</th>
-           <th>Crédito</th>
-           <th>Saldo</th>
+         <tr class="linha">
+           <th class="borda">Data</th>
+           <th class="borda">Contrapartida</th>
+           <th class="borda">Histórico</th>
+           <th class="borda">Número da Operação</th>
+           <th class="borda">Débito</th>
+           <th class="borda">Crédito</th>
+           <th class="borda">Saldo</th>
          </tr>
        </thead>
        <% @operations.sort_by{|task| task.id}.each do |op| %>
        <tbody >
-           <tr class="conta">
-           <td><%= op.release_date.strftime("%d/%m/%Y") %></td>
+           <tr>
+           <td class="borda1"><%= op.release_date.strftime("%d/%m/%Y") %></td>
          <!--   -->
            <% if op.release_account.eql?(@analytic_account)%>
            <!-- codigo da contra partida-->
-           <td align="center"><%= op.retrieve_account.second_synthetic_account.synthetic_account.account.account_type.code %>.
+           <td class="borda1"><%= op.retrieve_account.second_synthetic_account.synthetic_account.account.account_type.code %>.
            <%= op.retrieve_account.second_synthetic_account.synthetic_account.account.code %>
            .<%= op.retrieve_account.second_synthetic_account.synthetic_account.code %>
            .<%= op.retrieve_account.second_synthetic_account.code %>
            .<%= op.retrieve_account.code %></td>
            <% else %>
            <!-- codigo da contra partida-->
-           <td align="center"><%= op.release_account.second_synthetic_account.synthetic_account.account.account_type.code %>.
-           <%= op.release_account.second_synthetic_account.synthetic_account.account.code %>
+           <td class="borda1"><%= op.release_account.second_synthetic_account.synthetic_account.account.account_type.code %>.
+            <%= op.release_account.second_synthetic_account.synthetic_account.account.code %>
            .<%= op.release_account.second_synthetic_account.synthetic_account.code %>
            .<%= op.release_account.second_synthetic_account.code %>
            .<%= op.release_account.code %></td>
            <% end %>
-           <td><%= op.description %></td>
-           <td align= "center"><%= op.id %></td>
-           <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.retrieve_account.eql?(@analytic_account) %></td>
-           <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.release_account.eql?(@analytic_account) %></td>
-           <td><%=number_to_currency(OldBalance.find_by(operation: op,
+           <td class="borda1"><%= op.description %></td>
+           <td class="borda1"><%= op.id %></td>
+           <td class="borda1"><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.retrieve_account.eql?(@analytic_account) %></td>
+           <td class="borda1"><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.release_account.eql?(@analytic_account) %></td>
+           <td class="borda1"><%=number_to_currency(OldBalance.find_by(operation: op,
             analytic_account: @analytic_account).value, unit: "R$", separator: ",", delimiter: ".") %></td>
 
          </tr>
          </tbody>
        <% end %>
-       <tr><tr><tr><tr><tr><tr><td><td><td><td><td><td><strong>Total: </strong><td>
-       <strong class="total"><%= @analytic_account.balance%></strong></td></tr>
          </table>
+         <strong class="total">Total:<%= number_to_currency(balance = @analytic_account.balance, unit: "R$", separator: ",", delimiter:".")%></strong>
    </div>
  </div>
 </div>

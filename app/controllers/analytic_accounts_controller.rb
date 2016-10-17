@@ -6,7 +6,7 @@ class AnalyticAccountsController < ApplicationController
   # GET /analytic_accounts.json
   def index
     @analytic_accounts = AnalyticAccount.all
-    
+
 
   end
 
@@ -18,10 +18,10 @@ class AnalyticAccountsController < ApplicationController
       format.html
       format.pdf do
         render pdf: "file_name"   # Excluding ".pdf" extension.
-      end
-    end
   
 
+      end
+    end
   end
 
 
@@ -33,8 +33,8 @@ class AnalyticAccountsController < ApplicationController
     @operations = Operation.includes(:retrieve_account).where(retrieve_account:
                                                              @analytic_account)
     @operations += Operation.includes(:release_account).where(release_account: @analytic_account)
-    
- 
+
+
   end
 
   # GET /analytic_accounts/new
@@ -54,7 +54,7 @@ class AnalyticAccountsController < ApplicationController
     respond_to do |format|
       if @analytic_account.save
         format.html { redirect_to wizard_index_path, notice: 'Analytic account was successfully created.' }
-        
+
       else
         format.html { render :new }
         format.json { render json: @analytic_account.errors, status: :unprocessable_entity }
@@ -97,5 +97,5 @@ class AnalyticAccountsController < ApplicationController
       params.require(:analytic_account).permit(:code, :name, :description, :balance, :second_synthetic_account_id)
     end
 
-    
+
 end
