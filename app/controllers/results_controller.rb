@@ -11,7 +11,7 @@ class ResultsController < ApplicationController
 
     if @results.nil?
       respond_to do |format|
-        format.html { redirect_to welcome_path, notice: 'Não autorizado.' }
+        format.html { redirect_to dashboard_path, notice: 'Não autorizado.' }
         
       end
     end

@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-sm-12 offset-sm-3 col-md-12 offset-md-2 main">
+          <h1>Dashboard</h1>
+          <br>
+          <div class="row placeholders">
+            <div class="col-md-6 col-xs-6 col-sm-6 placeholder">
+              <%= link_to ledger_path do %>
+                <i class="fa fa-object-group aumentaicon" aria-hidden="true"></i>
+              <% end %>
+                
+              <h3>Veja o detalhamento de suas contas</h3>
+              
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6 placeholder">
+              <%= link_to new_operation_path do %>
+                <i class="fa fa-tasks aumentaicon" aria-hidden="true"></i>
+              <% end %>
+                
+              <h3>Crie operações entre suas contas</h3>
+              
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6 placeholder">
+              <%= link_to wizard_index_path do %>
+                <i class="fa fa-briefcase aumentaicon" aria-hidden="true"></i>
+              <% end %>
+                
+              <h3>Crie e gerencie suas contas</h3>
+              
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6 placeholder">
+              <%= link_to results_path do %>
+                <i class="fa fa-check-square-o aumentaicon" aria-hidden="true"></i>
+              <% end %>
+                
+              <h3>Lance resultados e tenha um detalhamento maior de suas atividades</h3>
+              
+            </div>
+          </div>          
+        </div>
+    </div>
+  </div>
+</div>

@@ -207,3 +207,7 @@ span.round-tab:hover {
     .apple_pagination a:hover, .apple_pagination a:focus {
       text-decoration: underline; }
 
+
+.big-icon {
+    font-size: 32px;
+}

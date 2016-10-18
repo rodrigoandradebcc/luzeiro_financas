@@ -18,7 +18,7 @@ devise_for :users, controllers: {
       }
 
   authenticated :user do
-      root 'welcome#index', as: :authenticated_root
+      root 'welcome#dashboard', as: :authenticated_root
   end
 
   
@@ -26,8 +26,9 @@ devise_for :users, controllers: {
   get 'checar_data', to: 'results#check_valid_date', as: :check_valid_date
   get 'selecionar_periodo', to: 'results#selecionar_periodo', as: :result_search
   get 'control_users/index'
-  get 'welcome', to: 'welcome#index', as: :welcome
-  get 'livro_diario', to: 'operations#index', as: :ledger
+  get 'dashboard', to: 'welcome#dashboard', as: :dashboard
+  get 'livro_diario', to: 'operations#index', as: :daily_ledger
+  get 'livro_razao', to: 'ledger#index', as: :ledger
   get 'cadastrar/contas', to: 'form_wizard#index', as: :wizard_index
   resources :enterprises
   post 'authorize_operation/:id', to: 'operations#authorize_operation', as: :authorize_operation

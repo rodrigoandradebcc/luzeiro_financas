@@ -36,7 +36,7 @@ class OperationsController < ApplicationController
       @operation = Operation.new(operation_params)
 
       if @operation.save
-         format.html { redirect_to root_path, notice: 'Operation was successfully created.' }
+         format.html { redirect_to operations_path, notice: 'Operação criada com sucesso. Necessita ser autorizada.' }
         
       else
         format.html { render :new }
@@ -67,7 +67,7 @@ class OperationsController < ApplicationController
     authorize @operation
     @operation.destroy
       respond_to do |format|
-        format.html { redirect_to operations_url, notice: 'Operação removida, valores atualizados com sucesso.' }
+        format.html { redirect_to operations_url, notice: 'Operação removida, valores atualizados.' }
         format.json { head :no_content }
       end
     
