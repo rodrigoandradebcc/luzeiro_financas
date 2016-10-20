@@ -2,16 +2,16 @@
 <html>
 <head>
 	<title>LuzeiroFinancao</title>
-	<%= include_gon(init: true) %>
+	
 
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
 
-	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
 
 	<%= csrf_meta_tags %>
 
-	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery-ui.min.js"%>
+	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery-ui.min.js"%>	
 	<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"%>	
 	</head>
 	<body>
@@ -56,11 +56,11 @@
 	
 	<div class="container-fluid">
 	<div class="row">
-	<div class="espaco">
-	<% flash.each do |name, msg| %>
-    	  <%= content_tag :div, msg, class: "alert alert-info" %>
-  	<% end %>
-	<%= yield %>
+		<div class="espaco">
+		<% flash.each do |name, msg| %>
+	    	  <%= content_tag :div, msg, class: "alert alert-info" %>
+	  	<% end %>
+		<%= yield %>
 	</div>
 	</div>
 	</div>

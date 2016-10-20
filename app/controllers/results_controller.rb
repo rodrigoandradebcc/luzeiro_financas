@@ -22,7 +22,7 @@ class ResultsController < ApplicationController
   # GET /results/1
   # GET /results/1.json
   def show
-        authorize @result
+        # authorize @result
         @init_date = @result.init.strftime("%d/%m/%Y")
         @final_date = @result.final.strftime("%d/%m/%Y") 
         

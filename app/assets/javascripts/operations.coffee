@@ -2,13 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on 'ready page:load', ->
-  $(".simple-test").select2();
-  # Configuração padrão.
+$(document).on "turbolinks:load", -> 
+  $('.simple-test').select2()
   $('#valor').maskMoney
     decimal: '.'
     thousands: ''
   $('#operation_release_date').mask '00/00/0000'
   return
-
-

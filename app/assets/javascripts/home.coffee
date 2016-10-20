@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-$(document).on 'ready page:load', ->
+$(document).on "turbolinks:load", -> 
   setTimeout (->
     $('.alert').slideUp()
     return
