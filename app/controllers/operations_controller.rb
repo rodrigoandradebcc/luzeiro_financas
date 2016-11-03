@@ -24,6 +24,7 @@ class OperationsController < ApplicationController
 
     end
   end
+  end
 
   # GET /operations/1
   # GET /operations/1.json
