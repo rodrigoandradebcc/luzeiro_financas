@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>LuzeiroFinancao</title>
-	
+
 
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
@@ -11,8 +11,8 @@
 
 	<%= csrf_meta_tags %>
 
-	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery-ui.min.js"%>	
-	<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"%>	
+	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery-ui.min.js"%>
+	<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"%>
 	</head>
 	<body>
 	  <nav class="navbar  navbar-inverse  navbar-fixed-top">
@@ -31,44 +31,38 @@
 
 	      <div class="navbar-collapse collapse">
 	        <ul class="nav navbar-nav navbar-center">
-	          
+
 	          <li class="dropdown">
-	            <a href="#" class="dropdown-toggle"
-		  data-toggle="dropdown"> Cadastros
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Cadastros
 	            <b class="caret"> </b>
 	            <ul class="dropdown-menu">
-		  <li> <%= link_to "Cadastrar Contas", wizard_index_path%> </li>
-		  <li> <%= link_to "Cadastrar Empresa", new_company_path%> </li>
-		  <li><%= link_to "Nova Operação", new_operation_path%></li>
-	              </ul>
+	  					<li><%= link_to "Cadastrar Contas", wizard_index_path%> </li>
+		  				<li><%= link_to "Cadastrar Empresa", new_company_path%> </li>
+		  				<li><%= link_to "Nova Operação", new_operation_path%></li>
+            </ul>
 	            </li>
-	            
-		<li><%= link_to "Livro Diário", daily_ledger_path%></li>
-		<li><%= link_to "Livro Razão", ledger_path %></li>
-		<li><%= link_to "Resultados", results_path %></li>
-		<li><%= link_to 'Sair' , destroy_user_session_path, method: :delete if user_signed_in? %></li>
+							<li><%= link_to "Livro Diário", daily_ledger_path%></li>
+							<li><%= link_to "Livro Razão", ledger_path %></li>
+							<li><%= link_to "Resultados", results_path %></li>
+							<li><%= link_to 'Sair' , destroy_user_session_path, method: :delete if user_signed_in? %></li>
 	          </ul>
 	       </div>
 	     </div>
 	  </nav>
-	
 
-	
-	<div class="container-fluid">
-	<div class="row">
-		<div class="espaco">
-		<% flash.each do |name, msg| %>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="espaco">
+					<% flash.each do |name, msg| %>
 	    	  <%= content_tag :div, msg, class: "alert alert-info" %>
-	  	<% end %>
-		<%= yield %>
-	</div>
-	</div>
-	</div>
+	  			<% end %>
+					<%= yield %>
+				</div>
+			</div>
+		</div>
 
-	<div class="footer-below fixed-bottom corfooterpreto">
-		Copyright &copy; DevIn6 2016
-	</div>
-</body>
-
-
+		<div class="footer-below fixed-bottom corfooterpreto">
+					Copyright &copy; DevIn6 2016
+		</div>
+	</body>
 </html>
