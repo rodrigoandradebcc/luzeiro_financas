@@ -8,11 +8,12 @@ class OperationsController < ApplicationController
   # GET /operations.json
   def index
      if params[:date_init] and params[:date_final]
-      
+
       @operations = Operation.paginate(:page => params[:page], :per_page => 20  ).date_search(params[:date_init], params[:date_final]).order("id DESC")
     else
       @operations = Operation.all.paginate(:page => params[:page], :per_page => 20  ).order('created_at DESC')
     end
+
     @ops = Operation.all
 
     respond_to do |format|
@@ -20,7 +21,7 @@ class OperationsController < ApplicationController
       format.pdf do
         
         render pdf: "relatório"
-      end
+
     end
   end
 
@@ -46,7 +47,7 @@ class OperationsController < ApplicationController
 
       if @operation.save
          format.html { redirect_to operations_path, notice: 'Operação criada com sucesso. Necessita ser autorizada.' }
-        
+
       else
         format.html { render :new }
         format.json { render json: @operation.errors, status: :unprocessable_entity }
@@ -57,7 +58,7 @@ class OperationsController < ApplicationController
   # # PATCH/PUT /operations/1
   # # PATCH/PUT /operations/1.json
   # def update
-    
+
   #   respond_to do |format|
   #     if @operation.update(operation_params)
   #       redirect_to update_balance_path, method: :put; return if performed?
@@ -79,7 +80,7 @@ class OperationsController < ApplicationController
         format.html { redirect_to operations_url, notice: 'Operação removida, valores atualizados.' }
         format.json { head :no_content }
       end
-    
+
   end
 
   # POST /operation
@@ -98,17 +99,17 @@ class OperationsController < ApplicationController
     def set_operation
       @operation = Operation.find(params[:id])
     end
-    
+
     # Never trust parameters from the scary internet, only allow the white list through.
   def operation_params
      params.require(:operation).permit(:value, :description, :release_date, :retrieve_account_id, :release_account_id)
   end
 
-  
- 
 
-  
 
-  
+
+
+
+
 
 end

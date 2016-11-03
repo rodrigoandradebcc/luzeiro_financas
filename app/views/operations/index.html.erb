@@ -14,7 +14,7 @@
 
         <%= text_field_tag :date_init, params[:date_init], placeholder: "Periodo inicial",  class: "input-sm date"%>
         <%= text_field_tag :date_final, params[:date_final], placeholder: "Periodo final",  class: "input-sm date"%>
-        
+
         <%= submit_tag "Buscar", :created_at => nil %>
 
         <% end %>
@@ -39,9 +39,9 @@
               <th colspan="3"></th>
             </tr>
           </thead>
-          <% if @operations %>  
+          <% if @operations %>
 
-          <% @operations.sort_by{|op| op.id }.each do |op| %> 
+          <% @operations.sort_by{|op| op.id }.each do |op| %>
           <tbody>
 
             <tr>
@@ -53,22 +53,21 @@
                 <%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".")  %>
               </td>
                 <% if op.unauthorized? %>
-                  <td><%= link_to 'Autorizar', authorize_operation_path(op.id), method: :post, class: "btn-primary btn-sm" %></td>
+                <td><%= link_to 'Autorizar', authorize_operation_path(op.id), method: :post, class: "btn-primary btn-sm" %></td>
                 <% else %>
-                  <td><%= link_to 'Lançado', '#', class: "btn-success btn-sm" %></td>
+                <td><%= link_to 'Lançado', '#', class: "btn-success btn-sm" %></td>
                 <% end %>
                 <td><%= link_to 'Desfazer', op, method: :delete, data: { confirm: 'Você tem certeza que deseja desfazer a operação? O valor da operação será creditado/debitado nas respectivas contas.' }, class: "btn-danger btn-sm" %></td>
-                  
             </tr>
           </tbody>
           <% end %>
           <% end %>
 
-        </table>
+          </table>
+        </div>
       </div>
-
-    </div>
     <div class="col-md-12"><%= will_paginate @operations, class: "apple_pagination" %></div>
   </div>
+  <%= link_to 'Gerar relatório', operations_path(@operation, format: 'pdf'), class: "btn btn-primary" %>
 
 </div>
