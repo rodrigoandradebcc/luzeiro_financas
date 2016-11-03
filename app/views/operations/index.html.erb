@@ -6,6 +6,10 @@
   </div>
   <div class="row">
     <div class="col-md-12">
+      <div class="col-md-6">
+        <%= link_to 'Nova Operação', new_operation_path, format: 'pdf', class: "btn btn-primary" %>
+        <div class="pull-right"><%= link_to 'Gerar relatório', operations_path( format: 'pdf'), class: "btn btn-primary" %></div>
+      </div>
       <div class="col-md-6 pull-right">Buscar por periodo <%= form_tag(ledger_path, :method => "get", id: "date_search") do %>
 
         <%= text_field_tag :date_init, params[:date_init], placeholder: "Periodo inicial",  class: "input-sm date"%>

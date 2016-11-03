@@ -13,6 +13,15 @@ class OperationsController < ApplicationController
     else
       @operations = Operation.all.paginate(:page => params[:page], :per_page => 20  ).order('created_at DESC')
     end
+    @ops = Operation.all
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        
+        render pdf: "relatório"
+      end
+    end
   end
 
   # GET /operations/1

@@ -18,8 +18,6 @@ class AnalyticAccountsController < ApplicationController
       format.html
       format.pdf do
         render pdf: "relatório"
-  
-
       end
     end
   end
