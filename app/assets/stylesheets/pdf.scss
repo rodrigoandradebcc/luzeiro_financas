@@ -1,7 +1,11 @@
 
+table, tr, td, th, tbody, thead, tfoot {
+    page-break-inside: avoid !important;
+}
+
 table.table1 {
     border-collapse: collapse;
-    width: 100%;
+    
 }
 
 th.borda, td.borda1 {
@@ -16,7 +20,7 @@ tr.linha:hover{background-color:#f5f5f5}
 
 strong.total{
   font-size: 14px;
-  padding-left: 570px;
+  padding-left: 460px;
   line-height: 3.5;
 }
 div h1{

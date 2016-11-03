@@ -6,14 +6,9 @@
    <%= wicked_pdf_javascript_include_tag "number_pages" %>
    <%= stylesheet_link_tag "pdf.scss" %>
  </head>
- <div id="content">
- <body onload='number_pages'>
- <div id="header">
-   <%= wicked_pdf_image_tag 'mysite.jpg' %>
 
-   <%= yield %>
-   </div>
- </div>
+ <body onload='number_pages'>
+ 
 <div class="container-fluid">
    <h1 class="page-header text-center"><strong><%= Company.last.name %></strong>
    <p class="page-header text-center" > CNPJ: <%= Company.last.cnpj%></p>
@@ -46,7 +41,10 @@
            <th class="borda">Crédito</th>
            <th class="borda">Saldo</th>
          </tr>
+
        </thead>
+       <br>
+         <br>
        <% @operations.sort_by{|task| task.id}.each do |op| %>
        <tbody >
            <tr>
@@ -82,6 +80,7 @@
          <strong class="total">Total:<%= number_to_currency(balance = @analytic_account.balance, unit: "R$", separator: ",", delimiter:".")%></strong>
    </div>
  </div>
+</div>
 </div>
 </body>
 </html>
