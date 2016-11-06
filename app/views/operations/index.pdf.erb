@@ -1,63 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
-  <head>
-    <meta charset='utf-8' />
-    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
-    <%= wicked_pdf_javascript_include_tag "number_pages" %>
-    <%= stylesheet_link_tag "pdf.scss" %>
-  </head>
-
-  <body onload='number_pages'>
-    <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <h1><strong>Livro Diário</strong></h1>
-    </div>
-  </div>
-  
   <br>
+   <meta charset='utf-8' />
+   <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+   <%= wicked_pdf_javascript_include_tag "number_pages" %>
+   <%= stylesheet_link_tag "pdf.scss" %>
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
-        <div class="panel-heading text-center"><strong><%= Company.last.name if Company.last %></strong></div>
-        <table class="table ">
+        <table class="table1">
           <thead>
-            <tr>
-              <th>Data</th>
-              <th>Numero da Operação</th>
-              <th>Conta a Débito </th>
-              <th>Conta a Crédito</th>
-              <th>Histórico</th>
-
+            <tr class="linha">
+              <th class="borda">Data</th>
+              <th class="borda">Numero da Operação</th>
+              <th class="borda">Conta a Débito </th>
+              <th class="borda">Conta a Crédito</th>
+              <th class="borda">Histórico</th>
               <th colspan="3"></th>
             </tr>
           </thead>
-          <% if @ops %>  
+          <% if @ops %>
 
-          <% @ops.sort_by{|op| op.id }.each do |op| %> 
+          <% @ops.sort_by{|op| op.id }.each do |op| %>
           <tbody>
-
             <tr>
-              <td><%= op.release_date.strftime("%d/%m/%Y") %></td>
-              <td><%= op.id %></td>
-              <td><%= op.retrieve_account.name %></td>
-              <td><%= op.release_account.name %></td>
-              <td>
+              <td class="borda1"><%= op.release_date.strftime("%d/%m/%Y") %></td>
+              <td class="borda1"><%= op.id %></td>
+              <td class="borda1"><%= op.retrieve_account.name %></td>
+              <td class="borda1"><%= op.release_account.name %></td>
+              <td class="borda1">
                 <%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".")  %>
               </td>
             </tr>
           </tbody>
           <% end %>
           <% end %>
-
         </table>
       </div>
-
     </div>
-    
   </div>
-
 </div>
-  </body>
+</body>
 </html>
