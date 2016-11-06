@@ -19,8 +19,20 @@ class OperationsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        
-        render pdf: "relatório"
+        render pdf: "relatório",
+
+        :header => {
+                  :html => {
+                     :template => 'layouts/pdf-header.html',
+                     :layout => 'pdf-header.html'
+
+                  }
+               },
+               :footer => {
+                  :html => {
+                     :template => 'layouts/pdf-footer.html'
+                  }
+               }
 
     end
   end
