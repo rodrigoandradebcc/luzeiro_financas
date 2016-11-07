@@ -7,14 +7,9 @@ class OperationsController < ApplicationController
   # GET /operations
   # GET /operations.json
   def index
-     if params[:date_init] and params[:date_final]
-
-      @operations = Operation.paginate(:page => params[:page], :per_page => 20  ).date_search(params[:date_init], params[:date_final]).order("id DESC")
-    else
-      @operations = Operation.all.paginate(:page => params[:page], :per_page => 20  ).order('created_at DESC')
-    end
-
-    @ops = Operation.all
+    @q = Operation.ransack(params[:q])
+     
+    @operations = @q.result.paginate(:page => params[:page], :per_page => 20  ).order('id asc')
 
     respond_to do |format|
       format.html
@@ -102,7 +97,7 @@ class OperationsController < ApplicationController
       @operation.authorize
 
       respond_to do |format|
-        format.html { redirect_to operations_url, notice: 'Operação Autorizada, valores atualizados com sucesso.' }
+        format.html { redirect_to request.referrer, notice: 'Operação Autorizada, valores atualizados com sucesso.' }
         format.json { head :no_content }
       end
   end

@@ -5,7 +5,7 @@ gem 'devise'
 gem "pundit"
 gem 'font-awesome-sass', '~> 4.6.2'
 gem 'bootstrap-datepicker-rails'
-
+gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'start'
 gem 'rails-i18n'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

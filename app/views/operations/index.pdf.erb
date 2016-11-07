@@ -19,9 +19,9 @@
               <th colspan="3"></th>
             </tr>
           </thead>
-          <% if @ops %>
+          <% if @operations %>
 
-          <% @ops.sort_by{|op| op.id }.each do |op| %>
+          <% @operations.each do |op| %>
           <tbody>
             <tr>
               <td class="borda1"><%= op.release_date.strftime("%d/%m/%Y") %></td>
