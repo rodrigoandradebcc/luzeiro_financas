@@ -2,43 +2,65 @@
   <div class="row">
     <div class="col-md-12">
       <div class="col-sm-12 offset-sm-3 col-md-12 offset-md-2 main">
-          <h1>Dashboard</h1>
-          <br>
-          <div class="row placeholders">
-            <div class="col-md-6 col-xs-6 col-sm-6 placeholder">
-              <%= link_to ledger_path do %>
-                <i class="fa fa-object-group aumentaicon" aria-hidden="true"></i>
-              <% end %>
-                
-              <h3>Veja o detalhamento de suas contas</h3>
-              
-            </div>
-            <div class="col-md-6 col-xs-6 col-sm-6 placeholder">
-              <%= link_to new_operation_path do %>
-                <i class="fa fa-tasks aumentaicon" aria-hidden="true"></i>
-              <% end %>
-                
-              <h3>Crie operações entre suas contas</h3>
-              
-            </div>
-            <div class="col-md-6 col-xs-6 col-sm-6 placeholder">
-              <%= link_to wizard_index_path do %>
-                <i class="fa fa-briefcase aumentaicon" aria-hidden="true"></i>
-              <% end %>
-                
-              <h3>Crie e gerencie suas contas</h3>
-              
-            </div>
-            <div class="col-md-6 col-xs-6 col-sm-6 placeholder">
-              <%= link_to results_path do %>
-                <i class="fa fa-check-square-o aumentaicon" aria-hidden="true"></i>
-              <% end %>
-                
-              <h3>Lance resultados e tenha um detalhamento maior de suas atividades</h3>
-              
-            </div>
-          </div>          
+        <h1><strong>Dashboard</strong></h1>
+        <br>
+          
+      </div>    
+    </div>
+    <div class="col-md-12">
+
+      <div class="col-md-6">
+        <div class="info-box bg-aqua">
+          <span class="info-box-icon">
+            <%= link_to ledger_path do %>
+            <i class="fa fa-object-group" aria-hidden="true"></i>
+            <% end %>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Veja o detalhamento de suas contas</span>
+          </div>
         </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="info-box bg-aqua">
+          <span class="info-box-icon">
+            <%= link_to new_operation_path do %>
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+            <% end %>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Crie operações entre suas contas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="info-box bg-aqua">
+          <span class="info-box-icon">
+            <%= link_to wizard_index_path do %>
+            <i class="fa fa-briefcase" aria-hidden="true"></i>
+            <% end %>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Crie e gerencie suas contas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="info-box bg-aqua">
+          <span class="info-box-icon">
+            <%= link_to results_path do %>
+            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+            <% end %>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Lance resultados e tenha um detalhamento maior de suas atividades</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
