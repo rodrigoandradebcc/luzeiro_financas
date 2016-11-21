@@ -1,26 +1,36 @@
 <div class="container-fluid">
   <div class="col-md-12">
+    
     <div class="panel panel-primary">
       <div class="panel-heading">
         <div class="row">
           <div class="col-xs-3">
-            <%= icon('dashboard', class: 'strong aumentaicon')%>
+            <%= icon('dashboard', class: 'strong aumentaicon')%>Dashboard
           </div>
-          <div class="col-xs-4 text-right">
-            <%= link_to 'Gerar relatório', ledger_path(format: 'pdf'), class: "btn btn-primary" %>
-          </div>
+          
+            
           <div class="col-xs-5 text-right">
             <%= link_to "Livro razão", "#", :class => "huge" %>
           </div>
         </div>
       </div>
+          <%= form_tag ledger_path, :method => "get", id: "search-form" do %>
+            <%= text_field_tag :name, params[:name], class:" search-query form-control",placeholder: "Buscar" %>
+            <span class="input-group-btn">
+            <%= button_tag(type: "submit") do%>
+             <span class="fa fa-search" aria-hidden="true"></span>
+            <% end %>
+            </span>
+            
+            <% end %>
+            
       <table class="table">
         <thead>
           <tr>
           	<th>Código</th>
 	       <th>Nome</th>
 	       <th>Saldo</th>
-	       <th></th>
+	       <th>  </th>
           </tr>
         </thead>
         <tbody>

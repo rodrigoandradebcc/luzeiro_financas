@@ -1,23 +1,28 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <h1><strong>Livro Diário</strong></h1>
+      <legend class="text-center" id="aumenntafoneform">Livro Diário</legend>
     </div>
   </div>
 
   <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6  ">
           <%= link_to 'Nova Operação', new_operation_path, format: 'pdf', class: "btn btn-primary" %>
           <%= link_to 'Gerar relatório', operations_path(@operation, format: 'pdf'), class: "btn btn-primary" %>
     </div>
+    <div class="col-md-6">
+      <div class="pull-right arredaplanodecontas">
+        <%= render "search" %>
+      </div>
+    </div>
   </div>
-    <%= render "search" %>
+    
   <br>
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
-        <div class="panel-heading text-center"><strong><%= Company.last.name if Company.last %></strong></div>
-        <table class="table ">
+        <div class="panel-heading text-center mudafundotable"><strong><%= Company.last.name if Company.last %></strong></div>
+        <table class="table table-active">
           <thead>
             <tr>
               <th>Data</th>

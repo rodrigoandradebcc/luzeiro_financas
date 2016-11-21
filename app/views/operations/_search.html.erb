@@ -2,20 +2,20 @@
 <div class="row">
   <div class="col-md-12">
     <div class="input-group" id="adv-search"><p>Pesquisar por período</p>
-        <div class="input-group-btn">
-            <div class="btn-group" role="group">
-                        <%= search_form_for @q, class: "form-horizontal" do |f|  %>
-                          <div class="form-group pull-right">
-                            <%= f.label "Período inicial" %>
-                            <%= f.search_field :release_date_gteq, placeholder: "Periodo inicial",  class: "input-sm date", default: Time.now%>
-                            <%= f.label "Período final" %>
-                            <%= f.search_field :release_date_lteq, placeholder: "Periodo final",  class: "input-sm date " %> 
-                            <%= f.submit  class: "btn btn-primary" %>
-                          </div>
-                            
-                        <% end %>
-            </div>
+      <div class="input-group-btn">
+        <div class="btn-group" role="group">
+          <%= search_form_for @q, class: "form-horizontal" do |f|  %>
+          <div class="form-group pull-right">
+            <%= f.label "Período inicial" %>
+            <%= f.search_field :release_date_gteq, placeholder: "Periodo inicial",  class: "input-sm date", default: Time.now%>
+            <%= f.label "Período final" %>
+            <%= f.search_field :release_date_lteq, placeholder: "Periodo final",  class: "input-sm date " %> 
+            <%= f.submit  class: "btn btn-primary" %>
+          </div>
+          
+          <% end %>
         </div>
+      </div>
     </div>
   </div>
 </div>
