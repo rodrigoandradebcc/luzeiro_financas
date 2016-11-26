@@ -47,13 +47,13 @@
               <td>
                 <%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".")  %>
               </td>
-              <%= render 'details_modal' %>
+              
                 <% if op.unauthorized? %>
                 <td><%= link_to 'Autorizar', authorize_operation_path(op.id), method: :post, class: "btn-primary btn-sm", data: { confirm: 'Confirme o lançamento.' } %></td>
                 <% else %>
                 <td><%= link_to 'Lançado', '#', class: "btn-success btn-sm" %></td>
                 <% end %>
-                <td><%= link_to 'Detalhes', operation_path(op), class: "btn-primary btn-sm", method: :get, remote: true 
+                <td><%= link_to 'Detalhes', operation_path(op), class: "btn-primary btn-sm", remote: true 
                  %></td>
 
                 <td><%= link_to 'Desfazer', op, method: :delete, data: { confirm: 'Você tem certeza que deseja desfazer a operação? O valor da operação será creditado/debitado nas respectivas contas.' }, class: "btn-danger btn-sm" %></td>
@@ -62,7 +62,7 @@
           <% end %>
           <% end %>
           </table>
-
+          <%= render 'details_modal' %>
         </div>
       </div>
     <div class="col-md-12"><%= will_paginate @operations, class: "apple_pagination" %></div>
