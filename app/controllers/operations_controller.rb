@@ -10,9 +10,10 @@ class OperationsController < ApplicationController
     @q = Operation.ransack(params[:q])
      
     @operations = @q.result.paginate(:page => params[:page], :per_page => 20  ).order('release_date asc')
-
+    
     respond_to do |format|
       format.html
+
       format.pdf do
         render pdf: "relatório",
 
@@ -36,6 +37,11 @@ class OperationsController < ApplicationController
   # GET /operations/1
   # GET /operations/1.json
   def show
+    respond_to do |format|
+        format.html # show.html.erb
+        format.js # show.js.erb
+        format.json { render json: @operation }
+    end
   end
 
   # GET /operations/new
