@@ -11,6 +11,7 @@ class OperationsController < ApplicationController
      
     @operations = @q.result.paginate(:page => params[:page], :per_page => 20  ).order('release_date asc')
     
+
     respond_to do |format|
       format.html
 
