@@ -1,24 +1,31 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <h1><strong>Livro Diário</strong></h1>
+      <legend class="text-center" id="aumenntafoneform">Livro Diário</legend>
     </div>
 
   <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6  ">
           <%= link_to 'Nova Operação', new_operation_path, format: 'pdf', class: "btn btn-primary" %>
           <%= link_to 'Gerar relatório', operations_path(@operation, format: 'pdf'), class: "btn btn-primary" %>
     </div>
 
+
   </div>
+
+    <div class="col-md-6">
+      <div class="pull-right arredaplanodecontas">
+        <%= render "search" %>
+      </div>
+    </div>
   </div>
-    <%= render "search" %>
+
   <br>
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
-        <div class="panel-heading text-center"><strong><%= Company.last.name if Company.last %></strong></div>
-        <table class="table ">
+        <div class="panel-heading text-center mudafundotable"><strong><%= Company.last.name if Company.last %></strong></div>
+        <table class="table table-active">
           <thead>
             <tr>
               <th>Data</th>
@@ -40,12 +47,15 @@
               <td>
                 <%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".")  %>
               </td>
+              <%= render 'details_modal' %>
                 <% if op.unauthorized? %>
                 <td><%= link_to 'Autorizar', authorize_operation_path(op.id), method: :post, class: "btn-primary btn-sm", data: { confirm: 'Confirme o lançamento.' } %></td>
                 <% else %>
                 <td><%= link_to 'Lançado', '#', class: "btn-success btn-sm" %></td>
                 <% end %>
-                <td><%= link_to 'Detalhes', operation_path(op), class: "btn-primary btn-sm" %></td>
+                <td><%= link_to 'Detalhes', operation_path(op), class: "btn-primary btn-sm", method: :get, remote: true 
+                 %></td>
+
                 <td><%= link_to 'Desfazer', op, method: :delete, data: { confirm: 'Você tem certeza que deseja desfazer a operação? O valor da operação será creditado/debitado nas respectivas contas.' }, class: "btn-danger btn-sm" %></td>
             </tr>
           </tbody>

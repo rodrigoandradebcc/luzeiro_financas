@@ -10,6 +10,16 @@ class AnalyticAccount < ActiveRecord::Base
   has_many :old_balances
   
   has_one :result
+
+  def self.name_search(search)
+
+    if search
+      where("name LIKE ? ", "%#{search}%")
+    else
+      where(nil)
+    end
+  end
+
   def self.debits
     
     debit.where(release_date: date1..date2 )
