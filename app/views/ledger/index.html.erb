@@ -14,14 +14,11 @@
           </div>
         </div>
       </div>
-          <%= form_tag ledger_path, :method => "get", id: "search-form" do %>
-            <%= text_field_tag :name, params[:name], class:" search-query form-control",placeholder: "Buscar" %>
-            <span class="input-group-btn">
-            <%= button_tag(type: "submit") do%>
-             <span class="fa fa-search" aria-hidden="true"></span>
-            <% end %>
-            </span>
-            
+          <%= form_tag ledger_path, :method => "get", class: "form-search" do %>
+            <%= text_field_tag :name, params[:name], class:" search",placeholder: "Buscar" %>
+            <%= button_tag(type: "submit") do %>
+            <span class="fa fa-search"></span>
+             <% end %>
             <% end %>
             
       <table class="table">
