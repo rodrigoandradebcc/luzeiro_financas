@@ -1,0 +1,13 @@
+
+
+
+$modal = $('.modal'),
+$modalBody = $('.modal .modal-body'),
+$modalHeading = $('.modal .modal-header .modal-title ');
+$modalHeading.html("<i class='text-muted fa fa-user'> <%= @operation.id %>");
+$modalBody.html("<%= escape_javascript(render @operation) %>");
+$modal.modal(),
+$open_info = $('.btn-mais-info').on('click', function(event) {
+        $( '.open_info' ).toggleClass( "hide" );
+    }),
+$modalFooter = $('.modal .modal-footer ');

@@ -1,0 +1,55 @@
+
+<div class="col-md-12">
+<table>
+     <tbody>
+         <tr>
+             <td class="h4"><strong>Valor:</strong></td>
+             <td> </td>
+             <td class="h3 pull-right"><%= number_to_currency(@operation.value, unit: "R$", separator: ",", delimiter: ".")%></td>
+         </tr>
+         
+  
+         <tr>
+             <td class="h4"><strong>Descrição:</strong></td>
+             <td> </td>
+             <td class="h3 pull-right"><%= @operation.description %></td>
+         </tr>
+  
+         <tr>
+             <td class="h4"><strong>Data de lançamento:</strong></td>
+             <td> </td>
+             <td class="h3 pull-right"><%= @operation.release_date.strftime("%d/%m/%Y") %></td>
+         </tr>
+         
+         <tr>
+             <td class="h4"><strong>Conta a débito:</strong></td>
+             <td> </td>
+             <td class="h3 pull-right"><%= @operation.retrieve_account.analytic_account_name %></td>
+         </tr>
+         
+  
+         <tr>
+             <td class="h4"><strong>Conta a crédito:</strong></td>
+             <td> </td>
+             <td class="h3 pull-right"><%= @operation.release_account.analytic_account_name %></td>
+         </tr>  
+
+         
+       <!-- <div class="clearfix"></div>
+         <tr>
+             <td class="btn-mais-info text-primary">
+                 <i class="open_info fa fa-plus-square-o"></i>
+                 <i class="open_info hide fa fa-minus-square-o"></i> endereço
+             </td>
+             
+             
+         </tr> --> 
+                             
+
+     </tbody>
+</table>
+
+
+  
+
+  
