@@ -1,14 +1,14 @@
 <div class="container-fluid">
   <div class="col-md-12">
-    
+
     <div class="panel panel-primary">
       <div class="panel-heading">
         <div class="row">
           <div class="col-xs-3">
             <%= icon('dashboard', class: 'strong aumentaicon')%>Dashboard
           </div>
-          
-            
+
+
           <div class="col-xs-5 text-right">
             <%= link_to "Livro razão", "#", :class => "huge" %>
           </div>
@@ -20,18 +20,18 @@
             <span class="fa fa-search"></span>
              <% end %>
             <% end %>
-            
+
       <table class="table">
         <thead>
           <tr>
-          	<th>Código</th>
-	       <th>Nome</th>
-	       <th>Saldo</th>
-	       <th>  </th>
+          	 <th>Código</th>
+    	       <th>Nome</th>
+    	       <th>Saldo</th>
+    	       <th>  </th>
           </tr>
         </thead>
         <tbody>
-        
+
           <% @analytic_accounts.each do |analytic_account| %>
 	     <tr>
 	       <td><%= analytic_account.second_synthetic_account.synthetic_account.account.account_type.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.account.code %>.<%= analytic_account.second_synthetic_account.synthetic_account.code %>.<%= analytic_account.second_synthetic_account.code %>.<%= analytic_account.code %>
