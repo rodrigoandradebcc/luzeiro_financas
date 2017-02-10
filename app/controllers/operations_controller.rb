@@ -9,7 +9,7 @@ class OperationsController < ApplicationController
   def index
     @q = Operation.ransack(params[:q])
     @operations_all = @q.result
-    @operations = @q.paginate(:page => params[:page], :per_page => 20  ).order('release_date asc')
+    @operations = @operations_all.paginate(:page => params[:page], :per_page => 20  ).order('release_date asc')
     
 
     respond_to do |format|
