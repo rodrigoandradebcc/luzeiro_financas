@@ -17,6 +17,7 @@ u = User.new(username: "edu",email: "edu@luzeiro.com", password: "luzeiro123", p
 u.save
 u = User.new(username: "marcia",email: "marcia@luzeiro.com", password: "marcia123", password_confirmation:"marcia123", role: Role.find_by({code: 2}))
 u.save
+
 c = Company.new(id: 1, name: "Luzeiro Navegação")
 c.save
 cc = ChartOfAccount.new(id: 1, title: "Balanço Patrimonial", company: c)
