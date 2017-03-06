@@ -8,8 +8,8 @@ class OperationsController < ApplicationController
   # GET /operations.json
   def index
     @q = Operation.ransack(params[:q])
-     
-    @operations = @q.result.paginate(:page => params[:page], :per_page => 20  ).order('release_date asc')
+     @operations_all = @q.result
+      @operations = @operations_all.paginate(:page => params[:page], :per_page => 20  ).order('release_date asc')
     
 
     respond_to do |format|
