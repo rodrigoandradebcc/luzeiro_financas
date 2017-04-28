@@ -15,9 +15,6 @@ u = User.new(username: "luzeiro", password: "luzeiroadmin123", email: "luzeiro@l
 u.save
 u = User.new(username: "edu",email: "edu@luzeiro.com", password: "luzeiro123", password_confirmation:"luzeiro123", role: Role.find_by({code: 2}))
 u.save
-u = User.new(username: "marcia",email: "marcia@luzeiro.com", password: "marcia123", password_confirmation:"marcia123", role: Role.find_by({code: 2}))
-u.save
-
 c = Company.new(id: 1, name: "Luzeiro Navegação")
 c.save
 cc = ChartOfAccount.new(id: 1, title: "Balanço Patrimonial", company: c)
@@ -40,11 +37,10 @@ at5.save
 acc1 = Account.new(name: "Circulante", id: 1, code: 1, account_type: at1)
 acc2 = Account.new(name: "Patrimônio", id: 2, code: 2, account_type: at1)
 acc3 = Account.new(name: "Circulante", id: 3, code: 1, account_type: at2)
-acc4 = Account.new(name: "Patrimônio Líquido", id: 4, code: 3, account_type: at2)
+acc4 = Account.new(name: "Patrimônio Líquido", id: 4, code: 2, account_type: at2)
 acc5 = Account.new(name: "Receitas Operacionais", id: 5, code: 1, account_type: at3)
 acc6 = Account.new(name: "Custos Gerais", id: 6, code: 1, account_type: at4)
 acc7 = Account.new(name: "Despesas Administrativas Geral", id: 7, code: 1, account_type: at5)
-acc8 = Account.new(name: "Não circulante", id: 8, code: 2, account_type: at2)
 
 acc1.save
 acc2.save
@@ -53,7 +49,6 @@ acc4.save
 acc5.save
 acc6.save
 acc7.save
-acc8.save
 
 # Terceiro Nível
 sin1 = SyntheticAccount.new(id: 1, name: "Disponível", code: 1, account: acc1 )
@@ -74,16 +69,6 @@ sin14 = SyntheticAccount.new(id: 14, name: "Bancos Conta Movimento", code: 3, ac
 sin15 = SyntheticAccount.new(id: 15, name: "Bancos Aplicações Financeiras", code: 4, account: acc1 )
 sin16 = SyntheticAccount.new(id: 16, name: "Estoque", code: 5, account: acc1 )
 sin17 = SyntheticAccount.new(id: 17, name: "Adiantamento", code: 6, account: acc1 )
-# contas novas do passivo circulante
-sin18 = SyntheticAccount.new(id: 18, name: "Empréstimos e Financiamentos", code: 3, account: acc3 )
-sin19 = SyntheticAccount.new(id: 19, name: "Fornecedores", code: 4, account: acc3 )
-sin20 = SyntheticAccount.new(id: 20, name: "Obrigações Fiscais", code: 5, account: acc3 )
-sin21 = SyntheticAccount.new(id: 21, name: "Outras Obrigações", code: 6, account: acc3 )
-sin22 = SyntheticAccount.new(id: 22, name: "Outras provisões", code: 7, account: acc3 )
-# contas novas do passivo não circulante
-sin23 = SyntheticAccount.new(id: 23, name: "Empréstimos e Financiamentos", code: 3, account: acc8 )
-
-
 
 sin1.save
 sin2.save
@@ -102,12 +87,7 @@ sin14.save
 sin15.save
 sin16.save
 sin17.save
-sin18.save
-sin19.save
-sin20.save
-sin21.save
-sin22.save
-sin23.save
+
 
 # Quarto Nível
 scd1 = SecondSyntheticAccount.new(id: 1, name:"Caixa", code: 1, synthetic_account: sin1 )
@@ -150,53 +130,6 @@ scd34 = SecondSyntheticAccount.new(id: 34, name:"Despesas Administrativas", code
 scd35 = SecondSyntheticAccount.new(id: 35, name:"Despesas Tributarias", code: 3, synthetic_account: sin12 )
 scd36 = SecondSyntheticAccount.new(id: 36, name:"Despesas Financeiras", code: 4, synthetic_account: sin12 )
 scd37 = SecondSyntheticAccount.new(id: 37, name:"Despesas não Operacionais", code: 5, synthetic_account: sin12 )
-#---------------------------------------------------------------------------------------------------------------------------
-#contas novas do passivo de 4 nivel
-scd38 = SecondSyntheticAccount.new(id: 38, name:"Titulos a pagar", code: 1, synthetic_account: sin18 )
-scd39 = SecondSyntheticAccount.new(id: 39, name:"Parcela empréstimos e financiamentos", code: 2, synthetic_account: sin18 )
-scd40 = SecondSyntheticAccount.new(id: 40, name:"Juros a pagar de empréstimos e financiamentos", code: 3, synthetic_account: sin18 )
-
-scd41 = SecondSyntheticAccount.new(id: 41, name:"Fornecedores nacionais", code: 1, synthetic_account: sin19 )
-
-scd42 = SecondSyntheticAccount.new(id: 42, name:"ICMS a recolher", code: 1, synthetic_account: sin20 )
-scd43 = SecondSyntheticAccount.new(id: 43, name:"IPI a recolher", code: 2, synthetic_account: sin20 )
-scd44 = SecondSyntheticAccount.new(id: 44, name:"Provisão para imposto de renda", code: 3, synthetic_account: sin20 )
-scd45 = SecondSyntheticAccount.new(id: 45, name:"Provisão para imposto de renda diferido", code: 4, synthetic_account: sin20 )
-scd46 = SecondSyntheticAccount.new(id: 46, name:"Provisão para contribuição social", code: 5, synthetic_account: sin20 )
-scd47 = SecondSyntheticAccount.new(id: 47, name:"Provisão para IOF", code: 6, synthetic_account: sin20 )
-scd48 = SecondSyntheticAccount.new(id: 48, name:"ISS a recolher", code: 7, synthetic_account: sin20 )
-scd49 = SecondSyntheticAccount.new(id: 49, name:"PIS a recolher", code: 8, synthetic_account: sin20 )
-scd50 = SecondSyntheticAccount.new(id: 50, name:"Cofins a recolher", code: 9, synthetic_account: sin20 )
-scd51 = SecondSyntheticAccount.new(id: 51, name:"Retenções de impostos a recolher", code: 10, synthetic_account: sin20 )
-scd52 = SecondSyntheticAccount.new(id: 52, name:"Outros impostos e taxas a recolher", code: 11, synthetic_account: sin20 )
-
-scd53 = SecondSyntheticAccount.new(id: 53, name:"Adiantamentos de clientes", code: 1, synthetic_account: sin21 )
-scd54 = SecondSyntheticAccount.new(id: 54, name:"Faturamento para entrega futura", code: 2, synthetic_account: sin21 )
-scd55 = SecondSyntheticAccount.new(id: 55, name:"Contas a pagar", code: 3, synthetic_account: sin21 )
-scd56 = SecondSyntheticAccount.new(id: 56, name:"Arrendamento mercantil a pagar", code: 4, synthetic_account: sin21 )
-scd57 = SecondSyntheticAccount.new(id: 57, name:"Ordenados e salários a pagar", code: 5, synthetic_account: sin21 )
-scd58 = SecondSyntheticAccount.new(id: 58, name:"Encargos sociais a pagar", code: 6, synthetic_account: sin21 )
-scd59 = SecondSyntheticAccount.new(id: 59, name:"FGTS a recolher", code: 7, synthetic_account: sin21 )
-scd60 = SecondSyntheticAccount.new(id: 60, name:"Honorários da administração a pagar", code: 8, synthetic_account: sin21 )
-scd61 = SecondSyntheticAccount.new(id: 61, name:"Comissões a pagar", code: 9, synthetic_account: sin21 )
-scd62 = SecondSyntheticAccount.new(id: 62, name:"Gratificações a lançar", code: 10, synthetic_account: sin21 )
-scd63 = SecondSyntheticAccount.new(id: 63, name:"Retenções contratuais", code: 11, synthetic_account: sin21 )
-scd64 = SecondSyntheticAccount.new(id: 64, name:"Dividendos a pagar", code: 12, synthetic_account: sin21 )
-scd65 = SecondSyntheticAccount.new(id: 65, name:"Juros sobre o capital próprio a pagar", code: 13, synthetic_account: sin21 )
-scd66 = SecondSyntheticAccount.new(id: 66, name:"Juros a pagar", code: 14, synthetic_account: sin21 )
-scd67 = SecondSyntheticAccount.new(id: 67, name:"Outras contas a pagar", code: 15, synthetic_account: sin21 )
-
-scd68 = SecondSyntheticAccount.new(id: 68, name:"Dividendos propostos", code: 1, synthetic_account: sin22 )
-scd69 = SecondSyntheticAccount.new(id: 69, name:"Gratificações e participações a empregados", code: 2, synthetic_account: sin22 )
-scd70 = SecondSyntheticAccount.new(id: 70, name:"Gratificações e participações a administradores", code: 3, synthetic_account: sin22 )
-scd71 = SecondSyntheticAccount.new(id: 71, name:"Participações de partes beneficiárias", code: 4, synthetic_account: sin22 )
-scd72 = SecondSyntheticAccount.new(id: 72, name:"Férias", code: 5, synthetic_account: sin22 )
-scd73 = SecondSyntheticAccount.new(id: 73, name:"Décimo-terceiro salário", code: 6, synthetic_account: sin22 )
-scd74 = SecondSyntheticAccount.new(id: 74, name:"Comissões", code: 7, synthetic_account: sin22 )
-
-
-
-
 
 scd1.save
 scd2.save
@@ -234,44 +167,7 @@ scd33.save
 scd34.save
 scd35.save
 scd36.save
-scd38.save
-scd39.save
-scd40.save
-scd41.save
-scd42.save
-scd43.save
-scd44.save
-scd45.save
-scd46.save
-scd47.save
-scd48.save
-scd49.save
-scd50.save
-scd51.save
-scd52.save
-scd53.save
-scd54.save
-scd55.save
-scd56.save
-scd57.save
-scd58.save
-scd59.save
-scd60.save
-scd61.save
-scd62.save
-scd63.save
-scd64.save
-scd65.save
-scd66.save
-scd67.save
-scd68.save
-scd69.save
-scd70.save
-scd71.save
-scd72.save
-scd73.save
-scd74.save
-
+scd37.save
 
 #contas analiticas
  anal1 = AnalyticAccount.new(id: 1, name:"Caixa-Escritorio/NM-LUZEIRO", code: 1, second_synthetic_account: scd1 )
@@ -373,4 +269,7 @@ anal47.save
 anal48.save
 
 
-
+50.times do |operation|
+	op = Operation.new(id: operation, value: 100, release_account: AnalyticAccount.find(1), retrieve_account: AnalyticAccount.find(2))
+	op.save
+end
