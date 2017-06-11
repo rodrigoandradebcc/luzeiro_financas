@@ -83,6 +83,7 @@ class AnalyticAccount < ActiveRecord::Base
       
   end
 
+  
   def old_balance op
   	
   		OldBalance.find_by(operation: op, analytic_account: self)

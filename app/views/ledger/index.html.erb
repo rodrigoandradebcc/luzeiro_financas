@@ -43,7 +43,7 @@
         	    <%= button_to analytic_account.second_synthetic_account.name.downcase, second_synthetic_account_path(analytic_account.second_synthetic_account), class: "btn btn-primary icon-btn btn-xs",method: :get%>
         	    <%= button_to analytic_account.name.downcase, analytic_account_path(analytic_account), class: "btn btn-primary icon-btn btn-xs",method: :get%>
       	       </td>
-      	       <td><%= number_to_currency(analytic_account.balance, unit: "R$", separator: ",", delimiter: ".")%></td>
+      	       <td><%= number_to_currency(analytic_account.old_balances.sum(:value), unit: "R$", separator: ",", delimiter: ".")%></td>
       	       <td><%= link_to 'Ver Livro Razão', analytic_ledger_path(analytic_account), class: "btn btn-success btn-sm" %></td>
 	     </tr>
           <% end %>

@@ -20,9 +20,6 @@ devise_for :users, controllers: {
   authenticated :user do
       root 'welcome#dashboard', as: :authenticated_root
   end
-
-  
-
   get 'checar_data', to: 'results#check_valid_date', as: :check_valid_date
   get 'selecionar_periodo', to: 'results#selecionar_periodo', as: :result_search
   get 'control_users/index'
@@ -32,6 +29,8 @@ devise_for :users, controllers: {
   get 'cadastrar/contas', to: 'form_wizard#index', as: :wizard_index
   resources :enterprises
   post 'authorize_operation/:id', to: 'operations#authorize_operation', as: :authorize_operation
+  get 'authorize_all', to: 'operations#authorize_all', as: :authorize_all
+  
   get 'analytic_ledger/:id', to: 'analytic_accounts#analytic_ledger', as: :analytic_ledger
   get 'home', to: 'home#visitors', as: :visitors
   get 'nova_senha', to: 'home#password', as: :forget_password

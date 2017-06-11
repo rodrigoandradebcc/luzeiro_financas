@@ -37,8 +37,9 @@ class Operation < ActiveRecord::Base
   
   def authorize
     unless destroyed?
-        retrieve_value = self.retrieve_account.balance + self.value 
-        release_value = self.release_account.balance - self.value
+      if !self.old_balances.empty?
+        retrieve_value = self.old_balances.where(:analytic_account => self.retrieve_account).sum(:value) + self.value 
+        release_value = self.old_balances.where(:analytic_account => self.release_account).sum(:value) - self.value
         
         # if self.release_account.result
         #    self.release_account.update(balance: release_value.abs)
@@ -47,9 +48,19 @@ class Operation < ActiveRecord::Base
         #    self.release_account.update(balance: release_value) 
         #    self.retrieve_account.update(balance: retrieve_value.abs) 
         # else
-          self.release_account.update(balance: release_value) 
-          self.retrieve_account.update(balance: retrieve_value) 
-        # end      
+          
+        # end
+      else 
+
+        retrieve_value =  0 + self.value 
+        release_value = 0 - self.value
+             
+
+      end
+
+        self.release_account.update(balance: release_value) 
+        self.retrieve_account.update(balance: retrieve_value) 
+        
         
         retrieve_ob  = OldBalance.new(operation: self, analytic_account: self.retrieve_account, value:  retrieve_value)
         release_ob = OldBalance.new(operation: self, analytic_account: self.release_account, value: release_value)  
@@ -68,7 +79,7 @@ class Operation < ActiveRecord::Base
 
   private
   def undo_last_operation
-    if authorized?
+    if self.authorized?
       retrieve_balance =  self.retrieve_account.balance - self.value
       release_balance = self.release_account.balance + self.value
       self.retrieve_account.update(balance: retrieve_balance)

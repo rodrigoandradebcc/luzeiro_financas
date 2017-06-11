@@ -14,6 +14,8 @@ class AnalyticAccountsController < ApplicationController
     @operations = Operation.includes(:retrieve_account).where(retrieve_account:
                                                              @analytic_account)
     @operations += Operation.includes(:release_account).where(release_account: @analytic_account)
+
+    @balance = @analytic_account.balance
     respond_to do |format|
       format.html
       format.pdf do

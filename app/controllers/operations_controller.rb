@@ -7,11 +7,18 @@ class OperationsController < ApplicationController
   # GET /operations
   # GET /operations.json
   def index
+
+    
     @q = Operation.ransack(params[:q])
      @operations_all = @q.result
       @operations = @operations_all.paginate(:page => params[:page], :per_page => 20  ).order('release_date asc')
     
-
+      # if params[:operations]
+      #     authorize_all and return
+      #     @q = Operation.ransack(params[:q])
+      #     @operations_all = @q.result
+      #     @operations = @operations_all.paginate(:page => params[:page], :per_page => 20  ).order('release_date asc')
+      # end
     respond_to do |format|
       format.html
 
@@ -107,6 +114,18 @@ class OperationsController < ApplicationController
         format.html { redirect_to request.referrer, notice: 'Operação Autorizada, valores atualizados com sucesso.' }
         format.json { head :no_content }
       end
+  end
+
+  def authorize_all operations
+      
+      operations.each do |op|
+        unless op.authorized?
+           authorize op
+           op.authorize
+        end 
+        
+      end
+     
   end
 
   private

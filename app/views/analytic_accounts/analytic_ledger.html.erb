@@ -12,11 +12,11 @@
             <th>Histórico</th>
             <th>Débito</th>
             <th>Crédito</th>
-            <th>Saldo</th>
+            <th>Saldo Anterior</th>
             <th colspan="3"></th>
           </tr>
         </thead>
-        <% @operations.sort_by{|op| op.id}.each  do |op| %>
+        <% @operations.sort_by{|op| op.release_date}.each  do |op| %>
         <tbody>
         <% if op.authorized? %>
           <tr>
@@ -32,7 +32,7 @@
             <td><%= op.description %></td>
             <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.retrieve_account.eql?(@analytic_account) %></td>
             <td><%= number_to_currency(op.value, unit: "R$", separator: ",", delimiter: ".") if op.release_account.eql?(@analytic_account) %></td>
-            <td><%= number_to_currency(op.old_balances.find_by(analytic_account: @analytic_account).value, unit: "R$", separator: ",", delimiter: ".")%></td>
+            <td><%= number_to_currency(OldBalance.balance(op, @analytic_account), unit: "R$", separator: ",", delimiter: ".")%></td>
           </tr>
 
         <% end %>
@@ -40,6 +40,7 @@
         </tbody>
         <% end %>
       </table>
+      <div class="panel-footer"><strong>Total: <%= number_to_currency(@analytic_account.old_balances.sum(:value), unit: "R$", separator: ",", delimiter: ".") %></strong></div>
     </div>
 
 <%= link_to 'Gerar relatório', analytic_ledger_path(@analytic_account, format: 'pdf'), class: "btn btn-primary" %>
