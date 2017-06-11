@@ -12,6 +12,7 @@ class OperationsController < ApplicationController
     @q = Operation.ransack(params[:q])
      @operations_all = @q.result
       @operations = @operations_all.paginate(:page => params[:page], :per_page => 20  ).order('release_date asc')
+
     
       # if params[:operations]
       #     authorize_all and return
