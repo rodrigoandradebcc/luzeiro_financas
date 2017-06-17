@@ -11,11 +11,12 @@ class AnalyticAccountsController < ApplicationController
   end
 
   def analytic_ledger
-    @operations = Operation.includes(:retrieve_account).where(retrieve_account:
+    @q = Operation.ransack(params[:q])
+    @operations = @q.result.includes(:retrieve_account).where(retrieve_account:
                                                              @analytic_account)
-    @operations += Operation.includes(:release_account).where(release_account: @analytic_account)
+    @operations << @q.result.includes(:release_account).where(release_account: @analytic_account)
 
-    @balance = @analytic_account.balance
+    @balance = @analytic_account.old_balances.where('operation_id in (?)', @operations.to_a).sum(:value)
     respond_to do |format|
       format.html
       format.pdf do
